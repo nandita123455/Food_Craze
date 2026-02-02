@@ -1,0 +1,49 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+EL001,Mobile Charger,Fast Charge,1pc,Electronics,Mobile Accessories,350,315,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,40 pcs,In Stock
+EL002,USB Cable,Type-C,1m,Electronics,Mobile Accessories,180,155,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,60 pcs,In Stock
+EL003,Power Bank,10000mAh,1pc,Electronics,Mobile Accessories,1850,1665,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,20 pcs,In Stock
+EL004,Mobile Back Cover,Premium,1pc,Electronics,Mobile Accessories,280,250,Mobile Accessories,Binod Karki,+977-9823456780,mobile@email.com,Mobile Zone,50 pcs,In Stock
+EL005,Tempered Glass,Screen,1pc,Electronics,Mobile Accessories,220,195,Mobile Accessories,Binod Karki,+977-9823456780,mobile@email.com,Mobile Zone,70 pcs,In Stock
+EL006,Earphones Wired,Bass Boost,1pc,Electronics,Mobile Accessories,380,340,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,45 pcs,In Stock
+EL007,Bluetooth Earbuds,True Wireless,1pc,Electronics,Mobile Accessories,2800,2520,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,15 pcs,In Stock
+EL008,Headphones,Over Ear,1pc,Electronics,Mobile Accessories,1450,1305,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,18 pcs,In Stock
+EL009,Bluetooth Speaker,Portable,1pc,Electronics,Audio,2200,1980,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,12 pcs,In Stock
+EL010,Memory Card,64GB,1pc,Electronics,Storage,850,765,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,30 pcs,In Stock
+EL011,Memory Card,128GB,1pc,Electronics,Storage,1550,1395,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,25 pcs,In Stock
+EL012,Pen Drive,32GB,1pc,Electronics,Storage,450,405,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,40 pcs,In Stock
+EL013,Pen Drive,64GB,1pc,Electronics,Storage,780,702,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,35 pcs,In Stock
+EL014,External HDD,1TB,1pc,Electronics,Storage,4500,4050,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,8 pcs,In Stock
+EL015,Mouse Wireless,Optical,1pc,Electronics,Computer Accessories,450,405,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,35 pcs,In Stock
+EL016,Mouse Wired,USB,1pc,Electronics,Computer Accessories,220,195,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,50 pcs,In Stock
+EL017,Keyboard Wireless,Slim,1pc,Electronics,Computer Accessories,980,882,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,25 pcs,In Stock
+EL018,Keyboard Wired,USB,1pc,Electronics,Computer Accessories,550,495,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,30 pcs,In Stock
+EL019,Webcam,HD,1pc,Electronics,Computer Accessories,1850,1665,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,18 pcs,In Stock
+EL020,USB Hub,4 Port,1pc,Electronics,Computer Accessories,350,315,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,35 pcs,In Stock
+EL021,HDMI Cable,2m,1pc,Electronics,Cables,280,250,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,40 pcs,In Stock
+EL022,AUX Cable,1.5m,1pc,Electronics,Cables,120,105,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,60 pcs,In Stock
+EL023,Extension Cord,3m,1pc,Electronics,Cables,320,285,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,35 pcs,In Stock
+EL024,Multi Plug,6 Socket,1pc,Electronics,Cables,450,405,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,30 pcs,In Stock
+EL025,LED Bulb,9W,1pc,Electronics,Lighting,95,82,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,80 pcs,In Stock
+EL026,LED Bulb,12W,1pc,Electronics,Lighting,140,122,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,70 pcs,In Stock
+EL027,Tube Light,20W,1pc,Electronics,Lighting,280,250,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,40 pcs,In Stock
+EL028,Emergency Light,LED,1pc,Electronics,Lighting,650,585,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,25 pcs,In Stock
+EL029,Torch Light,Rechargeable,1pc,Electronics,Lighting,380,340,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,35 pcs,In Stock
+EL030,Table Lamp,LED,1pc,Electronics,Lighting,850,765,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,22 pcs,In Stock
+EL031,Fan Table,12 inch,1pc,Electronics,Fans,1450,1305,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,15 pcs,In Stock
+EL032,Fan Ceiling,48 inch,1pc,Electronics,Fans,2800,2520,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,10 pcs,In Stock
+EL033,Iron,Dry,1pc,Electronics,Appliances,650,585,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,20 pcs,In Stock
+EL034,Iron,Steam,1pc,Electronics,Appliances,1850,1665,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,15 pcs,In Stock
+EL035,Hair Dryer,1200W,1pc,Electronics,Appliances,1200,1080,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,18 pcs,In Stock
+EL036,Trimmer,Rechargeable,1pc,Electronics,Grooming,1450,1305,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,20 pcs,In Stock
+EL037,Electric Shaver,Cordless,1pc,Electronics,Grooming,2200,1980,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,12 pcs,In Stock
+EL038,Calculator,Scientific,1pc,Electronics,Office,450,405,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,35 pcs,In Stock
+EL039,Calculator,Basic,1pc,Electronics,Office,180,155,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,50 pcs,In Stock
+EL040,Wall Clock,Digital,1pc,Electronics,Home,850,765,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,25 pcs,In Stock
+EL041,Alarm Clock,Table,1pc,Electronics,Home,280,250,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,40 pcs,In Stock
+EL042,Batteries AA,Pack of 4,1 pack,Electronics,Batteries,85,74,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,60 packs,In Stock
+EL043,Batteries AAA,Pack of 4,1 pack,Electronics,Batteries,75,65,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,65 packs,In Stock
+EL044,Rechargeable Battery,AA 2 pcs,1 pack,Electronics,Batteries,320,285,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,35 packs,In Stock
+EL045,Adapter,12V,1pc,Electronics,Adapters,280,250,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,40 pcs,In Stock
+EL046,Adapter,5V,1pc,Electronics,Adapters,180,155,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,50 pcs,In Stock
+EL047,Soldering Iron,40W,1pc,Electronics,Tools,450,405,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,25 pcs,In Stock
+EL048,Multimeter,Digital,1pc,Electronics,Tools,850,765,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,20 pcs,In Stock

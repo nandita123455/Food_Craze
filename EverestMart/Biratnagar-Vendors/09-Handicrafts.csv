@@ -1,0 +1,43 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+HC001,Dhaka Wallet,Handmade,1pc,Handicrafts,Dhaka Products,480,432,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,30 pcs,In Stock
+HC002,Dhaka Purse,Traditional,1pc,Handicrafts,Dhaka Products,350,315,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,35 pcs,In Stock
+HC003,Dhaka Bag,Medium,1pc,Handicrafts,Dhaka Products,950,855,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,20 pcs,In Stock
+HC004,Dhaka Laptop Bag,Premium,1pc,Handicrafts,Dhaka Products,1850,1665,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,12 pcs,In Stock
+HC005,Wooden Bowl,Handicraft,1pc,Handicrafts,Wood Crafts,680,612,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,25 pcs,In Stock
+HC006,Wooden Spoon Set,3 pcs,1 set,Handicrafts,Wood Crafts,450,405,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,30 sets,In Stock
+HC007,Wooden Decorative Plate,Wall Hanging,1pc,Handicrafts,Wood Crafts,1280,1152,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,15 pcs,In Stock
+HC008,Wooden Photo Frame,Medium,1pc,Handicrafts,Wood Crafts,580,522,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,28 pcs,In Stock
+HC009,Wooden Jewelry Box,Carved,1pc,Handicrafts,Wood Crafts,850,765,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,20 pcs,In Stock
+HC010,Wooden Pen Stand,Desk,1pc,Handicrafts,Wood Crafts,320,285,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,35 pcs,In Stock
+HC011,Metal Statue,Buddha,Small,Handicrafts,Metal Crafts,1450,1305,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,12 pcs,In Stock
+HC012,Metal Singing Bowl,Traditional,1pc,Handicrafts,Metal Crafts,2800,2520,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,8 pcs,In Stock
+HC013,Brass Diya,Oil Lamp,1pc,Handicrafts,Metal Crafts,280,250,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,40 pcs,In Stock
+HC014,Metal Wind Chime,Decorative,1pc,Handicrafts,Metal Crafts,650,585,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,25 pcs,In Stock
+HC015,Brass Utensils,Traditional,1pc,Handicrafts,Metal Crafts,980,882,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,18 pcs,In Stock
+HC016,Khukuri,Decorative,Medium,Handicrafts,Metal Crafts,3500,3150,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,10 pcs,In Stock
+HC017,Clay Pot,Traditional,Large,Handicrafts,Pottery,450,405,Pottery House,Santosh Karki,+977-9812345681,pottery@email.com,Pottery Zone,30 pcs,In Stock
+HC018,Clay Diya,Set of 10,1 pack,Handicrafts,Pottery,180,155,Pottery House,Santosh Karki,+977-9812345681,pottery@email.com,Pottery Zone,45 packs,In Stock
+HC019,Terracotta Vase,Decorative,1pc,Handicrafts,Pottery,780,702,Pottery House,Santosh Karki,+977-9812345681,pottery@email.com,Pottery Zone,22 pcs,In Stock
+HC020,Clay Utensils,Handmade,1pc,Handicrafts,Pottery,350,315,Pottery House,Santosh Karki,+977-9812345681,pottery@email.com,Pottery Zone,35 pcs,In Stock
+HC021,Thangka Painting,Small,1pc,Handicrafts,Paintings,2800,2520,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,10 pcs,In Stock
+HC022,Thangka Painting,Medium,1pc,Handicrafts,Paintings,4500,4050,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,6 pcs,In Stock
+HC023,Mandala Art,Framed,1pc,Handicrafts,Paintings,1850,1665,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,12 pcs,In Stock
+HC024,Lokta Paper Gift Box,Set of 3,1 set,Handicrafts,Paper Crafts,480,432,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,30 sets,In Stock
+HC025,Lokta Paper Diary,Handmade,1pc,Handicrafts,Paper Crafts,350,315,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,35 pcs,In Stock
+HC026,Lokta Paper Lamp,Decorative,1pc,Handicrafts,Paper Crafts,950,855,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,20 pcs,In Stock
+HC027,Prayer Flags,Cotton,Set of 25,Handicrafts,Religious,650,585,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,28 sets,In Stock
+HC028,Prayer Wheel,Spinning,Small,Handicrafts,Religious,1280,1152,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,15 pcs,In Stock
+HC029,Rudraksha Mala,108 Beads,1pc,Handicrafts,Religious,850,765,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,22 pcs,In Stock
+HC030,Incense Holder,Wooden,1pc,Handicrafts,Religious,280,250,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,40 pcs,In Stock
+HC031,Bamboo Basket,Storage,Medium,Handicrafts,Bamboo Crafts,650,585,Bamboo Works,Laxman Yadav,+977-9823456791,bamboo@email.com,Bamboo Zone,25 pcs,In Stock
+HC032,Bamboo Mat,Floor,1pc,Handicrafts,Bamboo Crafts,480,432,Bamboo Works,Laxman Yadav,+977-9823456791,bamboo@email.com,Bamboo Zone,28 pcs,In Stock
+HC033,Bamboo Wind Chime,Musical,1pc,Handicrafts,Bamboo Crafts,350,315,Bamboo Works,Laxman Yadav,+977-9823456791,bamboo@email.com,Bamboo Zone,32 pcs,In Stock
+HC034,Woven Table Mat,Set of 6,1 set,Handicrafts,Woven Crafts,580,522,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,25 sets,In Stock
+HC035,Felt Bag,Colorful,1pc,Handicrafts,Felt Crafts,780,702,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,22 pcs,In Stock
+HC036,Felt Coaster,Set of 4,1 set,Handicrafts,Felt Crafts,220,195,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,40 sets,In Stock
+HC037,Felt Slippers,Handmade,1 pair,Handicrafts,Felt Crafts,450,405,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,30 pairs,In Stock
+HC038,Stone Carving,Buddha,Small,Handicrafts,Stone Crafts,1850,1665,Stone Works Nepal,Binod Mandal,+977-9834567802,stone@gmail.com,Stone Zone,12 pcs,In Stock
+HC039,Stone Mortar Pestle,Kitchen,1 set,Handicrafts,Stone Crafts,950,855,Stone Works Nepal,Binod Mandal,+977-9834567802,stone@gmail.com,Stone Zone,18 sets,In Stock
+HC040,Beaded Jewelry,Necklace,1pc,Handicrafts,Jewelry,680,612,Jewelry Crafts,Anita Rai,+977-9845678913,jewelry@gmail.com,Jewelry Market,25 pcs,In Stock
+HC041,Beaded Bracelet,Handmade,1pc,Handicrafts,Jewelry,280,250,Jewelry Crafts,Anita Rai,+977-9845678913,jewelry@gmail.com,Jewelry Market,40 pcs,In Stock
+HC042,Beaded Earrings,Colorful,1 pair,Handicrafts,Jewelry,350,315,Jewelry Crafts,Anita Rai,+977-9845678913,jewelry@gmail.com,Jewelry Market,35 pairs,In Stock

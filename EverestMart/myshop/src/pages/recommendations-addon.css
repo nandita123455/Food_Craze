@@ -1,0 +1,19 @@
+/* Add these styles to your existing Home.css */
+
+.recommendations-section {
+  margin: 3rem 0;
+  background: #f9fafb;
+  padding: 2rem 0;
+  border-radius: 12px;
+}
+
+.recommendations-section h2 {
+  padding-left: 2rem;
+}
+
+@media (max-width: 768px) {
+  .recommendations-section {
+    margin: 2rem 0;
+    padding: 1rem 0;
+  }
+}

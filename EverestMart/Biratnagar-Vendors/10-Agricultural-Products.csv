@@ -1,0 +1,56 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+AG001,Vegetable Seeds Tomato,Hybrid,50g,Agricultural,Seeds,280,250,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,10 packs,In Stock
+AG002,Vegetable Seeds Cabbage,Quality,25g,Agricultural,Seeds,220,195,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,12 packs,In Stock
+AG003,Vegetable Seeds Cauliflower,Hybrid,25g,Agricultural,Seeds,250,225,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,12 packs,In Stock
+AG004,Vegetable Seeds Carrot,Premium,50g,Agricultural,Seeds,180,155,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,15 packs,In Stock
+AG005,Vegetable Seeds Radish,Fast Growing,100g,Agricultural,Seeds,120,105,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,18 packs,In Stock
+AG006,Leafy Seeds Spinach,Green,50g,Agricultural,Seeds,95,82,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,20 packs,In Stock
+AG007,Leafy Seeds Mustard,Traditional,100g,Agricultural,Seeds,65,56,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,25 packs,In Stock
+AG008,Leafy Seeds Fenugreek,Methi,100g,Agricultural,Seeds,75,65,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,22 packs,In Stock
+AG009,Flower Seeds Marigold,Orange,10g,Agricultural,Seeds,45,38,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,30 packs,In Stock
+AG010,Flower Seeds Sunflower,Giant,20g,Agricultural,Seeds,85,74,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,25 packs,In Stock
+AG011,Rice Seeds,Hybrid,1kg,Agricultural,Seeds,150,130,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,50 kg,In Stock
+AG012,Wheat Seeds,Premium,1kg,Agricultural,Seeds,120,105,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,50 kg,In Stock
+AG013,NPK Fertilizer,Balanced 19-19-19,1kg,Agricultural,Fertilizers,350,315,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,25 kg,In Stock
+AG014,Urea Fertilizer,Nitrogen,1kg,Agricultural,Fertilizers,280,250,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,50 kg,In Stock
+AG015,DAP Fertilizer,Phosphorus,1kg,Agricultural,Fertilizers,420,380,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,50 kg,In Stock
+AG016,Potash Fertilizer,Potassium,1kg,Agricultural,Fertilizers,380,340,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,40 kg,In Stock
+AG017,Organic Manure,Cow Dung,5kg,Agricultural,Fertilizers,180,155,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,100 kg,In Stock
+AG018,Vermicompost,Organic,5kg,Agricultural,Fertilizers,220,195,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,80 kg,In Stock
+AG019,Bone Meal,Organic,1kg,Agricultural,Fertilizers,280,250,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,30 kg,In Stock
+AG020,Neem Cake,Organic,1kg,Agricultural,Fertilizers,180,155,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,50 kg,In Stock
+AG021,Micronutrient Mix,Complete,500g,Agricultural,Fertilizers,450,405,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,20 kg,In Stock
+AG022,Pesticide,Insect Control,500ml,Agricultural,Pesticides,650,585,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,20 bottles,In Stock
+AG023,Fungicide,Disease Control,250ml,Agricultural,Pesticides,550,495,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,25 bottles,In Stock
+AG024,Herbicide,Weed Control,500ml,Agricultural,Pesticides,480,432,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,22 bottles,In Stock
+AG025,Neem Oil,Organic Pesticide,250ml,Agricultural,Pesticides,380,340,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,28 bottles,In Stock
+AG026,Garden Spade,Steel,1pc,Agricultural,Tools,450,405,Farm Tools,Ramesh Yadav,+977-9845678914,tools@gmail.com,Tool Market,35 pcs,In Stock
+AG027,Garden Fork,4 Prong,1pc,Agricultural,Tools,380,340,Farm Tools,Ramesh Yadav,+977-9845678914,tools@gmail.com,Tool Market,38 pcs,In Stock
+AG028,Garden Hoe,Traditional,1pc,Agricultural,Tools,320,285,Farm Tools,Ramesh Yadav,+977-9845678914,tools@gmail.com,Tool Market,40 pcs,In Stock
+AG029,Garden Rake,Metal,1pc,Agricultural,Tools,350,315,Farm Tools,Ramesh Yadav,+977-9845678914,tools@gmail.com,Tool Market,36 pcs,In Stock
+AG030,Pruning Shears,Sharp,1pc,Agricultural,Tools,550,495,Farm Tools,Ramesh Yadav,+977-9845678914,tools@gmail.com,Tool Market,30 pcs,In Stock
+AG031,Garden Gloves,Cotton,1 pair,Agricultural,Tools,120,105,Farm Tools,Ramesh Yadav,+977-9845678914,tools@gmail.com,Tool Market,55 pairs,In Stock
+AG032,Watering Can,10L,1pc,Agricultural,Irrigation,480,432,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,25 pcs,In Stock
+AG033,Garden Sprayer,Hand Pump,2L,Agricultural,Irrigation,650,585,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,22 pcs,In Stock
+AG034,Drip Irrigation Kit,50m,1 set,Agricultural,Irrigation,1850,1665,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,12 sets,In Stock
+AG035,Garden Hose Pipe,20m,1pc,Agricultural,Irrigation,850,765,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,18 pcs,In Stock
+AG036,Plant Pots,Plastic Medium,Set of 5,Agricultural,Pots & Containers,280,250,Garden  Supplies,Laxmi Rai,+977-9856789024,garden@gmail.com,Garden Market,40 sets,In Stock
+AG037,Plant Pots,Ceramic Large,1pc,Agricultural,Pots & Containers,650,585,Garden Supplies,Laxmi Rai,+977-9856789024,garden@gmail.com,Garden Market,25 pcs,In Stock
+AG038,Seedling Tray,50 Cells,1pc,Agricultural,Pots & Containers,180,155,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,35 pcs,In Stock
+AG039,Grow Bags,5 Gallon,Pack of 5,Agricultural,Pots & Containers,220,195,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,38 packs,In Stock
+AG040,Potting Soil,Ready Mix,5kg,Agricultural,Soil & Compost,220,195,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,50 kg,In Stock
+AG041,Coco Peat,Compressed,5kg,Agricultural,Soil & Compost,280,250,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,40 kg,In Stock
+AG042,Perlite,Soil Amendment,1kg,Agricultural,Soil & Compost,180,155,Garden Supplies,Laxmi Rai,+977-9856789024,garden@gmail.com,Garden Market,30 kg,In Stock
+AG043,Mulch,Organic,5kg,Agricultural,Soil & Compost,150,130,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,60 kg,In Stock
+AG044,Fresh Tomatoes,Local,1kg,Agricultural,Fresh Produce,65,55,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,200 kg,In Stock
+AG045,Fresh Potatoes,Local,1kg,Agricultural,Fresh Produce,45,38,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,300 kg,In Stock
+AG046,Fresh Onions,Red,1kg,Agricultural,Fresh Produce,55,48,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,250 kg,In Stock
+AG047,Fresh Cabbage,Green,1pc,Agricultural,Fresh Produce,40,34,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,150 pcs,In Stock
+AG048,Fresh Cauliflower,White,1pc,Agricultural,Fresh Produce,50,43,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,130 pcs,In Stock
+AG049,Fresh Carrots,Orange,1kg,Agricultural,Fresh Produce,70,62,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,180 kg,In Stock
+AG050,Fresh Spinach,Green,1 bunch,Agricultural,Fresh Produce,30,25,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,200 bunches,In Stock
+AG051,Fresh Coriander,Green,1 bunch,Agricultural,Fresh Produce,25,21,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,220 bunches,In Stock
+AG052,Fresh Mint,Green,1 bunch,Agricultural,Fresh Produce,20,17,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,230 bunches,In Stock
+AG053,Fresh Ginger,Local,250g,Agricultural,Fresh Produce,85,74,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,120 packs,In Stock
+AG054,Fresh Garlic,Local,250g,Agricultural,Fresh Produce,95,82,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,110 packs,In Stock
+AG055,Fresh Green Chilli,Spicy,250g,Agricultural,Fresh Produce,45,38,Fresh Farm Produce,Ganesh Tharu,+977-9867890130,fresh@gmail.com,Vegetable Market,160 packs,In Stock

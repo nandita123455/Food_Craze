@@ -1,0 +1,53 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+DA001,Full Cream Milk,Koshi Dairy,1L,Dairy,Milk,60,52,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,50L,In Stock
+DA002,Toned Milk,Fresh Dairy,1L,Dairy,Milk,55,48,Biratnagar Dairy Coop,Sunita Chaudhary,+977-9812345670,biratdairy@email.com,Cooperative Area,40L,In Stock
+DA003,Skimmed Milk,Lite Milk,1L,Dairy,Milk,50,44,Lite Dairy Products,Manoj Thakur,+977-9823456781,litedairy@gmail.com,Main Dairy Zone,30L,In Stock
+DA004,Buffalo Milk,Pure Dairy,1L,Dairy,Milk,70,62,Village Dairy,Shyam Rai,+977-9834567896,village@email.com,Rural Area,45L,In Stock
+DA005,Flavored Milk Chocolate,Choco Fresh,200ml,Dairy,Milk,25,21,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,100 units,In Stock
+DA006,Flavored Milk Strawberry,Berry Fresh,200ml,Dairy,Milk,25,21,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,100 units,In Stock
+DA007,Flavored Milk Mango,Mango Delight,200ml,Dairy,Milk,25,21,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,100 units,In Stock
+DA008,Table Butter,Golden Butter,100g,Dairy,Butter & Ghee,85,72,Golden Dairy Industries,Rajendra Mehta,+977-9834567892,goldendairy@email.com,Industrial Area-3,5kg,In Stock
+DA009,Table Butter,Golden Butter,500g,Dairy,Butter & Ghee,410,360,Golden Dairy Industries,Rajendra Mehta,+977-9834567892,goldendairy@email.com,Industrial Area-3,15kg,In Stock
+DA010,White Butter,Farm Fresh,250g,Dairy,Butter & Ghee,120,102,Farm Fresh Dairy,Geeta Jha,+977-9845678903,farmfresh@gmail.com,Farm Area,10kg,In Stock
+DA011,Salted Butter,Premium,100g,Dairy,Butter & Ghee,90,78,Golden Dairy Industries,Rajendra Mehta,+977-9834567892,goldendairy@email.com,Industrial Area-3,5kg,In Stock
+DA012,Unsalted Butter,Pure,100g,Dairy,Butter & Ghee,95,82,Golden Dairy Industries,Rajendra Mehta,+977-9834567892,goldendairy@email.com,Industrial Area-3,5kg,In Stock
+DA013,Ghee Pure Desi,Traditional,500g,Dairy,Butter & Ghee,320,280,Dairy Pride Biratnagar,Bishnu Tamang,+977-9856789014,dairypride@email.com,Dairy Zone,10kg,In Stock
+DA014,Ghee Pure Desi,Traditional,1kg,Dairy,Butter & Ghee,620,550,Traditional Foods,Keshav Sharma,+977-9867890125,traditional@gmail.com,Old Market,20kg,In Stock
+DA015,Ghee Cow,Premium,500g,Dairy,Butter & Ghee,380,340,Premium Ghee Co,Ramesh Gupta,+977-9878901239,ghee@gmail.com,Ghee Market,12kg,In Stock
+DA016,Cheddar Cheese,Euro Style,200g,Dairy,Cheese,180,155,Cheese Craft Nepal,Prakash Limbu,+977-9878901236,cheese@email.com,Dairy Complex,5kg,In Stock
+DA017,Cheddar Cheese Block,Euro Style,1kg,Dairy,Cheese,850,760,Cheese Craft Nepal,Prakash Limbu,+977-9878901236,cheese@email.com,Dairy Complex,15kg,In Stock
+DA018,Mozzarella,Pizza Fresh,200g,Dairy,Cheese,200,175,Italian Foods Nepal,Santosh Pradhan,+977-9889012347,italian@gmail.com,Food Court,5kg,In Stock
+DA019,Processed Cheese,Creamy,200g,Dairy,Cheese,140,122,Cheese Craft Nepal,Prakash Limbu,+977-9878901236,cheese@email.com,Dairy Complex,8kg,In Stock
+DA020,Cheese Spread,Easy Spread,200g,Dairy,Cheese,150,130,Dairy Delights,Anita Basnet,+977-9890123461,delights@email.com,Dairy Lane,10kg,In Stock
+DA021,Paneer Fresh,Fresh Cottage,250g,Dairy,Paneer,90,78,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,10kg,In Stock
+DA022,Paneer Fresh,Fresh Cottage,500g,Dairy,Paneer,175,155,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,18kg,In Stock
+DA023,Paneer Cubes,Ready Cut,200g,Dairy,Paneer,85,74,Paneer House,Dinesh Karki,+977-9801234562,paneer@gmail.com,Paneer Zone,8kg,In Stock
+DA024,Tofu,Soya Paneer,200g,Dairy,Paneer,70,60,Soya Foods,Prakash Rai,+977-9801234563,soya@email.com,Soya Market,10kg,In Stock
+DA025,Fresh Dahi Plain,Daily Fresh,500g,Dairy,Yogurt & Curd,45,38,Fresh Dairy,Sunita Chaudhary,+977-9812345670,biratdairy@email.com,Cooperative Area,20kg,In Stock
+DA026,Fresh Dahi Plain,Daily Fresh,1kg,Dairy,Yogurt & Curd,85,75,Fresh Dairy,Sunita Chaudhary,+977-9812345670,biratdairy@email.com,Cooperative Area,30kg,In Stock
+DA027,Sweet Dahi,Mishti Doi,400g,Dairy,Yogurt & Curd,55,48,Sweet Dairy,Geeta Pandey,+977-9812345671,sweet@gmail.com,Sweet Zone,15kg,In Stock
+DA028,Greek Yogurt,Premium,200g,Dairy,Yogurt & Curd,75,65,Premium Dairy Products,Neha Gupta,+977-9890123458,premium@gmail.com,Premium Zone,10kg,In Stock
+DA029,Flavored Yogurt Strawberry,Fruity,150g,Dairy,Yogurt & Curd,35,30,Flavor Dairy,Amit Singh,+977-9801234561,flavor@email.com,Flavor Street,15kg,In Stock
+DA030,Flavored Yogurt Mango,Fruity,150g,Dairy,Yogurt & Curd,35,30,Flavor Dairy,Amit Singh,+977-9801234561,flavor@email.com,Flavor Street,15kg,In Stock
+DA031,Flavored Yogurt Mixed Fruit,Fruity,150g,Dairy,Yogurt & Curd,35,30,Flavor Dairy,Amit Singh,+977-9801234561,flavor@email.com,Flavor Street,15kg,In Stock
+DA032,Probiotic Yogurt,Healthy,150g,Dairy,Yogurt & Curd,65,56,Health Dairy,Puja Sharma,+977-9801234564,health@gmail.com,Health Zone,12kg,In Stock
+DA033,Sweet Lassi,Traditional,200ml,Dairy,Lassi & Drinks,30,25,Lassi House,Ramesh Yadav,+977-9812345671,lassi@gmail.com,Beverage Lane,80 units,In Stock
+DA034,Salted Lassi,Traditional,200ml,Dairy,Lassi & Drinks,30,25,Lassi House,Ramesh Yadav,+977-9812345671,lassi@gmail.com,Beverage Lane,80 units,In Stock
+DA035,Mango Lassi,Fruit Lassi,200ml,Dairy,Lassi & Drinks,40,34,Lassi House,Ramesh Yadav,+977-9812345671,lassi@gmail.com,Beverage Lane,70 units,In Stock
+DA036,Buttermilk Chaach,Refreshing,200ml,Dairy,Lassi & Drinks,20,17,Dairy Drinks,Laxmi Rai,+977-9812345672,drinks@email.com,Drink Zone,100 units,In Stock
+DA037,Vanilla Ice Cream,Frozen Delight,1L,Dairy,Ice Cream,180,155,Cold Storage Biratnagar,Dipak Pradhan,+977-9823456782,cold@email.com,Cold Zone,20L,In Stock
+DA038,Chocolate Ice Cream,Rich,1L,Dairy,Ice Cream,200,175,Cold Storage Biratnagar,Dipak Pradhan,+977-9823456782,cold@email.com,Cold Zone,20L,In Stock
+DA039,Strawberry Ice Cream,Fruity,1L,Dairy,Ice Cream,190,165,Cold Storage Biratnagar,Dipak Pradhan,+977-9823456782,cold@email.com,Cold Zone,20L,In Stock
+DA040,Butter Scotch Ice Cream,Premium,1L,Dairy,Ice Cream,210,185,Cold Storage Biratnagar,Dipak Pradhan,+977-9823456782,cold@email.com,Cold Zone,20L,In Stock
+DA041,Kulfi Traditional,Desi,100ml,Dairy,Ice Cream,40,34,Kulfi Corner,Sanjay Kumar,+977-9834567893,kulfi@gmail.com,Sweet Market,50 units,In Stock
+DA042,Kulfi Malai,Rich,100ml,Dairy,Ice Cream,45,38,Kulfi Corner,Sanjay Kumar,+977-9834567893,kulfi@gmail.com,Sweet Market,50 units,In Stock
+DA043,Kulfi Pista,Premium,100ml,Dairy,Ice Cream,50,43,Kulfi Corner,Sanjay Kumar,+977-9834567893,kulfi@gmail.com,Sweet Market,45 units,In Stock
+DA044,Ice Cream Cones,Vanilla,100ml,Dairy,Ice Cream,35,30,Cold Storage Biratnagar,Dipak Pradhan,+977-9823456782,cold@email.com,Cold Zone,80 units,In Stock
+DA045,Cream Fresh,Cooking,200ml,Dairy,Cream,85,74,Fresh Cream Co,Santosh Gurung,+977-9845678909,cream@gmail.com,Cream Zone,15L,In Stock
+DA046,Whipping Cream,Premium,250ml,Dairy,Cream,120,105,Premium Cream,Binod Jha,+977-9845678910,whip@email.com,Premium Area,12L,In Stock
+DA047,Sour Cream,Tangy,200g,Dairy,Cream,95,82,Fresh Cream Co,Santosh Gurung,+977-9845678909,cream@gmail.com,Cream Zone,10kg,In Stock
+DA048,Condensed Milk,Sweet,400g,Dairy,Milk Products,110,95,Dairy Products Ltd,Ramesh Mandal,+977-9856789021,dairyprod@email.com,Factory Zone,15kg,In Stock
+DA049,Evaporated Milk,Concentrated,400g,Dairy,Milk Products,95,82,Dairy Products Ltd,Ramesh Mandal,+977-9856789021,dairyprod@email.com,Factory Zone,15kg,In Stock
+DA050,Milk Powder,Full Cream,500g,Dairy,Milk Products,380,340,Powder Milk Co,Laxman Thapa,+977-9856789022,powder@gmail.com,Powder Zone,20kg,In Stock
+DA051,Milk Powder,Skimmed,500g,Dairy,Milk Products,350,315,Powder Milk Co,Laxman Thapa,+977-9856789022,powder@gmail.com,Powder Zone,20kg,In Stock
+DA052,Khoya Mawa,Traditional,250g,Dairy,Sweets,140,125,Sweet Dairy,Geeta Pandey,+977-9812345671,sweet@gmail.com,Sweet Zone,12kg,In Stock

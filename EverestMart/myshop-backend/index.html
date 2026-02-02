@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Painting Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .dashboard {
+            display: flex;
+            gap: 20px;
+        }
+
+        .tools-panel {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .canvas-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #paintCanvas {
+            border: 2px solid #ddd;
+            background: white;
+            cursor: crosshair;
+        }
+
+        .color-picker {
+            margin: 10px 0;
+        }
+
+        .preset-colors {
+            display: flex;
+            gap: 5px;
+            margin: 15px 0;
+        }
+
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px 0;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="tools-panel">
+            <h2>Painting Tools</h2>
+            <div class="color-picker">
+                <label>Brush Color: </label>
+                <input type="color" id="colorPicker" value="#ff0000">
+            </div>
+            
+            <div>
+                <label>Brush Size: </label>
+                <input type="range" id="brushSize" min="1" max="50" value="5">
+                <span id="brushSizeValue">5</span>
+            </div>
+
+            <div class="preset-colors">
+                <div class="color-btn" style="background: #ff0000"></div>
+                <div class="color-btn" style="background: #00ff00"></div>
+                <div class="color-btn" style="background: #0000ff"></div>
+                <div class="color-btn" style="background: #ffff00"></div>
+                <div class="color-btn" style="background: #000000"></div>
+            </div>
+
+            <button id="clearBtn">Clear Canvas</button>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="paintCanvas" width="600" height="600"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+
+        // Initialize canvas
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        // Drawing functions
+        function startDrawing(e) {
+            isDrawing = true;
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            ctx.strokeStyle = document.getElementById('colorPicker').value;
+            ctx.lineWidth = document.getElementById('brushSize').value;
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.stroke();
+            
+            [lastX, lastY] = [e.offsetX, e.offsetY];
+        }
+
+        // Event listeners
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mouseleave', () => isDrawing = false);
+
+        // Tools functionality
+        document.getElementById('brushSize').addEventListener('input', function() {
+            document.getElementById('brushSizeValue').textContent = this.value;
+        });
+
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('colorPicker').value = 
+                    rgbToHex(btn.style.backgroundColor);
+            });
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', () => {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        });
+
+        // Helper function to convert RGB to HEX
+        function rgbToHex(rgb) {
+            return '#' + rgb.match(/\d+/g)
+                .map(x => parseInt(x).toString(16).padStart(2, '0')).join('');
+        }
+    </script>
+</body>
+</html>

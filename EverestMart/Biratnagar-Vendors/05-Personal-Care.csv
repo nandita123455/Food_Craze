@@ -1,0 +1,63 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+PC001,Bath Soap,Herbal Fresh,125g,Personal Care,Soap & Bathing,35,29,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,100 pcs,In Stock
+PC002,Bath Soap Medicated,Skin Guard,100g,Personal Care,Soap & Bathing,45,38,Herbal Care Nepal,Santosh Rai,+977-9812345678,herbal@email.com,Herbal Zone,80 pcs,In Stock
+PC003,Handwash Liquid,Germ Free,250ml,Personal Care,Soap & Bathing,85,72,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,50 bottles,In Stock
+PC004,Body Wash,Fresh Shower,500ml,Personal Care,Soap & Bathing,180,155,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,40 bottles,In Stock
+PC005,Face Wash,Clear Skin,100ml,Personal Care,Skin Care,120,105,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,60 tubes,In Stock
+PC006,Face Scrub,Glow,100g,Personal Care,Skin Care,150,130,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,50 tubes,In Stock
+PC007,Face Cream,Moisturizing,50g,Personal Care,Skin Care,220,195,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,40 jars,In Stock
+PC008,Sunscreen SPF 50,Sun Guard,100ml,Personal Care,Skin Care,350,310,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,35 tubes,In Stock
+PC009,Moisturizer,Hydra Soft,150ml,Personal Care,Skin Care,280,250,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,40 bottles,In Stock
+PC010,Night Cream,Age Defense,50g,Personal Care,Skin Care,380,340,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,30 jars,In Stock
+PC011,Shampoo Anti-Dandruff,Hair Health,200ml,Personal Care,Hair Care,120,105,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,60 bottles,In Stock
+PC012,Shampoo Herbal,Natural Fresh,200ml,Personal Care,Hair Care,95,82,Herbal Care Nepal,Santosh Rai,+977-9812345678,herbal@email.com,Herbal Zone,70 bottles,In Stock
+PC013,Conditioner,Smooth Silk,200ml,Personal Care,Hair Care,140,122,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,55 bottles,In Stock
+PC014,Hair Oil,Nourishing,200ml,Personal Care,Hair Care,95,82,Ayurvedic Products,Binod Jha,+977-9845678901,ayurvedic@gmail.com,Ayurvedic Market,65 bottles,In Stock
+PC015,Hair Serum,Shine Boost,100ml,Personal Care,Hair Care,250,225,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,40 bottles,In Stock
+PC016,Hair Gel,Strong Hold,150g,Personal Care,Hair Care,85,74,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,50 tubes,In Stock
+PC017,Hair Wax,Styling,100g,Personal Care,Hair Care,120,105,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,45 jars,In Stock
+PC018,Toothpaste,Fresh Mint,150g,Personal Care,Oral Care,55,48,Oral Care Nepal,Prakash Rai,+977-9856789012,oral@gmail.com,Health Market,100 tubes,In Stock
+PC019,Toothpaste Sensitive,Gentle Care,100g,Personal Care,Oral Care,75,65,Oral Care Nepal,Prakash Rai,+977-9856789012,oral@gmail.com,Health Market,80 tubes,In Stock
+PC020,Toothbrush Soft,Daily Clean,1pc,Personal Care,Oral Care,25,21,Oral Care Nepal,Prakash Rai,+977-9856789012,oral@gmail.com,Health Market,200 pcs,In Stock
+PC021,Mouthwash,Fresh Breath,250ml,Personal Care,Oral Care,95,82,Oral Care Nepal,Prakash Rai,+977-9856789012,oral@gmail.com,Health Market,60 bottles,In Stock
+PC022,Deodorant Spray,Long Lasting,150ml,Personal Care,Deodorants,180,155,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,50 cans,In Stock
+PC023,Deodorant Roll-on,Fresh,50ml,Personal Care,Deodorants,120,105,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,70 bottles,In Stock
+PC024,Perfume,Signature,100ml,Personal Care,Fragrances,450,405,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,30 bottles,In Stock
+PC025,Body Spray,Cool Fresh,200ml,Personal Care,Fragrances,150,130,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,55 cans,In Stock
+PC026,Talcum Powder,Smooth,200g,Personal Care,Body Care,75,65,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,80 bottles,In Stock
+PC027,Body Lotion,Nourishing,300ml,Personal Care,Body Care,180,155,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,45 bottles,In Stock
+PC028,Hand Cream,Soft Touch,75ml,Personal Care,Body Care,95,82,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,60 tubes,In Stock
+PC029,Petroleum Jelly,Pure,100g,Personal Care,Body Care,45,38,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,90 jars,In Stock
+PC030,Baby Soap,Gentle,75g,Personal Care,Baby Care,40,34,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,100 pcs,In Stock
+PC031,Baby Shampoo,No Tears,200ml,Personal Care,Baby Care,120,105,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,60 bottles,In Stock
+PC032,Baby Lotion,Soft Skin,200ml,Personal Care,Baby Care,140,122,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,55 bottles,In Stock
+PC033,Baby Powder,Fresh,200g,Personal Care,Baby Care,95,82,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,70 bottles,In Stock
+PC034,Baby Wipes,Gentle Clean,80 pcs,Personal Care,Baby Care,85,74,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,60 packs,In Stock
+PC035,Diapers Small,Soft Dry,30 pcs,Personal Care,Baby Care,280,250,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,40 packs,In Stock
+PC036,Diapers Medium,Soft Dry,28 pcs,Personal Care,Baby Care,320,285,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,38 packs,In Stock
+PC037,Diapers Large,Soft Dry,26 pcs,Personal Care,Baby Care,350,315,Baby Care Products,Geeta Pandey,+977-9867890123,babycare@email.com,Baby Zone,35 packs,In Stock
+PC038,Sanitizer Hand,Germ Kill,100ml,Personal Care,Hygiene,55,48,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,100 bottles,In Stock
+PC039,Sanitizer Hand,Germ Kill,500ml,Personal Care,Hygiene,220,195,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,50 bottles,In Stock
+PC040,Tissue Paper,Soft,200 sheets,Personal Care,Hygiene,35,30,Hygiene Products,Laxman Thapa,+977-9878901234,hygiene@gmail.com,Market Zone,80 packs,In Stock
+PC041,Toilet Paper,Gentle,200 sheets,Personal Care,Hygiene,40,34,Hygiene Products,Laxman Thapa,+977-9878901234,hygiene@gmail.com,Market Zone,100 rolls,In Stock
+PC042,Cotton Balls,Pure,100 pcs,Personal Care,Hygiene,30,25,Hygiene Products,Laxman Thapa,+977-9878901234,hygiene@gmail.com,Market Zone,90 packs,In Stock
+PC043,Cotton Buds,Soft,100 pcs,Personal Care,Hygiene,25,21,Hygiene Products,Laxman Thapa,+977-9878901234,hygiene@gmail.com,Market Zone,120 packs,In Stock
+PC044,Razor Disposable,Sharp,5 pcs,Personal Care,Shaving,45,38,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,70 packs,In Stock
+PC045,Shaving Cream,Smooth,100g,Personal Care,Shaving,75,65,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,55 tubes,In Stock
+PC046,After Shave Lotion,Cool,100ml,Personal Care,Shaving,95,82,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,50 bottles,In Stock
+PC047,Lipstick,Matte,3.5g,Personal Care,Makeup,180,155,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,40 pcs,In Stock
+PC048,Lip Gloss,Shine,10ml,Personal Care,Makeup,120,105,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,50 tubes,In Stock
+PC049,Kajal,Black,2.5g,Personal Care,Makeup,85,74,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,65 pcs,In Stock
+PC050,Nail Polish,Glossy,10ml,Personal Care,Makeup,65,56,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,80 bottles,In Stock
+PC051,Face Powder,Compact,20g,Personal Care,Makeup,220,195,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,45 compacts,In Stock
+PC052,Foundation,Liquid,30ml,Personal Care,Makeup,350,315,Premium Care,Anita Basnet,+977-9834567890,premium@email.com,Premium Zone,35 bottles,In Stock
+PC053,Mascara,Volume,10ml,Personal Care,Makeup,180,155,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,50 tubes,In Stock
+PC054,Eyeliner,Black,3ml,Personal Care,Makeup,95,82,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,60 pcs,In Stock
+PC055,Hair Removal Cream,Gentle,60g,Personal Care,Hair Removal,120,105,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,50 tubes,In Stock
+PC056,Face Pack,Glow,100g,Personal Care,Skin Care,150,130,Ayurvedic Products,Binod Jha,+977-9845678901,ayurvedic@gmail.com,Ayurvedic Market,45 packs,In Stock
+PC057,Hair Dye,Natural Black,60ml,Personal Care,Hair Care,180,155,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,40 boxes,In Stock
+PC058,Nail Cutter,Stainless,1pc,Personal Care,Grooming,45,38,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,100 pcs,In Stock
+PC059,Hair Comb,Wooden,1pc,Personal Care,Grooming,35,30,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,120 pcs,In Stock
+PC060,Hair Brush,Premium,1pc,Personal Care,Grooming,95,82,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,60 pcs,In Stock
+PC061,Mirror Compact,Pocket,1pc,Personal Care,Grooming,65,56,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,70 pcs,In Stock
+PC062,Makeup Remover,Gentle,150ml,Personal Care,Makeup,140,122,Cosmetic House,Maya Sharma,+977-9823456789,cosmetic@email.com,Cosmetic Zone,50 bottles,In Stock

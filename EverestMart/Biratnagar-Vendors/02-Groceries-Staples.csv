@@ -1,0 +1,108 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+GR001,Basmati Rice Premium,Biratnagar Grains,1kg,Groceries,Rice & Grains,120,95,Biratnagar Rice Mills,Ram Prasad Sharma,+977-9841234567,ramsharm@gmail.com,Main Road-4,50kg,In Stock
+GR002,Basmati Rice Regular,B
+
+irat Grains,1kg,Groceries,Rice & Grains,100,82,Biratnagar Rice Mills,Ram Prasad Sharma,+977-9841234567,ramsharm@gmail.com,Main Road-4,50kg,In Stock
+GR003,Jasmine Rice,Aromatic,1kg,Groceries,Rice & Grains,110,90,Aromatic Rice Mills,Shyam Karki,+977-9851234567,aromatic@gmail.com,Rice Mill Area,40kg,In Stock
+GR004,Brown Rice Organic,Health Grain,1kg,Groceries,Rice & Grains,140,115,Organic Foods Nepal,Maya Thapa,+977-9851234568,organic@email.com,Organic Zone,30kg,In Stock
+GR005,Parboiled Rice,Golden Rice,1kg,Groceries,Rice & Grains,85,70,Golden Rice Factory,Hari Bahadur,+977-9851234569,golden@gmail.com,Factory Road,60kg,In Stock
+GR006,Sona Masoori,South Indian,1kg,Groceries,Rice & Grains,95,78,South Foods,Anil Kumar,+977-9851234570,south@email.com,Trading Area,45kg,In Stock
+GR007,Kolam Rice,Daily Rice,1kg,Groceries,Rice & Grains,88,72,Daily Grains,Sunita Rai,+977-9851234571,daily@gmail.com,Grain Market,50kg,In Stock
+GR008,Beaten Rice Chiura,Traditional,500g,Groceries,Rice & Grains,35,28,Village Products,Ganesh Tharu,+977-9851234572,village@gmail.com,Rural Market,25kg,In Stock
+GR009,Puffed Rice,Crispy,200g,Groceries,Rice & Grains,25,20,Crispy Foods,Ramesh Jha,+977-9851234573,crispy@email.com,Snack Zone,30kg,In Stock
+GR010,Rice Flour,Pure Flour,1kg,Groceries,Flour,55,45,Flour Mills Nepal,Prakash Limbu,+977-9851234574,flour@gmail.com,Mill Area,40kg,In Stock
+GR011,Moong Dal Whole,Fresh Dal,1kg,Groceries,Pulses,160,135,Koshi Dal Industries,Sita Devi,+977-9852345678,koshidal@email.com,Industrial Area,25kg,In Stock
+GR012,Moong Dal Split,Fresh Dal,500g,Groceries,Pulses,85,70,Koshi Dal Industries,Sita Devi,+977-9852345678,koshidal@email.com,Industrial Area,25kg,In Stock
+GR013,Masoor Dal Whole,Premium,1kg,Groceries,Pulses,140,115,Sharma Trading,Gopal Sharma,+977-9863456789,sharma@gmail.com,Bhanu Chowk,30kg,In Stock
+GR014,Masoor Dal Split,Premium,500g,Groceries,Pulses,75,62,Sharma Trading,Gopal Sharma,+977-9863456789,sharma@gmail.com,Bhanu Chowk,30kg,In Stock
+GR015,Chana Dal,Best Quality,1kg,Groceries,Pulses,120,98,Subedi Wholesalers,Krishna Subedi,+977-9874567890,subedi@email.com,Traffic Chowk,20kg,In Stock
+GR016,Chana Dal,Best Quality,500g,Groceries,Pulses,65,52,Subedi Wholesalers,Krishna Subedi,+977-9874567890,subedi@email.com,Traffic Chowk,20kg,In Stock
+GR017,Toor Dal,Arhar Dal,1kg,Groceries,Pulses,130,105,Yadav Dal Mill,Rajesh Yadav,+977-9885678901,yadav@gmail.com,Road No. 5,40kg,In Stock
+GR018,Urad Dal Whole,Black Gram,1kg,Groceries,Pulses,150,125,Black Gram Industries,Binod Mandal,+977-9885678902,blackgram@email.com,Dal Market,35kg,In Stock
+GR019,Urad Dal Split,Black Gram,500g,Groceries,Pulses,80,66,Black Gram Industries,Binod Mandal,+977-9885678902,blackgram@email.com,Dal Market,35kg,In Stock
+GR020,Rajma Red Beans,Himalayan,500g,Groceries,Pulses,95,78,Mountain Foods,Santosh Gurung,+977-9885678903,mountain@gmail.com,Hill Area,20kg,In Stock
+GR021,Chickpeas Kabuli,Premium,1kg,Groceries,Pulses,110,90,Chana Traders,Laxman Yadav,+977-9885678904,chana@email.com,Chana Bazaar,30kg,In Stock
+GR022,Black Chickpeas,Desi Chana,500g,Groceries,Pulses,60,48,Desi Foods,Kamala Devi,+977-9885678905,desi@gmail.com,Market Road,25kg,In Stock
+GR023,Green Peas Dried,Green,500g,Groceries,Pulses,70,58,Green Valley,Dinesh Pandey,+977-9885678906,green@email.com,Green Market,20kg,In Stock
+GR024,Soybean,Protein Rich,1kg,Groceries,Pulses,85,70,Soya Products,Ravi Mishra,+977-9885678907,soya@gmail.com,Protein Zone,40kg,In Stock
+GR025,Mixed Dal,Rainbow,500g,Groceries,Pulses,75,62,Mixed Foods,Anita Rai,+977-9885678908,mixed@email.com,Trading Center,25kg,In Stock
+GR026,Whole Wheat Atta,Biratnagar Mills,5kg,Groceries,Flour,250,210,Biratnagar Flour Mills,Hari Prasad,+977-9896789012,biratmill@email.com,Mill Area-7,100kg,In Stock
+GR027,Whole Wheat Atta,Biratnagar Mills,10kg,Groceries,Flour,480,420,Biratnagar Flour Mills,Hari Prasad,+977-9896789012,biratmill@email.com,Mill Area-7,200kg,In Stock
+GR028,Multi Grain Atta,Health Flour,5kg,Groceries,Flour,300,255,Health Mills,Puja Sharma,+977-9896789013,health@gmail.com,Health Zone,80kg,In Stock
+GR029,Maida All Purpose,Pure White,1kg,Groceries,Flour,45,38,Koshi Flour Industries,Laxmi Khatri,+977-9801234567,koshiflour@gmail.com,Industrial Road,50kg,In Stock
+GR030,Maida All Purpose,Pure White,5kg,Groceries,Flour,210,185,Koshi Flour Industries,Laxmi Khatri,+977-9801234567,koshiflour@gmail.com,Industrial Road,100kg,In Stock
+GR031,Suji Rava Fine,Golden Grains,500g,Groceries,Flour,35,28,Golden Grain Traders,Mohan Thapa,+977-9812345678,golden@email.com,Bhanu Path,30kg,In Stock
+GR032,Suji Rava Coarse,Golden Grains,1kg,Groceries,Flour,65,54,Golden Grain Traders,Mohan Thapa,+977-9812345678,golden@email.com,Bhanu Path,40kg,In Stock
+GR033,Besan Gram Flour,Fresh Gram,500g,Groceries,Flour,55,45,Fresh Foods Pvt Ltd,Binod Kumar,+977-9823456789,fresh@email.com,Main Market,25kg,In Stock
+GR034,Besan Gram Flour,Fresh Gram,1kg,Groceries,Flour,105,88,Fresh Foods Pvt Ltd,Binod Kumar,+977-9823456789,fresh@email.com,Main Market,40kg,In Stock
+GR035,Corn Flour,Corn King,500g,Groceries,Flour,50,42,Corn Products,Meena Devi,+977-9823456790,corn@gmail.com,Corn Street,30kg,In Stock
+GR036,Rice Flour,White,1kg,Groceries,Flour,55,45,Flour Mills Nepal,Prakash Limbu,+977-9823456791,flour@gmail.com,Mill Area,40kg,In Stock
+GR037,Sooji Upma Mix,Ready Cook,500g,Groceries,Flour,45,38,Quick Foods,Amit Singh,+977-9823456792,quick@email.com,Food Street,25kg,In Stock
+GR038,Chapati Mix,Instant,1kg,Groceries,Flour,60,50,Instant Foods,Neha Gupta,+977-9823456793,instant@gmail.com,Instant Zone,30kg,In Stock
+GR039,Mustard Oil Pure,Koshi Pure,1L,Groceries,Cooking Oil,180,155,Koshi Oil Mills,Ramesh Rai,+977-9834567890,koshioil@gmail.com,Oil Mill Road,20L,In Stock
+GR040,Mustard Oil Pure,Koshi Pure,5L,Groceries,Cooking Oil,850,750,Koshi Oil Mills,Ramesh Rai,+977-9834567890,koshioil@gmail.com,Oil Mill Road,50L,In Stock
+GR041,Sunflower Oil,Sunshine,1L,Groceries,Cooking Oil,150,130,Biratnagar Edibles,Sushila Gurung,+977-9845678901,edibles@email.com,Industrial Area-2,30L,In Stock
+GR042,Sunflower Oil,Sunshine,5L,Groceries,Cooking Oil,720,640,Biratnagar Edibles,Sushila Gurung,+977-9845678901,edibles@email.com,Industrial Area-2,80L,In Stock
+GR043,Soybean Oil,Nature Fresh,1L,Groceries,Cooking Oil,140,120,Nature Fresh Industries,Prakash Limbu,+977-9856789012,naturefresh@gmail.com,Factory Area,25L,In Stock
+GR044,Soybean Oil,Nature Fresh,5L,Groceries,Cooking Oil,670,590,Nature Fresh Industries,Prakash Limbu,+977-9856789012,naturefresh@gmail.com,Factory Area,70L,In Stock
+GR045,Groundnut Oil,Peanut Gold,1L,Groceries,Cooking Oil,170,145,Peanut Industries,Ramesh Mandal,+977-9856789013,peanut@email.com,Oil Zone,25L,In Stock
+GR046,Coconut Oil,Tropical,500ml,Groceries,Cooking Oil,180,155,Tropical Oils,Geeta Pandey,+977-9856789014,tropical@gmail.com,Coconut Area,15L,In Stock
+GR047,Rice Bran Oil,Health Oil,1L,Groceries,Cooking Oil,160,138,Health Oils Nepal,Keshav Jha,+977-9856789015,healthoil@email.com,Health Market,20L,In Stock
+GR048,Olive Oil Extra Virgin,Premium,500ml,Groceries,Cooking Oil,450,395,Premium Imports,Santosh Pradhan,+977-9856789016,premium@gmail.com,Import Zone,10L,In Stock
+GR049,Sesame Oil Til,Traditional,500ml,Groceries,Cooking Oil,120,102,Traditional Oils,Anita Basnet,+977-9856789017,traditional@email.com,Oil Market,15L,In Stock
+GR050,Cooking Oil Blend,Multi,1L,Groceries,Cooking Oil,135,115,Blend Oils,Mukesh Pradhan,+977-9856789018,blend@gmail.com,Blend Zone,25L,In Stock
+GR051,Iodized Salt,Clean Salt,1kg,Groceries,Salt & Spices,20,16,Biratnagar Salt Works,Anil Jha,+977-9878901234,salt@email.com,Near Railway,100kg,In Stock
+GR052,Sea Salt,Premium,500g,Groceries,Salt & Spices,45,38,Premium Salt Co,Rita Rai,+977-9878901235,seasalt@gmail.com,Salt Market,50kg,In Stock
+GR053,Black Salt Kala Namak,Traditional,250g,Groceries,Salt & Spices,35,29,Traditional Spices,Dinesh Sharma,+977-9878901236,spices@email.com,Spice Zone,25kg,In Stock
+GR054,Turmeric Powder,Spice King,100g,Groceries,Salt & Spices,35,28,Spice Valley Traders,Rita Chaudhary,+977-9889012345,valley@gmail.com,Spice Market,5kg,In Stock
+GR055,Turmeric Powder,Spice King,200g,Groceries,Salt & Spices,65,55,Spice Valley Traders,Rita Chaudhary,+977-9889012345,valley@gmail.com,Spice Market,10kg,In Stock
+GR056,Red Chilli Powder,Hot Spice,100g,Groceries,Salt & Spices,40,32,Hot Masala Co,Suresh Mandal,+977-9890123456,hotmasala@email.com,Main Bazaar,5kg,In Stock
+GR057,Red Chilli Powder,Hot Spice,200g,Groceries,Salt & Spices,75,65,Hot Masala Co,Suresh Mandal,+977-9890123456,hotmasala@email.com,Main Bazaar,10kg,In Stock
+GR058,Coriander Powder,Fresh Grind,100g,Groceries,Salt & Spices,30,24,Fresh Spice Mills,Kamala Devi,+977-9801234568,freshspice@gmail.com,Market Road,5kg,In Stock
+GR059,Coriander Powder,Fresh Grind,200g,Groceries,Salt & Spices,55,47,Fresh Spice Mills,Kamala Devi,+977-9801234568,freshspice@gmail.com,Market Road,10kg,In Stock
+GR060,Garam Masala,Royal Blend,50g,Groceries,Salt & Spices,45,36,Royal Masala House,Dinesh Pandey,+977-9812345679,royal@email.com,Old Bazaar,3kg,In Stock
+GR061,Garam Masala,Royal Blend,100g,Groceries,Salt & Spices,85,72,Royal Masala House,Dinesh Pandey,+977-9812345679,royal@email.com,Old Bazaar,5kg,In Stock
+GR062,Cumin Seeds Jeera,Pure,100g,Groceries,Salt & Spices,55,46,Spice Valley Traders,Rita Chaudhary,+977-9889012345,valley@gmail.com,Spice Market,5kg,In Stock
+GR063,Mustard Seeds,Traditional,100g,Groceries,Salt & Spices,40,33,Spice Valley Traders,Rita Chaudhary,+977-9889012345,valley@gmail.com,Spice Market,5kg,In Stock
+GR064,Fenugreek Seeds,Methi,100g,Groceries,Salt & Spices,35,29,Spice Valley Traders,Rita Chaudhary,+977-9889012345,valley@gmail.com,Spice Market,5kg,In Stock
+GR065,Black Pepper Whole,Premium,50g,Groceries,Salt & Spices,95,82,Premium Spices,Laxman Thapa,+977-9812345680,premiumspice@gmail.com,Premium Market,3kg,In Stock
+GR066,Black Pepper Powder,Ground,100g,Groceries,Salt & Spices,110,95,Premium Spices,Laxman Thapa,+977-9812345680,premiumspice@gmail.com,Premium Market,5kg,In Stock
+GR067,Cardamom Green,Premium,50g,Groceries,Salt & Spices,280,250,Aromatic Spices,Santosh Rai,+977-9812345681,aromatic@email.com,Spice Lane,2kg,In Stock
+GR068,Cinnamon Sticks,Dalchini,50g,Groceries,Salt & Spices,75,65,Aromatic Spices,Santosh Rai,+977-9812345681,aromatic@email.com,Spice Lane,3kg,In Stock
+GR069,Cloves Laung,Premium,50g,Groceries,Salt & Spices,120,105,Aromatic Spices,Santosh Rai,+977-9812345681,aromatic@email.com,Spice Lane,2kg,In Stock
+GR070,Bay Leaves Tejpatta,Dried,50g,Groceries,Salt & Spices,45,38,Aromatic Spices,Santosh Rai,+977-9812345681,aromatic@email.com,Spice Lane,3kg,In Stock
+GR071,White Sugar,Crystal Sweet,1kg,Groceries,Sugar,50,42,Biratnagar Sugar Mills,Ravi Mishra,+977-9823456780,sugar@gmail.com,Sugar Mill Area,50kg,In Stock
+GR072,White Sugar,Crystal Sweet,5kg,Groceries,Sugar,240,215,Biratnagar Sugar Mills,Ravi Mishra,+977-9823456780,sugar@gmail.com,Sugar Mill Area,100kg,In Stock
+GR073,Brown Sugar,Natural,500g,Groceries,Sugar,45,38,Sweet Traders,Anita Yadav,+977-9834567891,sweet@email.com,Trading Zone,25kg,In Stock
+GR074,Jaggery Gur,Village Fresh,500g,Groceries,Sugar,40,33,Village Products,Ganesh Tharu,+977-9845678902,village@gmail.com,Rural Market,20kg,In Stock
+GR075,Jaggery Gur,Village Fresh,1kg,Groceries,Sugar,75,65,Village Products,Ganesh Tharu,+977-9845678902,village@gmail.com,Rural Market,40kg,In Stock
+GR076,Black Tea,Koshi Tea,250g,Groceries,Beverages,120,100,Koshi Tea Estates,Pradip Gurung,+977-9856789013,koshitea@gmail.com,Tea Garden Road,10kg,In Stock
+GR077,Black Tea,Koshi Tea,500g,Groceries,Beverages,230,200,Koshi Tea Estates,Pradip Gurung,+977-9856789013,koshitea@gmail.com,Tea Garden Road,20kg,In Stock
+GR078,Green Tea,Mountain Fresh,100g,Groceries,Beverages,180,150,Himalayan Tea Co,Sangita Rai,+977-9867890124,himalayan@email.com,Hill Area,5kg,In Stock
+GR079,Masala Tea,Spiced,200g,Groceries,Beverages,140,120,Koshi Tea Estates,Pradip Gurung,+977-9856789013,koshitea@gmail.com,Tea Garden Road,8kg,In Stock
+GR080,Coffee Powder,Aromatic,200g,Groceries,Beverages,220,185,Coffee House Biratnagar,Mukesh Sah,+977-9878901235,coffee@gmail.com,Coffee Lane,8kg,In Stock
+GR081,Instant Coffee,Quick Brew,100g,Groceries,Beverages,180,155,Coffee House Biratnagar,Mukesh Sah,+977-9878901235,coffee@gmail.com,Coffee Lane,5kg,In Stock
+GR082,Honey Pure,Pure Bee,500g,Groceries,Others,250,210,Bee Products Nepal,Santosh Karki,+977-9889012346,bee@email.com,Honey Lane,10kg,In Stock
+GR083,Honey Pure,Pure Bee,1kg,Groceries,Others,480,425,Bee Products Nepal,Santosh Karki,+977-9889012346,bee@email.com,Honey Lane,20kg,In Stock
+GR084,Vermicelli,Quick Cook,400g,Groceries,Others,45,38,Quick Foods,Puja Shrestha,+977-9890123457,quickfood@gmail.com,Food Street,20kg,In Stock
+GR085,Poha Beaten Rice,Crispy,500g,Groceries,Others,40,33,Flake Industries,Ashok Basnet,+977-9801234569,flake@email.com,Industrial Zone,25kg,In Stock
+GR086,Cornflakes Plain,Crunchy,250g,Groceries,Others,95,82,Corn Flakes Co,Ram Bahadur,+977-9812345682,cornflakes@gmail.com,Breakfast Zone,15kg,In Stock
+GR087,Oats Steel Cut,Healthy,500g,Groceries,Others,120,105,Health Grains,Maya Thapa,+977-9812345683,healthgrain@email.com,Health Market,15kg,In Stock
+GR088,Sago Sabudana,Pearl,500g,Groceries,Others,65,55,Traditional Foods,Binod Rai,+977-9812345684,traditionalfood@gmail.com,Food Market,20kg,In Stock
+GR089,Cashew Nuts,Premium,250g,Groceries,Dry Fruits,280,250,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,10kg,In Stock
+GR090,Almonds,California,250g,Groceries,Dry Fruits,350,310,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,10kg,In Stock
+GR091,Raisins,Sweet,250g,Groceries,Dry Fruits,120,105,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,15kg,In Stock
+GR092,Walnuts,Premium,250g,Groceries,Dry Fruits,380,340,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,8kg,In Stock
+GR093,Peanuts Roasted,Salted,200g,Groceries,Dry Fruits,60,50,Nut Products,Laxmi Yadav,+977-9834567895,nuts@email.com,Nut Corner,20kg,In Stock
+GR094,Dates Khajoor,Premium,500g,Groceries,Dry Fruits,220,195,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,12kg,In Stock
+GR095,Dried Figs,Anjeer,200g,Groceries,Dry Fruits,180,160,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,8kg,In Stock
+GR096,Pistachio,Premium,100g,Groceries,Dry Fruits,450,410,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,5kg,In Stock
+GR097,Mixed Dry Fruits,Assorted,250g,Groceries,Dry Fruits,250,225,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,12kg,In Stock
+GR098,Tomato Ketchup,Tangy,500g,Groceries,Sauces,65,55,Sauce Factory,Dinesh Karki,+977-9845678906,sauce@gmail.com,Sauce Lane,20 bottles,In Stock
+GR099,Soy Sauce,Premium,200ml,Groceries,Sauces,75,65,Asian Foods,Prakash Rai,+977-9845678907,asian@email.com,Asian Market,15 bottles,In Stock
+GR100,Chilli Sauce,Hot,200g,Groceries,Sauces,55,47,Sauce Factory,Dinesh Karki,+977-9845678906,sauce@gmail.com,Sauce Lane,20 bottles,In Stock
+GR101,Vinegar White,Pure,500ml,Groceries,Sauces,45,38,Vinegar Co,Sunita Sharma,+977-9845678908,vinegar@gmail.com,Vinegar Zone,25 bottles,In Stock
+GR102,Pickle Mixed,Traditional,400g,Groceries,Pickles,85,72,Pickle House,Geeta Jha,+977-9856789019,pickle@email.com,Pickle Market,15kg,In Stock
+GR103,Mango Pickle,Spicy,500g,Groceries,Pickles,95,82,Pickle House,Geeta Jha,+977-9856789019,pickle@email.com,Pickle Market,15kg,In Stock
+GR104,Lemon Pickle,Tangy,300g,Groceries,Pickles,75,65,Pickle House,Geeta Jha,+977-9856789019,pickle@email.com,Pickle Market,12kg,In Stock
+GR105,Gundruk Fermented,Traditional,250g,Groceries,Pickles,80,68,Traditional Pickles,Kamala Rai,+977-9856789020,traditional@gmail.com,Traditional Zone,10kg,In Stock

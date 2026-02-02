@@ -1,0 +1,69 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+SN001,Glucose Biscuits,Golden Bake,200g,Snacks,Biscuits,25,21,Biratnagar Biscuit Factory,Ramesh Gupta,+977-9801234562,biratbiscuit@gmail.com,Factory Road-5,100 packs,In Stock
+SN002,Cream Biscuits,Creamy Delight,150g,Snacks,Biscuits,35,30,Sweet Snacks Pvt Ltd,Anjali Rai,+977-9812345672,sweetsnacks@email.com,Snack Zone,80 packs,In Stock
+SN003,Butter Cookies,Premium,100g,Snacks,Biscuits,45,38,Cookie House,Sunil Shrestha,+977-9823456783,cookie@gmail.com,Baker Street,60 packs,In Stock
+SN004,Marie Biscuits,Classic,200g,Snacks,Biscuits,22,18,Classic Bakers,Binod Jha,+977-9834567894,classic@email.com,Old Bazaar,100 packs,In Stock
+SN005,Digestive Biscuits,Healthy,250g,Snacks,Biscuits,40,34,Health Bakes,Maya Sharma,+977-9845678911,health@gmail.com,Health Market,70 packs,In Stock
+SN006,Chocolate Cream Biscuits,Choco,150g,Snacks,Biscuits,45,38,Sweet Snacks Pvt Ltd,Anjali Rai,+977-9812345672,sweetsnacks@email.com,Snack Zone,75 packs,In Stock
+SN007,Oat Cookies,Crunchy,100g,Snacks,Biscuits,50,43,Cookie House,Sunil Shrestha,+977-9823456783,cookie@gmail.com,Baker Street,55 packs,In Stock
+SN008,Coconut Cookies,Tropical,120g,Snacks,Biscuits,40,34,Cookie House,Sunil Shrestha,+977-9823456783,cookie@gmail.com,Baker Street,60 packs,In Stock
+SN009,Potato Chips Salted,Crispy Munch,50g,Snacks,Chips & Namkeen,20,16,Crisp Foods Nepal,Dinesh Karki,+977-9845678904,crisp@gmail.com,Industrial Area-4,200 packs,In Stock
+SN010,Potato Chips Tomato,Crispy Munch,50g,Snacks,Chips & Namkeen,20,16,Crisp Foods Nepal,Dinesh Karki,+977-9845678904,crisp@gmail.com,Industrial Area-4,200 packs,In Stock
+SN011,Potato Chips Masala,Crispy Munch,50g,Snacks,Chips & Namkeen,20,16,Crisp Foods Nepal,Dinesh Karki,+977-9845678904,crisp@gmail.com,Industrial Area-4,200 packs,In Stock
+SN012,Aloo Bhujia,Spicy,200g,Snacks,Chips & Namkeen,40,34,Namkeen House,Laxman Thapa,+977-9856789015,namkeen@email.com,Namkeen Lane,50 packs,In Stock
+SN013,Sev Traditional,Crispy,150g,Snacks,Chips & Namkeen,35,29,Traditional Snacks,Geeta Pandey,+977-9867890126,traditional@gmail.com,Market Road,60 packs,In Stock
+SN014,Mix Namkeen,Party Mix,200g,Snacks,Chips & Namkeen,45,38,Party Snacks Co,Rajesh Yadav,+977-9878901237,party@email.com,Party Lane,50 packs,In Stock
+SN015,Corn Flakes Crunchy,Crispy,100g,Snacks,Chips & Namkeen,25,21,Corn Products,Meena Devi,+977-9889012348,corn@gmail.com,Corn Street,100 packs,In Stock
+SN016,Banana Chips,Crispy,100g,Snacks,Chips & Namkeen,35,29,Crisp Foods Nepal,Dinesh Karki,+977-9845678904,crisp@gmail.com,Industrial Area-4,80 packs,In Stock
+SN017,Cheese Balls,Cheesy,75g,Snacks,Chips & Namkeen,30,25,Snack Factory,Prakash Rai,+977-9890123462,snack@email.com,Snack Zone,90 packs,In Stock
+SN018,Popcorn Ready,Butter,50g,Snacks,Chips & Namkeen,15,12,Pop Snacks,Deepak Chaudhary,+977-9801234564,pop@gmail.com,Snack Market,150 packs,In Stock
+SN019,Milk Chocolate Bar,Choco Bliss,40g,Snacks,Chocolates,30,25,Chocolate Factory Nepal,Pradeep Limbu,+977-9890123459,choco@gmail.com,Sweet Zone,100 bars,In Stock
+SN020,Dark Chocolate,Premium,50g,Snacks,Chocolates,65,56,Premium Chocolates,Santosh Rai,+977-9801234565,premiumchoc@email.com,Premium Market,60 bars,In Stock
+SN021,White Chocolate,Creamy,40g,Snacks,Chocolates,55,48,Chocolate Factory Nepal,Pradeep Limbu,+977-9890123459,choco@gmail.com,Sweet Zone,70 bars,In Stock
+SN022,Toffees Mixed,Sweet,Jar 500g,Snacks,Candies,80,68,Toffee World,Sanjana Gurung,+977-9801234563,toffee@email.com,Candy Street,20 jars,In Stock
+SN023,Lollipops,Fruity,Pack of 10,Snacks,Candies,20,16,Lolly Treats,Arun Subedi,+977-9812345673,lolly@gmail.com,Kids Zone,50 packs,In Stock
+SN024,Hard Candies,Assorted,250g,Snacks,Candies,45,38,Candy House,Binod Karki,+977-9812345674,candy@gmail.com,Candy Market,40 packs,In Stock
+SN025,Mango Juice,Fruit Fresh,1L,Snacks,Beverages,80,68,Fruit Beverages Ltd,Santosh Rai,+977-9823456784,fruit@gmail.com,Beverage Park,50 units,In Stock
+SN026,Orange Juice,Citrus Fresh,1L,Snacks,Beverages,75,64,Citrus Products,Krishna Tharu,+977-9834567895,citrus@email.com,Juice Lane,50 units,In Stock
+SN027,Mixed Fruit Juice,Fruity Mix,500ml,Snacks,Beverages,45,38,Mix Beverages,Puja Sharma,+977-9845678905,mix@gmail.com,Fruit Market,80 units,In Stock
+SN028,Apple Juice,Fresh,1L,Snacks,Beverages,90,78,Fruit Beverages Ltd,Santosh Rai,+977-9823456784,fruit@gmail.com,Beverage Park,45 units,In Stock
+SN029,Pineapple Juice,Tropical,500ml,Snacks,Beverages,55,48,Tropical Drinks,Ramesh Gupta,+977-9856789023,tropical@email.com,Tropical Zone,70 units,In Stock
+SN030,Mineral Water,Pure Drop,1L,Snacks,Beverages,20,16,Water Works Biratnagar,Mohan Jha,+977-9856789016,water@email.com,Water Plant,200 units,In Stock
+SN031,Mineral Water,Pure Drop,5L,Snacks,Beverages,85,75,Water Works Biratnagar,Mohan Jha,+977-9856789016,water@email.com,Water Plant,100 units,In Stock
+SN032,Sparkling Water,Fizzy,500ml,Snacks,Beverages,35,30,Fizzy Drinks,Laxmi Rai,+977-9867890128,fizzy@gmail.com,Drink Zone,90 units,In Stock
+SN033,Energy Drink,Power Up,250ml,Snacks,Beverages,50,42,Energy Drinks Nepal,Rakesh Singh,+977-9867890127,energy@email.com,Sports Zone,100 units,In Stock
+SN034,Sports Drink,Electrolyte,500ml,Snacks,Beverages,60,52,Sports Beverages,Dinesh Pandey,+977-9878901240,sports@gmail.com,Sports Market,80 units,In Stock
+SN035,Carbonated Drink Cola,Cola Fresh,500ml,Snacks,Beverages,40,34,Soft Drinks Co,Geeta Jha,+977-9878901241,softdrink@email.com,Beverage Area,120 units,In Stock
+SN036,Carbonated Drink Lemon,Lime Fresh,500ml,Snacks,Beverages,40,34,Soft Drinks Co,Geeta Jha,+977-9878901241,softdrink@email.com,Beverage Area,120 units,In Stock
+SN037,Instant Noodles Veg,Quick Noodles,75g,Snacks,Noodles & Pasta,12,10,Noodle Factory,Binod Karki,+977-9878901238,noodle@gmail.com,Noodle Street,200 packs,In Stock
+SN038,Instant Noodles Chicken,Quick Noodles,75g,Snacks,Noodles & Pasta,15,12,Noodle Factory,Binod Karki,+977-9878901238,noodle@gmail.com,Noodle Street,200 packs,In Stock
+SN039,Cup Noodles,Quick Cup,65g,Snacks,Noodles & Pasta,25,21,Quick Foods Pvt Ltd,Anita Basnet,+977-9889012349,quickfood@email.com,Food Court,100 cups,In Stock
+SN040,Hakka Noodles,Chinese,400g,Snacks,Noodles & Pasta,60,52,Asian Foods,Prakash Limbu,+977-9890123463,asian@gmail.com,Asian Market,60 packs,In Stock
+SN041,Pasta Macaroni,Italian Style,400g,Snacks,Noodles & Pasta,65,55,Pasta House,Mukesh Pradhan,+977-9890123460,pasta@gmail.com,Pasta Lane,40 packs,In Stock
+SN042,Pasta Penne,Italian Style,400g,Snacks,Noodles & Pasta,70,60,Pasta House,Mukesh Pradhan,+977-9890123460,pasta@gmail.com,Pasta Lane,40 packs,In Stock
+SN043,Pasta Spaghetti,Italian Style,500g,Snacks,Noodles & Pasta,80,70,Pasta House,Mukesh Pradhan,+977-9890123460,pasta@gmail.com,Pasta Lane,35 packs,In Stock
+SN044,Popcorn Microwave,Butter,90g,Snacks,Ready to Eat,40,34,Pop Snacks,Deepak Chaudhary,+977-9801234564,pop@gmail.com,Snack Market,70 packs,In Stock
+SN045,Roasted Peanuts,Salted,100g,Snacks,Ready to Eat,30,25,Nut Products,Laxmi Yadav,+977-9812345674,nut@email.com,Nut Corner,80 packs,In Stock
+SN046,Roasted Chana,Healthy,200g,Snacks,Ready to Eat,40,34,Health Snacks,Ramesh Mandal,+977-9823456785,healthsnack@gmail.com,Health Lane,60 packs,In Stock
+SN047,Trail Mix,Premium,150g,Snacks,Ready to Eat,85,74,Premium Snacks,Santosh Gurung,+977-9834567897,premiumsnack@email.com,Premium Zone,45 packs,In Stock
+SN048,Protein Bar Chocolate,Energy,40g,Snacks,Ready to Eat,65,56,Health Foods,Maya Thapa,+ 977-9845678912,healthfood@gmail.com,Health Market,60 bars,In Stock
+SN049,Granola Bar,Crunchy,35g,Snacks,Ready to Eat,55,48,Health Foods,Maya Thapa,+977-9845678912,healthfood@gmail.com,Health Market,70 bars,In Stock
+SN050,Plum Cake,Sweet Bakes,400g,Snacks,Bakery,120,102,Biratnagar Bakery,Suresh Mehta,+977-9834567896,bakery@gmail.com,Bakery Road,20 units,In Stock
+SN051,Rusk Toast,Crispy Rusk,200g,Snacks,Bakery,35,30,Rusk Factory,Geeta Shrestha,+977-9845678906,rusk@email.com,Factory Area,50 packs,In Stock
+SN052,Bread White,Daily Fresh,400g,Snacks,Bakery,28,24,Daily Bread Co,Keshav Jha,+977-9856789017,bread@gmail.com,Bread Street,100 loaves,In Stock
+SN053,Bread Brown,Whole Wheat,400g,Snacks,Bakery,32,28,Daily Bread Co,Keshav Jha,+977-9856789017,bread@gmail.com,Bread Street,100 loaves,In Stock
+SN054,Pav  Buns,Soft,Pack of 6,Snacks,Bakery,25,21,Biratnagar Bakery,Suresh Mehta,+977-9834567896,bakery@gmail.com,Bakery Road,80 packs,In Stock
+SN055,Burger Buns,Fresh,Pack of 4,Snacks,Bakery,30,26,Daily Bread Co,Keshav Jha,+977-9856789017,bread@gmail.com,Bread Street,70 packs,In Stock
+SN056,Butter Toast,Premium,200g,Snacks,Bakery,45,38,Premium Bakery,Binod Rai,+977-9867890129,premiumbake@email.com,Bakery Zone,50 packs,In Stock
+SN057,Milk Rusk,Crunchy,300g,Snacks,Bakery,50,43,Rusk Factory,Geeta Shrestha,+977-9845678906,rusk@email.com,Factory Area,45 packs,In Stock
+SN058,Fruit Cake,Mixed Fruit,500g,Snacks,Bakery,180,160,Biratnagar Bakery,Suresh Mehta,+977-9834567896,bakery@gmail.com,Bakery Road,25 units,In Stock
+SN059,Chocolate Wafers,Crispy,75g,Snacks,Wafers,35,30,Wafer House,Prakash Rai,+977-9878901242,wafer@gmail.com,Wafer Lane,80 packs,In Stock
+SN060,Vanilla Wafers,Crispy,75g,Snacks,Wafers,30,26,Wafer House,Prakash Rai,+977-9878901242,wafer@gmail.com,Wafer Lane,85 packs,In Stock
+SN061,Cream Wafers,Strawberry,75g,Snacks,Wafers,35,30,Wafer House,Prakash Rai,+977-9878901242,wafer@gmail.com,Wafer Lane,75 packs,In Stock
+SN062,Churpi Hard,Traditional,100g,Snacks,Traditional,120,105,Himalayan Foods,Santosh Gurung,+977-9889012350,himalayan@gmail.com,Hill Area,30 packs,In Stock
+SN063,Sel Roti Mix,Instant,500g,Snacks,Traditional,75,65,Traditional Foods,Kamala Devi,+977-9890123464,traditionalfood@email.com,Traditional Market,35 packs,In Stock
+SN064,Chatamari Mix,Ready,400g,Snacks,Traditional,85,74,Newari Foods,Rajendra Shrestha,+977-9801234566,newari@gmail.com,Newari Zone,30 packs,In Stock
+SN065,Dried Meat Sukuti,Spicy,200g,Snacks,Traditional,280,250,Mountain Delights,Binod Gurung,+977-9812345675,mountain@email.com,Mountain Zone,15 packs,In Stock
+SN066,Momos Frozen Veg,Ready to Steam,500g,Snacks,Frozen Snacks,120,105,Frozen Foods,Anita Rai,+977-9823456786,frozen@gmail.com,Frozen Zone,25 packs,In Stock
+SN067,Momos Frozen Chicken,Ready to Steam,500g,Snacks,Frozen Snacks,150,135,Frozen Foods,Anita Rai,+977-9823456786,frozen@gmail.com,Frozen Zone,25 packs,In Stock
+SN068,Samosa Frozen,Ready to Fry,400g,Snacks,Frozen Snacks,95,85,Frozen Foods,Anita Rai,+977-9823456786,frozen@gmail.com,Frozen Zone,30 packs,In Stock

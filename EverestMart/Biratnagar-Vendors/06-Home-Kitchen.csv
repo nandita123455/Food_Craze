@@ -1,0 +1,72 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+HK001,Stainless Steel Plate,Premium,1pc,Home & Kitchen,Utensils,85,74,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,50 pcs,In Stock
+HK002,Stainless Steel Bowl,Medium,1pc,Home & Kitchen,Utensils,65,56,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,60 pcs,In Stock
+HK003,Stainless Steel Glass,Set of 6,1 set,Home & Kitchen,Utensils,220,195,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,30 sets,In Stock
+HK004,Spoon Set,Stainless,6 pcs,Home & Kitchen,Utensils,120,105,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,40 sets,In Stock
+HK005,Fork Set,Table,6pcs,Home & Kitchen,Utensils,95,82,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,45 sets,In Stock
+HK006,Knife Set,Kitchen,3 pcs,Home & Kitchen,Utensils,350,310,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,25 sets,In Stock
+HK007,Chopping Board,Wooden,Large,Home & Kitchen,Utensils,280,250,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,35 pcs,In Stock
+HK008,Pressure Cooker,5L,1pc,Home & Kitchen,Cookware,1850,1650,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,15 pcs,In Stock
+HK009,Pressure Cooker,3L,1pc,Home & Kitchen,Cookware,1450,1290,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,18 pcs,In Stock
+HK010,Non-Stick Pan,26cm,1pc,Home & Kitchen,Cookware,980,870,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,20 pcs,In Stock
+HK011,Non-Stick Kadhai,24cm,1pc,Home & Kitchen,Cookware,850,760,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,22 pcs,In Stock
+HK012,Tawa,Non-Stick,28cm,Home & Kitchen,Cookware,650,580,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,25 pcs,In Stock
+HK013,Saucepan Set,3 pcs,1 set,Home & Kitchen,Cookware,1250,1120,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,15 sets,In Stock
+HK014,Rice Cooker,1.8L,1pc,Home & Kitchen,Appliances,2500,2250,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,12 pcs,In Stock
+HK015,Electric Kettle,1.5L,1pc,Home & Kitchen,Appliances,1200,1080,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,18 pcs,In Stock
+HK016,Mixer Grinder,500W,1pc,Home & Kitchen,Appliances,3500,3150,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,10 pcs,In Stock
+HK017,Gas Stove,2 Burner,1pc,Home & Kitchen,Appliances,4200,3780,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,8 pcs,In Stock
+HK018,Induction Cooktop,2000W,1pc,Home & Kitchen,Appliances,3800,3420,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,10 pcs,In Stock
+HK019,Toaster,2 Slice,1pc,Home & Kitchen,Appliances,1800,1620,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,15 pcs,In Stock
+HK020,Hand Blender,250W,1pc,Home & Kitchen,Appliances,1450,1305,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,18 pcs,In Stock
+HK021,Water Purifier,7L,1pc,Home & Kitchen,Appliances,8500,7650,Appliance Center,Laxman Thapa,+977-9801234568,appliance@email.com,Appliance Zone,6 pcs,In Stock
+HK022,Water Filter,Ceramic,1pc,Home & Kitchen,Appliances,2200,1980,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,12 pcs,In Stock
+HK023,Plastic Container Set,5 pcs,1 set,Home & Kitchen,Storage,320,285,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,30 sets,In Stock
+HK024,Glass Container,1L,1pc,Home & Kitchen,Storage,180,155,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,35 pcs,In Stock
+HK025,Lunch Box,3 Tier,1pc,Home & Kitchen,Storage,280,250,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,40 pcs,In Stock
+HK026,Water Bottle,1L,1pc,Home & Kitchen,Storage,145,130,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,60 pcs,In Stock
+HK027,Thermos Flask,1L,1pc,Home & Kitchen,Storage,650,585,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,25 pcs,In Stock
+HK028,Spice Box,7 Container,1 set,Home & Kitchen,Storage,250,225,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,35 sets,In Stock
+HK029,Kitchen Rack,3 Tier,1pc,Home & Kitchen,Storage,1250,1120,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,15 pcs,In Stock
+HK030,Dish Rack,Stainless,1pc,Home & Kitchen,Storage,480,430,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,25 pcs,In Stock
+HK031,Dustbin,10L,1pc,Home & Kitchen,Cleaning,320,285,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,30 pcs,In Stock
+HK032,Mop,Cotton,1pc,Home & Kitchen,Cleaning,220,195,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,40 pcs,In Stock
+HK033,Broom,Soft,1pc,Home & Kitchen,Cleaning,95,82,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,60 pcs,In Stock
+HK034,Bucket,20L,1pc,Home & Kitchen,Cleaning,280,250,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,35 pcs,In Stock
+HK035,Dishwash Liquid,500ml,1 bottle,Home & Kitchen,Cleaning,95,82,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,50 bottles,In Stock
+HK036,Dishwash Bar,200g,1pc,Home & Kitchen,Cleaning,35,30,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,80 pcs,In Stock
+HK037,Floor Cleaner,1L,1 bottle,Home & Kitchen,Cleaning,120,105,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,45 bottles,In Stock
+HK038,Toilet Cleaner,500ml,1 bottle,Home & Kitchen,Cleaning,95,82,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,50 bottles,In Stock
+HK039,Glass Cleaner,500ml,1 bottle,Home & Kitchen,Cleaning,85,74,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,55 bottles,In Stock
+HK040,Detergent Powder,1kg,1 pack,Home & Kitchen,Laundry,140,122,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,40 packs,In Stock
+HK041,Detergent Liquid,1L,1 bottle,Home & Kitchen,Laundry,220,195,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,35 bottles,In Stock
+HK042,Fabric Softener,500ml,1 bottle,Home & Kitchen,Laundry,150,130,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,40 bottles,In Stock
+HK043,Washing Soap,250g,1 bar,Home & Kitchen,Laundry,45,38,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,70 pcs,In Stock
+HK044,Naphthalene Balls,100g,1 pack,Home & Kitchen,Others,25,21,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,90 packs,In Stock
+HK045,Air Freshener,300ml,1 can,Home & Kitchen,Others,180,155,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,45 cans,In Stock
+HK046,Mosquito Repellent,30 Coils,1 pack,Home & Kitchen,Others,85,74,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,55 packs,In Stock
+HK047,Mosquito Liquid,45 Nights,1pc,Home & Kitchen,Others,120,105,Cleaning Supplies,Binod Jha,+977-9812345680,cleaning@gmail.com,Market Area,50 pcs,In Stock
+HK048,Candles,Pack of 12,1 pack,Home & Kitchen,Others,45,38,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,70 packs,In Stock
+HK049,Matchbox,10 boxes,1 pack,Home & Kitchen,Others,25,21,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,100 packs,In Stock
+HK050,Aluminum Foil,10m,1 roll,Home & Kitchen,Kitchen Accessories,85,74,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,50 rolls,In Stock
+HK051,Cling Film,30m,1 roll,Home & Kitchen,Kitchen Accessories,65,56,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,60 rolls,In Stock
+HK052,Kitchen Towel,2 Roll,1 pack,Home & Kitchen,Kitchen Accessories,95,82,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,55 packs,In Stock
+HK053,Apron,Cotton,1pc,Home & Kitchen,Kitchen Accessories,180,155,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,45 pcs,In Stock
+HK054,Oven Gloves,Pair,1 pair,Home & Kitchen,Kitchen Accessories,120,105,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,50 pairs,In Stock
+HK055,Kitchen Mat,Anti-Slip,1pc,Home & Kitchen,Kitchen Accessories,250,225,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,35 pcs,In Stock
+HK056,Dinner Set,24 pcs,1 set,Home & Kitchen,Crockery,2800,2520,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,10 sets,In Stock
+HK057,Tea Set,12 pcs,1 set,Home & Kitchen,Crockery,850,765,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,18 sets,In Stock
+HK058,Coffee Mugs,Set of 6,1 set,Home & Kitchen,Crockery,520,470,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,25 sets,In Stock
+HK059,Serving Bowls,Set of 3,1 set,Home & Kitchen,Crockery,680,612,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,22 sets,In Stock
+HK060,Casserole,1.5L,1pc,Home & Kitchen,Cookware,950,855,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,20 pcs,In Stock
+HK061,Hot Pot,3pcs Set,1 set,Home & Kitchen,Cookware,1450,1305,Cookware Nepal,Santosh Gurung,+977-9890123456,cookware@gmail.com,Cookware Market,15 sets,In Stock
+HK062,Measuring Cup Set,5 pcs,1 set,Home & Kitchen,Kitchen Accessories,180,155,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,40 sets,In Stock
+HK063,Measuring Spoon Set,6 pcs,1 set,Home & Kitchen,Kitchen Accessories,120,105,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,45 sets,In Stock
+HK064,Rolling Pin,Wooden,1pc,Home & Kitchen,Kitchen Accessories,95,82,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,50 pcs,In Stock
+HK065,Grater,4 Side,1pc,Home & Kitchen,Kitchen Accessories,145,130,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,45 pcs,In Stock
+HK066,Peeler,Stainless,1pc,Home & Kitchen,Kitchen Accessories,45,38,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,80 pcs,In Stock
+HK067,Can Opener,Manual,1pc,Home & Kitchen,Kitchen Accessories,65,56,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,65 pcs,In Stock
+HK068,Bottle Opener,Stainless,1pc,Home & Kitchen,Kitchen Accessories,35,30,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,90 pcs,In Stock
+HK069,Scissors,Kitchen,1pc,Home & Kitchen,Kitchen Accessories,95,82,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,55 pcs,In Stock
+HK070,Tongs,Stainless,1pc,Home & Kitchen,Kitchen Accessories,75,65,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,60 pcs,In Stock
+HK071,Ladle Set,3 pcs,1 set,Home & Kitchen,Kitchen Accessories,220,195,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,40 sets,In Stock

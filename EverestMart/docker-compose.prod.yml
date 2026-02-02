@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # Backend API - Production
+  backend:
+    build:
+      context: ./myshop-backend
+      dockerfile: Dockerfile
+      target: production
+    container_name: everestmart-backend-prod
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - SESSION_SECRET=${SESSION_SECRET}
+      - CLIENT_URL=${CLIENT_URL}
+      - ADMIN_URL=${ADMIN_URL}
+      - PRODUCTION_CLIENT_URL=${PRODUCTION_CLIENT_URL}
+      - PRODUCTION_ADMIN_URL=${PRODUCTION_ADMIN_URL}
+    volumes:
+      - ./myshop-backend/uploads:/app/uploads
+    networks:
+      - everestmart-network
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend - Customer App - Production
+  frontend:
+    build:
+      context: ./myshop
+      dockerfile: Dockerfile
+      target: production
+    container_name: everestmart-frontend-prod
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - everestmart-network
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Admin Panel - Production
+  admin:
+    build:
+      context: ./everestmart-admin
+      dockerfile: Dockerfile
+      target: production
+    container_name: everestmart-admin-prod
+    restart: always
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    networks:
+      - everestmart-network
+    healthcheck:
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  everestmart-network:
+    driver: bridge

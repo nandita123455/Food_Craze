@@ -1,0 +1,17 @@
+Category,Total_Products,Total_Vendors,Avg_MRP_Rs,Price_Range,Key_Products,Top_Vendor
+Groceries & Staples,105,18,Rs. 125,Rs. 10 - Rs. 850,"Rice, Dal, Oil, Flour, Spices, Sugar, Tea",Biratnagar Rice Mills
+Dairy Products,52,8,Rs. 98,Rs. 30 - Rs. 620,"Milk, Cheese, Butter, Paneer, Yogurt, Ghee",Koshi Dairy Farm
+Snacks &  Beverages,68,12,Rs. 45,Rs. 10 - Rs. 220,"Biscuits, Chips, Juice, Noodles, Chocolates",Biratnagar Biscuit Factory
+Personal Care,62,10,Rs. 135,Rs. 15 - Rs. 450,"Soap, Shampoo,Toothpaste, Cosmetics, Hygiene",Beauty Products Nepal
+Home & Kitchen,71,14,Rs. 295,Rs. 30 - Rs. 2500,"Utensils, Appliances, Storage, Cookware",Kitchen Mart Biratnagar
+Electronics,48,9,Rs. 1850,Rs. 150 - Rs. 15000,"Mobile Accessories, Gadgets, Cables, Chargers",Tech Zone Biratnagar
+Textiles & Garments,64,13,Rs. 525,Rs. 80 - Rs. 3000,"Sarees, Kurtas, Shirts, Fabrics, Shawls",Biratnagar Textiles
+Handicrafts,42,11,Rs. 680,Rs. 100 - Rs. 5000,"Dhaka Items, Wood Crafts, Metal Work, Pottery",Nepali Crafts House
+Agricultural Products,55,15,Rs. 145,Rs. 20 - Rs. 800,"Seeds, Fertilizers, Tools, Fresh Produce",Koshi Agro Products
+
+SUMMARY,,,,,,
+Total Categories,9,,,,,
+Total Products,567,,,,,
+Total Vendors,110,,,,,
+Database Value (Est.),Rs. 2,53,449,,,,,
+Last Updated,17-Jan-2026,,,,,

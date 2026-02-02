@@ -1,0 +1,65 @@
+Product_ID,Product_Name,Brand,Unit_Size,Category,Sub_Category,MRP_Rs,Wholesale_Rs,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,MOQ,Stock_Status
+TX001,Saree Silk,Premium,6m,Textiles,Sarees,2800,2520,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,10 pcs,In Stock
+TX002,Saree Cotton,Handloom,6m,Textiles,Sarees,1450,1305,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,15 pcs,In Stock
+TX003,Saree Georgette,Party Wear,6m,Textiles,Sarees,1850,1665,Saree Palace,Geeta Sharma,+977-9867890124,saree@gmail.com,Saree Market,12 pcs,In Stock
+TX004,Saree Designer,Embroidered,6m,Textiles,Sarees,3500,3150,Saree Palace,Geeta Sharma,+977-9867890124,saree@gmail.com,Saree Market,8 pcs,In Stock
+TX005,Kurta Men,Cotton,1pc,Textiles,Men's Wear,680,612,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,20 pcs,In Stock
+TX006,Kurta Women,Embroidered,1pc,Textiles,Women's Wear,850,765,Traditional  Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,18 pcs,In Stock
+TX007,Shirt Men,Formal,1pc,Textiles,Men's Wear,980,882,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,15 pcs,In Stock
+TX008,Shirt Men,Casual,1pc,Textiles,Men's Wear,650,585,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,20 pcs,In Stock
+TX009,T-Shirt Men,Cotton,1pc,Textiles,Men's Wear,450,405,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,30 pcs,In Stock
+TX010,T-Shirt Women,Printed,1pc,Textiles,Women's Wear,380,340,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,35 pcs,In Stock
+TX011,Jeans Men,Denim,1pc,Textiles,Men's Wear,1450,1305,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,15 pcs,In Stock
+TX012,Jeans Women,Slim Fit,1pc,Textiles,Women's Wear,1280,1152,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,18 pcs,In Stock
+TX013,Trousers Men,Formal,1pc,Textiles,Men's Wear,950,855,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,20 pcs,In Stock
+TX014,Leggings Women,Cotton,1pc,Textiles,Women's Wear,280,250,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,40 pcs,In Stock
+TX015,Palazzo Women,Printed,1pc,Textiles,Women's Wear,450,405,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,30 pcs,In Stock
+TX016,Dhoti Men,Traditional,1pc,Textiles,Traditional,520,468,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,25 pcs,In Stock
+TX017,Dhaka Topi,Handmade,1pc,Textiles,Traditional,380,340,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,35 pcs,In Stock
+TX018,Shawl Pashmina,Warm,1pc,Textiles,Shawls,1850,1665,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,15 pcs,In Stock
+TX019,Shawl Woolen,Traditional,1pc,Textiles,Shawls,980,882,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,20 pcs,In Stock
+TX020,Scarf Women,Silk,1pc,Textiles,Accessories,320,285,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,40 pcs,In Stock
+TX021,Socks Men,Pack of 3,1 pack,Textiles,Accessories,180,155,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,50 packs,In Stock
+TX022,Socks Women,Pack of 3,1 pack,Textiles,Accessories,150,130,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,55 packs,In Stock
+TX023,Handkerchief,Pack of 6,1 pack,Textiles,Accessories,120,105,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,60 packs,In Stock
+TX024,Towel Bath,Cotton,1pc,Textiles,Home Textiles,280,250,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,35 pcs,In Stock
+TX025,Towel Face,Soft,1pc,Textiles,Home Textiles,95,82,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,70 pcs,In Stock
+TX026,Bed Sheet,Double,1pc,Textiles,Home Textiles,850,765,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,20 pcs,In Stock
+TX027,Bed Sheet,Single,1pc,Textiles,Home Textiles,520,468,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,30 pcs,In Stock
+TX028,Bed Sheet Set,Double with 2 Pillows,1 set,Textiles,Home Textiles,1450,1305,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,15 sets,In Stock
+TX029,Pillow Cover,Cotton,Pack of 2,Textiles,Home Textiles,220,195,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,45 packs,In Stock
+TX030,Cushion Cover,Decorative,Pack of 2,Textiles,Home Textiles,320,285,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,35 packs,In Stock
+TX031,Blanket,Double,1pc,Textiles,Home Textiles,1850,1665,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,12 pcs,In Stock
+TX032,Blanket,Single,1pc,Textiles,Home Textiles,980,882,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,18 pcs,In Stock
+TX033,Quilt,Winter,1pc,Textiles,Home Textiles,2200,1980,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,10 pcs,In Stock
+TX034,Curtain,Window,2 pcs,Textiles,Home Textiles,1280,1152,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,15 pairs,In Stock
+TX035,Curtain,Door,1 pc,Textiles,Home Textiles,680,612,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,20 pcs,In Stock
+TX036,Carpet,Floor Mat,1pc,Textiles,Home Textiles,950,855,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,18 pcs,In Stock
+TX037,Doormat,Coir,1pc,Textiles,Home Textiles,320,285,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,35 pcs,In Stock
+TX038,Table Cloth,Dining,1pc,Textiles,Home Textiles,450,405,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,30 pcs,In Stock
+TX039,Cotton Fabric,Plain,1m,Textiles,Fabrics,95,82,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,100 m,In Stock
+TX040,Silk Fabric,Premium,1m,Textiles,Fabrics,350,315,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,50 m,In Stock
+TX041,Georgette Fabric,Lightweight,1m,Textiles,Fabrics,220,195,Saree Palace,Geeta Sharma,+977-9867890124,saree@gmail.com,Saree Market,60 m,In Stock
+TX042,Velvet Fabric,Soft,1m,Textiles,Fabrics,450,405,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,40 m,In Stock
+TX043,Denim Fabric,Blue,1m,Textiles,Fabrics,280,250,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,50 m,In Stock
+TX044,Linen Fabric,Natural,1m,Textiles,Fabrics,320,285,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,45 m,In Stock
+TX045,Satin Fabric,Glossy,1m,Textiles,Fabrics,380,340,Saree Palace,Geeta Sharma,+977-9867890124,saree@gmail.com,Saree Market,40 m,In Stock
+TX046,Chiffon Fabric,Sheer,1m,Textiles,Fabrics,280,250,Saree Palace,Geeta Sharma,+977-9867890124,saree@gmail.com,Saree Market,50 m,In Stock
+TX047,Wool Fabric,Warm,1m,Textiles,Fabrics,550,495,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,35 m,In Stock
+TX048,Dhaka Fabric,Traditional,1m,Textiles,Fabrics,480,432,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,40 m,In Stock
+TX049,Shawl Fabric,Pashmina,1m,Textiles,Fabrics,780,702,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,25 m,In Stock
+TX050,Kids Dress,Frock,1pc,Textiles,Kids Wear,650,585,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,25 pcs,In Stock
+TX051,Kids Shirt,Cotton,1pc,Textiles,Kids Wear,380,340,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,35 pcs,In Stock
+TX052,Ks T-Shirt,Printed,1pc,Textiles,Kids Wear,280,250,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,40 pcs,In Stock
+TX053,Kids Jeans,Denim,1pc,Textiles,Kids Wear,780,702,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,25 pcs,In Stock
+TX054,Raincoat,Water Proof,1pc,Textiles,Rainwear,380,340,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,30 pcs,In Stock
+TX055,Umbrella,Folding,1pc,Textiles,Accessories,450,405,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,35 pcs,In Stock
+TX056,Backpack,School,1pc,Textiles,Bags,950,855,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,20 pcs,In Stock
+TX057,Handbag Women,Premium,1pc,Textiles,Bags,1450,1305,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,15 pcs,In Stock
+TX058,Wallet Men,Leather,1pc,Textiles,Accessories,650,585,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,30 pcs,In Stock
+TX059,Belt Men,Leather,1pc,Textiles,Accessories,480,432,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,35 pcs,In Stock
+TX060,Cap,Cotton,1pc,Textiles,Accessories,280,250,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,45 pcs,In Stock
+TX061,Gloves,Winter,1 pair,Textiles,Accessories,220,195,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,50 pairs,In Stock
+TX062,Necktie,Formal,1pc,Textiles,Accessories,350,315,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,40 pcs,In Stock
+TX063,Bow Tie,Party Wear,1pc,Textiles,Accessories,280,250,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,45 pcs,In Stock
+TX064,Sleep Suit,Night Wear,1pc,Textiles,Night Wear,780,702,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,25 pcs,In Stock

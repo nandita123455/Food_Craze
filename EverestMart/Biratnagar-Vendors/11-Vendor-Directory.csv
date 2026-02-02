@@ -1,0 +1,57 @@
+Vendor_ID,Vendor_Name,Contact_Person,Phone,Email,Address_Biratnagar,Category,Products_Count,Payment_Terms,Delivery_Area,Rating
+V001,Biratnagar Rice Mills,Ram Prasad Sharma,+977-9841234567,ramsharm@gmail.com,Main Road-4,Groceries,8,15-30 days credit,Biratnagar + nearby,4.5/5
+V002,Koshi Dal Industries,Sita Devi,+977-9852345678,koshidal@email.com,Industrial Area,Groceries,6,15-30 days credit,Biratnagar,4.7/5
+V003,Biratnagar Flour Mills,Hari Prasad,+977-9896789012,biratmill@email.com,Mill Area-7,Groceries,10,30 days credit,Regional,4.8/5
+V004,Koshi Oil Mills,Ramesh Rai,+977-9834567890,koshioil@gmail.com,Oil Mill Road,Groceries,5,15 days credit,Biratnagar,4.6/5
+V005,Spice Valley Traders,Rita Chaudhary,+977-9889012345,valley@gmail.com,Spice Market,Groceries,12,Cash/7 days,Biratnagar,4.4/5
+V006,Biratnagar Sugar Mills,Ravi Mishra,+977-9823456780,sugar@gmail.com,Sugar Mill Area,Groceries,3,30 days credit,Regional,4.7/5
+V007,Koshi Tea Estates,Pradip Gurung,+977-9856789013,koshitea@gmail.com,Tea Garden Road,Groceries,4,15-30 days,Regional,4.9/5
+V008,Coffee House Biratnagar,Mukesh Sah,+977-9878901235,coffee@gmail.com,Coffee Lane,Groceries,2,15 days credit,Biratnagar,4.3/5
+V009,Dry Fruit House,Ramesh Gupta,+977-9823456794,dryfruits@gmail.com,Dry Fruit Market,Groceries,9,15-30 days,Regional,4.6/5
+V010,Sauce Factory,Dinesh Karki,+977-9845678906,sauce@gmail.com,Sauce Lane,Groceries,3,Cash/15 days,Biratnagar,4.2/5
+V011,Pickle House,Geeta Jha,+977-9856789019,pickle@email.com,Pickle Market,Groceries,4,15 days,Biratnagar,4.5/5
+V012,Koshi Dairy Farm,Ram Bahadur Rai,+977-9801234560,koshidairy@gmail.com,Dairy Road-6,Dairy,8,Daily/Weekly,Biratnagar,4.8/5
+V013,Biratnagar Dairy Coop,Sunita Chaudhary,+977-9812345670,biratdairy@email.com,Cooperative Area,Dairy,4,Daily/Weekly,Biratnagar,4.7/5
+V014,Golden Dairy Industries,Rajendra Mehta,+977-9834567892,goldendairy@email.com,Industrial Area-3,Dairy,6,7 days credit,Biratnagar,4.6/5
+V015,Dairy Pride Biratnagar,Bishnu Tamang,+977-9856789014,dairypride@email.com,Dairy Zone,Dairy,3,7-15 days,Biratnagar,4.5/5
+V016,Cheese Craft Nepal,Prakash Limbu,+977-9878901236,cheese@email.com,Dairy Complex,Dairy,5,15 days credit,Regional,4.7/5
+V017,Cold Storage Biratnagar,Dipak Pradhan,+977-9823456782,cold@email.com,Cold Zone,Dairy,8,15-30 days,Regional,4.8/5
+V018,Kulfi Corner,Sanjay Kumar,+977-9834567893,kulfi@gmail.com,Sweet Market,Dairy,3,Cash/7 days,Biratnagar,4.4/5
+V019,Powder Milk Co,Laxman Thapa,+977-9856789022,powder@gmail.com,Powder Zone,Dairy,2,30 days,Regional,4.5/5
+V020,Biratnagar Biscuit Factory,Ramesh Gupta,+977-9801234562,biratbiscuit@gmail.com,Factory Road-5,Snacks,8,15-30 days,Regional,4.7/5
+V021,Sweet Snacks Pvt Ltd,Anjali Rai,+977-9812345672,sweetsnacks@email.com,Snack Zone,Snacks,3,15-30 days,Biratnagar,4.5/5
+V022,Cookie House,Sunil Shrestha,+977-9823456783,cookie@gmail.com,Baker Street,Snacks,4,Cash/15 days,Biratnagar,4.6/5
+V023,Crisp Foods Nepal,Dinesh Karki,+977-9845678904,crisp@gmail.com,Industrial Area-4,Snacks,5,15-30 days,Biratnagar,4.8/5
+V024,Namkeen House,Laxman Thapa,+977-9856789015,namkeen@email.com,Namkeen Lane,Snacks,2,Cash/15 days,Biratnagar,4.4/5
+V025,Chocolate Factory Nepal,Pradeep Limbu,+977-9890123459,choco@gmail.com,Sweet Zone,Snacks,3,30 days credit,Regional,4.7/5
+V026,Fruit Beverages Ltd,Santosh Rai,+ 977-9823456784,fruit@gmail.com,Beverage Park,Snacks,6,15-30 days,Regional,4.8/5
+V027,Water Works Biratnagar,Mohan Jha,+977-9856789016,water@email.com,Water Plant,Snacks,3,15 days,Biratnagar + nearby,4.9/5
+V028,Energy Drinks Nepal,Rakesh Singh,+977-9867890127,energy@email.com,Sports Zone,Snacks,2,30 days,Regional,4.5/5
+V029,Noodle Factory,Binod Karki,+977-9878901238,noodle@gmail.com,Noodle Street,Snacks,4,Cash/15 days,Biratnagar,4.6/5
+V030,Pasta House,Mukesh Pradhan,+977-9890123460,pasta@gmail.com,Pasta Lane,Snacks,3,15-30 days,Biratnagar,4.4/5
+V031,Daily Bread Co,Kesh av Jha,+977-9856789017,bread@gmail.com,Bread Street,Snacks,4,Daily settlement,Biratnagar,4.7/5
+V032,Frozen Foods,Anita Rai,+977-9823456786,frozen@gmail.com,Frozen Zone,Snacks,3,15 days,Biratnagar,4.6/5
+V033,Beauty Products Nepal,Ramesh Gupta,+977-9801234567,beauty@gmail.com,Beauty Market,Personal Care,15,15-30 days,Regional,4.8/5
+V034,Herbal Care Nepal,Santosh Rai,+977-9812345678,herbal@email.com,Herbal Zone,Personal Care,10,30 days,Regional,4.7/5
+V035,Ayurvedic Products,Maya Thapa,+977-9823456789,ayurvedic@gmail.com,Ayurvedic Market,Personal Care,12,15 days,Biratnagar,4.6/5
+V036,Cosmetic House,Anita Basnet,+977-9834567890,cosmetic@email.com,Cosmetic Zone,Personal Care,8,15-30 days,Regional,4.5/5
+V037,Oral Care Nepal,Binod Jha,+977-9845678901,oral@gmail.com,Health Market,Personal Care,6,15 days,Biratnagar,4.7/5
+V038,Baby Care Products,Geeta Pandey,+977-9856789012,babycare@email.com,Baby Zone,Personal Care,11,30 days,Regional,4.9/5
+V039,Kitchen Mart Biratnagar,Prakash Limbu,+977-9867890123,kitchen@gmail.com,Kitchen Market,Home & Kitchen,18,15-30 days,Regional,4.8/5
+V040,Utensil House,Ramesh Yadav,+977-9878901234,utensil@email.com,Utensil Zone,Home & Kitchen,15,15 days,Biratnagar,4.6/5
+V041,Storage Solutions,Dinesh Sharma,+977-9889012345,storage@gmail.com,Storage Market,Home & Kitchen,12,30 days,Regional,4.7/5
+V042,Appliance Center,Laxman Thapa,+977-9890123456,appliance@email.com,Appliance Zone,Home & Kitchen,14,30 days,Regional,4.8/5
+V043,Cookware Nepal,Santosh Gurung,+977-9801234568,cookware@gmail.com,Cookware Market,Home & Kitchen,12,15-30 days,Birat nagar,4.5/5
+V044,Tech Zone Biratnagar,Prakash Rai,+977-9812345679,tech@gmail.com,Tech Market,Electronics,22,15-30 days,Regional,4.9/5
+V045,Mobile Accessories,Binod Karki,+977-9823456780,mobile@email.com,Mobile Zone,Electronics,15,15 days,Biratnagar,4.7/5
+V046,Computer Parts Nepal,Ramesh Mandal,+977-9834567891,computer@gmail.com,IT Market,Electronics,11,30 days,Regional,4.8/5
+V047,Biratnagar Textiles,Laxmi Rai,+977-9845678902,textiles@gmail.com,Textile Market,Textiles,20,30 days,Regional,4.8/5
+V048,Fabric House,Santosh Pradhan,+977-9856789013,fabric@email.com,Fabric Zone,Textiles,15,15-30 days,Biratnagar,4.6/5
+V049,Saree Palace,Geeta Sharma,+977-9867890124,saree@gmail.com,Saree Market,Textiles,12,30 days,Regional,4.7/5
+V050,Traditional Wear,Anita Yadav,+977-9878901235,traditional@email.com,Traditional Market,Textiles,17,15-30 days,Biratnagar,4.5/5
+V051,Nepali Crafts House,Binod Rai,+977-9889012346,crafts@gmail.com,Craft Market,Handicrafts,18,30 days,Regional,4.9/5
+V052,Wood Works Nepal,Ramesh Gurung,+977-9890123457,wood@email.com,Wood Zone,Handicrafts,12,15-30 days,Biratnagar,4.6/5
+V053,Metal Craft,Prakash Thapa,+977-9801234569,metal@gmail.com,Metal Market,Handicrafts,12,30 days,Regional,4.7/5
+V054,Koshi Agro Products,Santosh Karki,+977-9812345680,agro@gmail.com,Agricultural Zone,Agricultural,25,15 days,Regional,4.8/5
+V055,Seed Company Nepal,Laxman Yadav,+977-9823456791,seed@email.com,Seed Market,Agricultural,12,30 days,Regional,4.7/5
+V056,Fertilizer Center,Binod Mandal,+977-9834567802,fertilizer@gmail.com,Fertilizer Zone,Agricultural,18,15-30 days,Biratnagar + nearby,4.6/5
