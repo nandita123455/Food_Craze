@@ -1,0 +1,14 @@
+# Build ALL 3 apps exactly like your local setup
+[build]
+  command = """
+    cd EverestMart/everestmart-admin && npm ci && npm run build &&
+    cd EverestMart/myshop && npm ci && npm run build &&
+    cd EverestMart/myshop-backend && npm ci && npm run build
+  """
+  publish = "EverestMart/everestmart-admin/build"
+
+# React Router SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
