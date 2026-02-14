@@ -29,14 +29,14 @@ function AdminOrders() {
   const updateOrderStatus = async (orderId, newStatus) => {
     try {
       await adminApi.updateOrderStatus(orderId, newStatus);
-      
+
       // Update local state
-      setOrders(orders.map(order => 
-        order._id === orderId 
+      setOrders(orders.map(order =>
+        order._id === orderId
           ? { ...order, orderStatus: newStatus }
           : order
       ));
-      
+
       alert(`✅ Order status updated to: ${newStatus}`);
     } catch (error) {
       console.error('Failed to update order:', error);
@@ -45,13 +45,13 @@ function AdminOrders() {
   };
 
   const filteredOrders = orders.filter(order => {
-    const matchesSearch = 
+    const matchesSearch =
       order._id?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.user?.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       order.user?.email?.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     const matchesFilter = filter === 'all' || order.orderStatus === filter;
-    
+
     return matchesSearch && matchesFilter;
   });
 
@@ -84,7 +84,7 @@ function AdminOrders() {
           onChange={(e) => setSearchQuery(e.target.value)}
           style={styles.searchInput}
         />
-        
+
         <div style={styles.filterButtons}>
           <button
             onClick={() => setFilter('all')}
@@ -129,7 +129,7 @@ function AdminOrders() {
       {filteredOrders.length === 0 ? (
         <div style={styles.empty}>
           <p>No orders found</p>
-          <p style={{fontSize: '0.875rem', color: '#6b7280', marginTop: '0.5rem'}}>
+          <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.5rem' }}>
             {searchQuery ? 'Try a different search term' : 'Orders will appear here when customers place them'}
           </p>
         </div>
@@ -203,9 +203,9 @@ function AdminOrders() {
                     {new Date(order.createdAt).toLocaleDateString('en-IN')}
                     <br />
                     <small style={styles.smallText}>
-                      {new Date(order.createdAt).toLocaleTimeString('en-IN', { 
-                        hour: '2-digit', 
-                        minute: '2-digit' 
+                      {new Date(order.createdAt).toLocaleTimeString('en-IN', {
+                        hour: '2-digit',
+                        minute: '2-digit'
                       })}
                     </small>
                   </td>
@@ -234,7 +234,9 @@ const getStatusColor = (status) => {
 
 const styles = {
   container: {
-    fontFamily: 'system-ui, sans-serif'
+    fontFamily: 'inherit',
+    maxWidth: '1200px',
+    margin: '0 auto'
   },
   loading: {
     display: 'flex',
@@ -243,13 +245,13 @@ const styles = {
     justifyContent: 'center',
     minHeight: '60vh',
     gap: '1rem',
-    color: '#6b7280'
+    color: '#6B7280'
   },
   spinner: {
     width: '40px',
     height: '40px',
-    border: '3px solid #E5E2DD',
-    borderTop: '3px solid #1A1A1A',
+    border: '3px solid #E5E7EB',
+    borderTop: '3px solid #0c831f',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite'
   },
@@ -257,38 +259,49 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '2rem'
+    marginBottom: '2rem',
+    flexWrap: 'wrap',
+    gap: '1rem'
   },
   title: {
-    fontSize: '1.5rem',
-    fontWeight: '400',
-    color: '#1A1A1A',
+    fontSize: '1.8rem',
+    fontWeight: '800',
+    color: '#1F2937',
     margin: 0,
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    letterSpacing: '-0.02em'
   },
   stats: {
     display: 'flex',
-    gap: '1.5rem'
+    gap: '1rem'
   },
   stat: {
-    fontSize: '0.8125rem',
-    color: '#5A5A5A',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    fontWeight: '500'
+    fontSize: '0.9rem',
+    color: '#4B5563',
+    fontWeight: '600',
+    background: '#FFFFFF',
+    padding: '0.5rem 1rem',
+    borderRadius: '8px',
+    border: '1px solid #E5E7EB',
+    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)'
   },
   filters: {
-    marginBottom: '1.5rem'
+    marginBottom: '1.5rem',
+    background: '#FFFFFF',
+    padding: '1rem',
+    borderRadius: '12px',
+    border: '1px solid #E5E7EB',
+    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)'
   },
   searchInput: {
     width: '100%',
     padding: '0.75rem 1rem',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.875rem',
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
+    fontSize: '0.95rem',
     marginBottom: '1rem',
     outline: 'none',
-    fontFamily: 'inherit'
+    transition: 'border 0.2s',
+    background: '#F9FAFB'
   },
   filterButtons: {
     display: 'flex',
@@ -297,92 +310,97 @@ const styles = {
   },
   filterBtn: {
     padding: '0.5rem 1rem',
-    background: '#FFFFFF',
-    border: '1px solid #E5E2DD',
-    color: '#5A5A5A',
-    fontSize: '0.8125rem',
+    background: 'transparent',
+    border: '1px solid #E5E7EB',
+    color: '#6B7280',
+    fontSize: '0.9rem',
     cursor: 'pointer',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    fontWeight: '500'
+    borderRadius: '6px',
+    fontWeight: '500',
+    transition: 'all 0.2s'
   },
   filterBtnActive: {
     padding: '0.5rem 1rem',
-    background: '#1A1A1A',
-    border: '1px solid #1A1A1A',
+    background: '#0c831f',
+    border: '1px solid #0c831f',
     color: '#FFFFFF',
-    fontSize: '0.8125rem',
+    fontSize: '0.9rem',
     cursor: 'pointer',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    fontWeight: '500'
+    borderRadius: '6px',
+    fontWeight: '600',
+    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.1)'
   },
   empty: {
     textAlign: 'center',
     padding: '4rem',
-    color: '#8B8B8B',
+    color: '#9CA3AF',
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD'
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px'
   },
   tableContainer: {
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD',
-    overflowX: 'auto'
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px',
+    overflowX: 'auto',
+    boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)'
   },
   table: {
     width: '100%',
-    borderCollapse: 'collapse'
+    borderCollapse: 'separate',
+    borderSpacing: '0'
   },
   tableHeader: {
-    background: '#F8F7F5',
-    borderBottom: '1px solid #E5E2DD'
+    background: '#F9FAFB'
   },
   th: {
     padding: '1rem',
     textAlign: 'left',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    color: '#5A5A5A',
+    fontSize: '0.85rem',
+    fontWeight: '600',
+    color: '#6B7280',
     textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    letterSpacing: '0.05em',
+    borderBottom: '1px solid #E5E7EB'
   },
   tableRow: {
-    borderBottom: '1px solid #F0EDE8'
+    transition: 'background 0.1s'
   },
   td: {
     padding: '1rem',
-    fontSize: '0.875rem',
-    color: '#1A1A1A',
-    verticalAlign: 'top'
+    fontSize: '0.95rem',
+    color: '#1F2937',
+    verticalAlign: 'top',
+    borderBottom: '1px solid #F3F4F6'
   },
   customerInfo: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.25rem'
+    gap: '0.1rem'
   },
   smallText: {
-    fontSize: '0.75rem',
-    color: '#8B8B8B'
+    fontSize: '0.8rem',
+    color: '#6B7280'
   },
   paymentBadge: {
     display: 'inline-block',
-    padding: '0.25rem 0.5rem',
+    padding: '0.25rem 0.6rem',
     color: '#FFFFFF',
-    fontSize: '0.6875rem',
+    fontSize: '0.75rem',
     fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    borderRadius: '9999px',
+    textTransform: 'capitalize'
   },
   statusSelect: {
-    padding: '0.5rem 0.75rem',
+    padding: '0.4rem 0.8rem',
     border: 'none',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
+    fontSize: '0.85rem',
+    fontWeight: '600',
     cursor: 'pointer',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+    borderRadius: '6px',
     outline: 'none',
-    width: '100%'
+    width: '100%',
+    textTransform: 'capitalize'
   }
 };
 

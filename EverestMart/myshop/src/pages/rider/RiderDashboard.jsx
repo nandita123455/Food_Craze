@@ -250,6 +250,18 @@ function RiderDashboard() {
             };
             setCurrentLocation(location);
 
+            // ✅ Emit socket event if there's an active order
+            if (activeOrder && (activeOrder.orderStatus === 'shipped' || activeOrder.orderStatus === 'out_for_delivery')) {
+              if (socket) {
+                socket.emit('update-location', {
+                  orderId: activeOrder._id,
+                  location: location,
+                  heading: position.coords.heading || 0
+                });
+                console.log('📡 Sent location update for order:', activeOrder._id);
+              }
+            }
+
             try {
               const token = localStorage.getItem('riderToken');
               await axios.put(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/rider/location`,
@@ -264,7 +276,7 @@ function RiderDashboard() {
           { enableHighAccuracy: true }
         );
       }
-    }, 10000);
+    }, 10000); // 10 seconds interval
   };
 
   const toggleAvailability = async () => {
@@ -273,7 +285,7 @@ function RiderDashboard() {
       const newStatus = !isAvailable;
 
       await axios.put(
-  `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/rider/availability`,
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/rider/availability`,
         { isAvailable: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -425,7 +437,17 @@ function RiderDashboard() {
       setShowOTPModal(false);
       setActiveOrder(null);
       setDirections(null);
-      await loadRiderData();
+
+      // Reload orders list (without full page loading flash)
+      await loadOrders();
+
+      // Also refresh stats in the background
+      try {
+        const statsRes = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/rider/earnings`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setStats(statsRes.data);
+      } catch (e) { /* stats refresh is non-critical */ }
 
     } catch (error) {
       console.error('OTP verification failed:', error);
@@ -677,10 +699,15 @@ function RiderDashboard() {
                   📦 Mark as Picked Up
                 </button>
               )}
-              {(activeOrder.orderStatus === 'shipped' || activeOrder.orderStatus === 'out_for_delivery') && (
+              {(activeOrder.orderStatus === 'shipped' || activeOrder.orderStatus === 'out_for_delivery') && activeOrder.orderStatus !== 'delivered' && (
                 <button style={{ ...styles.actionBtn, ...styles.deliverBtn }} onClick={markDelivered}>
                   ✓ Mark as Delivered
                 </button>
+              )}
+              {activeOrder.orderStatus === 'delivered' && (
+                <div style={{ padding: '1rem', background: '#10b981', color: '#FFFFFF', textAlign: 'center', fontSize: '0.875rem', fontWeight: '500', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  ✅ Delivery Completed
+                </div>
               )}
             </div>
           </div>

@@ -11,7 +11,7 @@ exports.phoneLogin = async (req, res) => {
 
     // Verify Firebase token
     const decodedToken = await admin.auth().verifyIdToken(firebaseToken);
-    
+
     if (decodedToken.phone_number !== phone) {
       return res.status(400).json({ message: 'Phone number mismatch' });
     }
@@ -23,7 +23,7 @@ exports.phoneLogin = async (req, res) => {
       user = await User.create({
         phone,
         name: `User${phone.slice(-4)}`,
-        email: `${phone.replace('+', '')}@everestmart.com`
+        email: `${phone.replace('+', '')}@foodcraze.com`
       });
       console.log(`✅ New user registered via phone: ${phone}`);
     } else {
@@ -91,7 +91,7 @@ exports.login = async (req, res) => {
 
     // Find user with password field
     const user = await User.findOne({ email }).select('+password');
-    
+
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -101,7 +101,7 @@ exports.login = async (req, res) => {
 
     // Check password (use ONLY matchPassword OR comparePassword, not both)
     const isPasswordValid = await user.matchPassword(password);
-    
+
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
@@ -111,8 +111,8 @@ exports.login = async (req, res) => {
 
     // Generate token
     const token = jwt.sign(
-      { id: user._id }, 
-      process.env.JWT_SECRET, 
+      { id: user._id },
+      process.env.JWT_SECRET,
       { expiresIn: '30d' }
     );
 
@@ -204,7 +204,7 @@ exports.updateProfile = async (req, res) => {
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
-      
+
       // Update saved address
       if (req.body.savedAddress) {
         user.savedAddress = {
@@ -224,7 +224,7 @@ exports.updateProfile = async (req, res) => {
         email: updatedUser.email,
         savedAddress: updatedUser.savedAddress
       });
-      
+
       console.log('✅ Profile updated for:', updatedUser.email);
     } else {
       res.status(404).json({ message: 'User not found' });

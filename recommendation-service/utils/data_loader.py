@@ -70,26 +70,26 @@ class DataLoader:
         
         # Sample grocery products
         self.products = [
-            {'_id': '1', 'name': 'Fresh Milk', 'category': 'Dairy', 'price': 2.99, 'description': 'Fresh whole milk'},
-            {'_id': '2', 'name': 'Bread', 'category': 'Bakery', 'price': 1.99, 'description': 'Whole wheat bread'},
-            {'_id': '3', 'name': 'Eggs', 'category': 'Dairy', 'price': 3.49, 'description': 'Free range eggs'},
-            {'_id': '4', 'name': 'Bananas', 'category': 'Fruits', 'price': 0.99, 'description': 'Fresh bananas'},
-            {'_id': '5', 'name': 'Apples', 'category': 'Fruits', 'price': 2.49, 'description': 'Red apples'},
-            {'_id': '6', 'name': 'Chicken Breast', 'category': 'Meat', 'price': 6.99, 'description': 'Fresh chicken breast'},
-            {'_id': '7', 'name': 'Rice', 'category': 'Grains', 'price': 4.99, 'description': 'Basmati rice 5kg'},
-            {'_id': '8', 'name': 'Pasta', 'category': 'Grains', 'price': 1.49, 'description': 'Spaghetti pasta'},
-            {'_id': '9', 'name': 'Tomatoes', 'category': 'Vegetables', 'price': 1.99, 'description': 'Fresh tomatoes'},
-            {'_id': '10', 'name': 'Potatoes', 'category': 'Vegetables', 'price': 2.99, 'description': 'Fresh potatoes'},
-            {'_id': '11', 'name': 'Yogurt', 'category': 'Dairy', 'price': 1.99, 'description': 'Greek yogurt'},
-            {'_id': '12', 'name': 'Cheese', 'category': 'Dairy', 'price': 4.99, 'description': 'Cheddar cheese'},
-            {'_id': '13', 'name': 'Orange Juice', 'category': 'Beverages', 'price': 3.99, 'description': 'Fresh orange juice'},
-            {'_id': '14', 'name': 'Coffee', 'category': 'Beverages', 'price': 7.99, 'description': 'Premium coffee beans'},
-            {'_id': '15', 'name': 'Tea', 'category': 'Beverages', 'price': 3.49, 'description': 'Green tea'},
-            {'_id': '16', 'name': 'Cereal', 'category': 'Breakfast', 'price': 3.99, 'description': 'Corn flakes'},
-            {'_id': '17', 'name': 'Peanut Butter', 'category': 'Spreads', 'price': 4.49, 'description': 'Creamy peanut butter'},
-            {'_id': '18', 'name': 'Jam', 'category': 'Spreads', 'price': 2.99, 'description': 'Strawberry jam'},
-            {'_id': '19', 'name': 'Olive Oil', 'category': 'Oils', 'price': 8.99, 'description': 'Extra virgin olive oil'},
-            {'_id': '20', 'name': 'Salt', 'category': 'Spices', 'price': 0.99, 'description': 'Sea salt'},
+            {'_id': '1', 'name': 'Fresh Milk', 'category': 'Dairy', 'price': 2.99, 'description': 'Fresh whole milk', 'image': 'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500'},
+            {'_id': '2', 'name': 'Bread', 'category': 'Bakery', 'price': 1.99, 'description': 'Whole wheat bread', 'image': 'https://images.unsplash.com/photo-1598373182133-52452f7691ef?w=500'},
+            {'_id': '3', 'name': 'Eggs', 'category': 'Dairy', 'price': 3.49, 'description': 'Free range eggs', 'image': 'https://images.unsplash.com/photo-1569246294372-ed319c674f14?w=500'},
+            {'_id': '4', 'name': 'Bananas', 'category': 'Fruits', 'price': 0.99, 'description': 'Fresh bananas', 'image': 'https://images.unsplash.com/photo-1603833665858-e61d17a86224?w=500'},
+            {'_id': '5', 'name': 'Apples', 'category': 'Fruits', 'price': 2.49, 'description': 'Red apples', 'image': 'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500'},
+            {'_id': '6', 'name': 'Chicken Breast', 'category': 'Meat', 'price': 6.99, 'description': 'Fresh chicken breast', 'image': 'https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=500'},
+            {'_id': '7', 'name': 'Rice', 'category': 'Grains', 'price': 4.99, 'description': 'Basmati rice 5kg', 'image': 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=500'},
+            {'_id': '8', 'name': 'Pasta', 'category': 'Grains', 'price': 1.49, 'description': 'Spaghetti pasta', 'image': 'https://images.unsplash.com/photo-1612927601601-6638404737ce?w=500'},
+            {'_id': '9', 'name': 'Tomatoes', 'category': 'Vegetables', 'price': 1.99, 'description': 'Fresh tomatoes', 'image': 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500'},
+            {'_id': '10', 'name': 'Potatoes', 'category': 'Vegetables', 'price': 2.99, 'description': 'Fresh potatoes', 'image': 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500'},
+            {'_id': '11', 'name': 'Yogurt', 'category': 'Dairy', 'price': 1.99, 'description': 'Greek yogurt', 'image': 'https://images.unsplash.com/photo-1584278860047-22db9ff82bed?w=500'},
+            {'_id': '12', 'name': 'Cheese', 'category': 'Dairy', 'price': 4.99, 'description': 'Cheddar cheese', 'image': 'https://images.unsplash.com/photo-1615486511484-92e172cc416d?w=500'},
+            {'_id': '13', 'name': 'Orange Juice', 'category': 'Beverages', 'price': 3.99, 'description': 'Fresh orange juice', 'image': 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=500'},
+            {'_id': '14', 'name': 'Coffee', 'category': 'Beverages', 'price': 7.99, 'description': 'Premium coffee beans', 'image': 'https://images.unsplash.com/photo-1517701604599-bb29b5c73553?w=500'},
+            {'_id': '15', 'name': 'Tea', 'category': 'Beverages', 'price': 3.49, 'description': 'Green tea', 'image': 'https://images.unsplash.com/photo-1627435601361-ec25481c3db6?w=500'},
+            {'_id': '16', 'name': 'Cereal', 'category': 'Breakfast', 'price': 3.99, 'description': 'Corn flakes', 'image': 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500'},
+            {'_id': '17', 'name': 'Peanut Butter', 'category': 'Spreads', 'price': 4.49, 'description': 'Creamy peanut butter', 'image': 'https://images.unsplash.com/photo-1579294247071-f925be25c285?w=500'},
+            {'_id': '18', 'name': 'Jam', 'category': 'Spreads', 'price': 2.99, 'description': 'Strawberry jam', 'image': 'https://images.unsplash.com/photo-1570773823795-c1c5c56784d9?w=500'},
+            {'_id': '19', 'name': 'Olive Oil', 'category': 'Oils', 'price': 8.99, 'description': 'Extra virgin olive oil', 'image': 'https://images.unsplash.com/photo-1474979266404-7cadd259d366?w=500'},
+            {'_id': '20', 'name': 'Salt', 'category': 'Spices', 'price': 0.99, 'description': 'Sea salt', 'image': 'https://images.unsplash.com/photo-1549488344-c7388568e998?w=500'},
         ]
         
         # Sample user behaviors
@@ -129,6 +129,7 @@ class DataLoader:
                     'name': p.get('name'),
                     'category': p.get('category'),
                     'price': p.get('price'),
+                    'image': p.get('image'),
                     'rank': idx + 1
                 }
                 for idx, p in enumerate(self.products[:limit])
@@ -146,10 +147,11 @@ class DataLoader:
         for idx, (product_id, count) in enumerate(most_common):
             product = product_map.get(product_id, {})
             trending.append({
-                'product_id': product_id,
+                'product_id': str(product_id),
                 'name': product.get('name'),
                 'category': product.get('category'),
                 'price': product.get('price'),
+                'image': product.get('image'),
                 'interaction_count': count,
                 'rank': idx + 1
             })
@@ -197,6 +199,7 @@ class DataLoader:
                             'name': product.get('name'),
                             'category': product.get('category'),
                             'price': product.get('price'),
+                            'image': product.get('image'),
                             'confidence': rec.get('confidence', 0.5),
                             'source': 'cold_start'
                         })
@@ -221,6 +224,7 @@ class DataLoader:
                 'name': p.get('name'),
                 'category': p.get('category'),
                 'price': p.get('price'),
+                'image': p.get('image'),
                 'source': 'default'
             }
             for p in products_to_return
@@ -252,6 +256,7 @@ class DataLoader:
                             'name': p.get('name'),
                             'category': p.get('category'),
                             'price': p.get('price'),
+                            'image': p.get('image'),
                             'confidence': suggestion.get('confidence', 0.5),
                             'type': 'frequently_bought_together'
                         })
@@ -269,6 +274,7 @@ class DataLoader:
                         'name': p.get('name'),
                         'category': p.get('category'),
                         'price': p.get('price'),
+                        'image': p.get('image'),
                         'type': 'same_category'
                     })
                     if len(related) >= limit:
@@ -306,6 +312,7 @@ class DataLoader:
                         'name': p.get('name'),
                         'category': p.get('category'),
                         'price': p.get('price'),
+                        'image': p.get('image'),
                         'source': 'time_based'
                     })
                     if len(recommended) >= limit:

@@ -15,12 +15,12 @@ const userBehaviorSchema = new mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
-        required: true,
+        required: false,
         index: true
     },
     action: {
         type: String,
-        enum: ['view', 'click', 'add_to_cart', 'remove_from_cart', 'purchase', 'wishlist', 'search'],
+        enum: ['view', 'click', 'add_to_cart', 'remove_from_cart', 'purchase', 'wishlist', 'search', 'page_view', 'category_view', 'impression', 'activity', 'page_exit'],
         required: true,
         index: true
     },
@@ -59,12 +59,20 @@ userBehaviorSchema.index({ action: 1, timestamp: -1 });
 // Static method to track behavior
 userBehaviorSchema.statics.track = async function (behaviorData) {
     try {
+        // Validate ObjectId if needed
+        if (behaviorData.productId && !mongoose.Types.ObjectId.isValid(behaviorData.productId)) {
+            console.warn(`Skipping behavior with invalid productId: ${behaviorData.productId}`);
+            return null;
+        }
+
         const behavior = new this(behaviorData);
         await behavior.save();
         return behavior;
     } catch (error) {
-        console.error('Error tracking behavior:', error);
-        throw error;
+        // Log error but don't crash, especially for bulk operations
+        console.error('Error tracking behavior:', error.message);
+        // Only rethrow if necessary, otherwise return null to allow partial success in bulk
+        return null; // Return null instead of throwing to prevent Promise.all from failing completely
     }
 };
 

@@ -19,25 +19,28 @@ cron.schedule('0 * * * *', async () => {
         const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
         const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
 
-        // Find users with items in cart but no order in last hour
-        const Cart = require('../models/Cart');
-
-        const abandonedCarts = await Cart.find({
+        // Find users with items in cart but not updated in last hour
+        const abandonedCarts = await User.find({
             updatedAt: { $gte: oneDayAgo, $lte: oneHourAgo },
-            'items.0': { $exists: true } // has at least one item
-        }).populate('userId');
+            'cart.0': { $exists: true } // has at least one item
+        }).populate('cart.product');
 
         console.log(`Found ${abandonedCarts.length} abandoned carts`);
 
-        for (const cart of abandonedCarts) {
-            if (cart.userId && cart.userId.email) {
+        for (const user of abandonedCarts) {
+            if (user.email) {
+                // Calculate total
+                const cartTotal = user.cart.reduce((sum, item) => {
+                    return sum + (item.product?.price || 0) * item.quantity;
+                }, 0);
+
                 await emailQueue.add('abandoned-cart', {
                     type: 'abandoned-cart',
                     data: {
-                        email: cart.userId.email,
-                        name: cart.userId.name,
-                        cartItems: cart.items,
-                        cartTotal: cart.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+                        email: user.email,
+                        name: user.name,
+                        cartItems: user.cart,
+                        cartTotal: cartTotal
                     }
                 }, {
                     delay: Math.random() * 3600000 // Random delay up to 1 hour

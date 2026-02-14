@@ -16,10 +16,19 @@ router.post('/track', async (req, res) => {
         } = req.body;
 
         // Validate required fields
-        if (!productId || !action) {
+        if (!action) {
             return res.status(400).json({
                 success: false,
-                message: 'productId and action are required'
+                message: 'action is required'
+            });
+        }
+
+        // Validate productId for product-specifc actions
+        const productActions = ['view', 'click', 'add_to_cart', 'remove_from_cart', 'purchase', 'wishlist'];
+        if (productActions.includes(action) && !productId) {
+            return res.status(400).json({
+                success: false,
+                message: 'productId is required for this action'
             });
         }
 

@@ -5,30 +5,30 @@ import config from '../config/config';
 function Cart() {
   const navigate = useNavigate();
   const API_URL = config.API_BASE_URL || import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-  
+
   const [cartItems, setCartItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   // ✅ Load cart on mount and listen for updates
   useEffect(() => {
     loadCart();
-    
+
     // ✅ Listen for cart updates from any component
     const handleCartUpdate = () => {
       console.log('🔄 Cart update event received');
       loadCart();
     };
-    
+
     const handleStorageChange = (e) => {
       if (e.key === 'cart' || !e.key) {
         console.log('🔄 Storage change detected');
         loadCart();
       }
     };
-    
+
     window.addEventListener('cartUpdated', handleCartUpdate);
     window.addEventListener('storage', handleStorageChange);
-    
+
     // Cleanup listeners
     return () => {
       window.removeEventListener('cartUpdated', handleCartUpdate);
@@ -60,7 +60,7 @@ function Cart() {
     const updatedCart = cartItems.map(item =>
       item._id === productId ? { ...item, quantity: newQuantity } : item
     );
-    
+
     saveCart(updatedCart);
   };
 
@@ -68,7 +68,7 @@ function Cart() {
   const removeItem = (productId) => {
     const item = cartItems.find(i => i._id === productId);
     if (!confirm(`Remove "${item?.name}" from cart?`)) return;
-    
+
     const updatedCart = cartItems.filter(item => item._id !== productId);
     saveCart(updatedCart);
     console.log('🗑️ Item removed from cart');
@@ -77,9 +77,9 @@ function Cart() {
   // ✅ Clear cart with confirmation
   const clearCart = () => {
     if (cartItems.length === 0) return;
-    
+
     if (!confirm(`Clear all ${cartItems.length} items from cart?`)) return;
-    
+
     saveCart([]);
     console.log('🗑️ Cart cleared');
   };
@@ -88,14 +88,14 @@ function Cart() {
   const saveCart = (updatedCart) => {
     // Save to localStorage
     localStorage.setItem('cart', JSON.stringify(updatedCart));
-    
+
     // Update state
     setCartItems(updatedCart);
-    
+
     // Dispatch events to notify other components
     window.dispatchEvent(new Event('cartUpdated'));
     window.dispatchEvent(new Event('storage'));
-    
+
     console.log('💾 Cart saved:', updatedCart.length, 'items');
   };
 
@@ -123,7 +123,7 @@ function Cart() {
     return (
       <div style={styles.emptyCart}>
         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" style={styles.emptyIcon}>
-          <path d="M9 2C7.89543 2 7 2.89543 7 4V6H5C3.89543 6 3 6.89543 3 8V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V8C21 6.89543 20.1046 6 19 6H17V4C17 2.89543 16.1046 2 15 2H9Z" stroke="#E5E2DD" strokeWidth="2"/>
+          <path d="M9 2C7.89543 2 7 2.89543 7 4V6H5C3.89543 6 3 6.89543 3 8V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V8C21 6.89543 20.1046 6 19 6H17V4C17 2.89543 16.1046 2 15 2H9Z" stroke="#E5E2DD" strokeWidth="2" />
         </svg>
         <h2 style={styles.emptyTitle}>Your cart is empty</h2>
         <p style={styles.emptyText}>Add products to get started</p>
@@ -150,8 +150,12 @@ function Cart() {
             <div key={item._id} style={styles.cartItem}>
               <div style={styles.itemImage}>
                 {item.image && (
-                  <img 
-                    src={item.image.startsWith('data:') ? item.image : `${API_URL.replace('/api', '')}${item.image}`}
+                  <img
+                    src={
+                      item.image.startsWith('http') || item.image.startsWith('data:')
+                        ? item.image
+                        : `${API_URL.replace('/api', '')}${item.image}`
+                    }
                     alt={item.name}
                     style={styles.productImage}
                     onError={(e) => {
@@ -170,7 +174,7 @@ function Cart() {
 
               <div style={styles.itemActions}>
                 <div style={styles.quantityControl}>
-                  <button 
+                  <button
                     style={styles.quantityBtn}
                     onClick={() => updateQuantity(item._id, item.quantity - 1)}
                     aria-label="Decrease quantity"
@@ -178,7 +182,7 @@ function Cart() {
                     −
                   </button>
                   <span style={styles.quantity}>{item.quantity}</span>
-                  <button 
+                  <button
                     style={styles.quantityBtn}
                     onClick={() => updateQuantity(item._id, item.quantity + 1)}
                     aria-label="Increase quantity"
@@ -189,7 +193,7 @@ function Cart() {
 
                 <p style={styles.itemTotal}>₹{item.price * item.quantity}</p>
 
-                <button 
+                <button
                   style={styles.removeBtn}
                   onClick={() => removeItem(item._id)}
                 >
@@ -213,7 +217,7 @@ function Cart() {
               <span style={styles.summaryValue}>₹40</span>
             )}
           </div>
-          
+
           {/* ✅ Delivery hint */}
           {getTotalPrice() < 250 && (
             <div style={styles.deliveryHint}>
@@ -229,14 +233,14 @@ function Cart() {
           </div>
 
           {/* ✅ Navigate to Checkout page */}
-          <button 
+          <button
             style={styles.checkoutBtn}
             onClick={() => navigate('/checkout')}
           >
             Proceed to Checkout
           </button>
-          
-          <button 
+
+          <button
             style={styles.continueShoppingBtn}
             onClick={() => navigate('/products')}
           >
@@ -249,218 +253,224 @@ function Cart() {
 }
 
 const styles = {
-  container: { 
-    minHeight: '100vh', 
-    background: '#FFFFFF', 
-    padding: '2rem' 
+  container: {
+    minHeight: '100vh',
+    background: '#F3F4F6',
+    padding: '2rem 1rem'
   },
-  content: { 
-    maxWidth: '1000px', 
-    margin: '0 auto' 
+  content: {
+    maxWidth: '1000px',
+    margin: '0 auto',
+    background: 'white',
+    borderRadius: '12px',
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)',
+    padding: '1.5rem',
+    border: '1px solid #E5E7EB'
   },
-  header: { 
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    alignItems: 'center', 
-    marginBottom: '2rem', 
-    paddingBottom: '1rem', 
-    borderBottom: '1px solid #E5E2DD' 
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '1.5rem',
+    paddingBottom: '1rem',
+    borderBottom: '1px solid #F3F4F6'
   },
-  title: { 
-    fontSize: '2rem', 
-    fontWeight: '300', 
-    color: '#1A1A1A', 
-    letterSpacing: '0.5px' 
+  title: {
+    fontSize: '1.5rem',
+    fontWeight: '800',
+    color: '#1F2937',
+    letterSpacing: '-0.02em'
   },
-  clearBtn: { 
-    padding: '0.5rem 1rem', 
-    background: 'transparent', 
-    border: '1px solid #E5E2DD', 
-    color: '#ef4444', 
-    fontSize: '0.875rem', 
+  clearBtn: {
+    padding: '0.4rem 0.8rem',
+    background: '#fee2e2',
+    border: 'none',
+    color: '#dc2626',
+    fontSize: '0.85rem',
     cursor: 'pointer',
-    borderRadius: '4px',
+    borderRadius: '6px',
     transition: 'all 0.2s',
-    fontWeight: '500'
+    fontWeight: '600'
   },
-  itemsContainer: { 
-    marginBottom: '2rem' 
+  itemsContainer: {
+    marginBottom: '2rem'
   },
-  cartItem: { 
-    display: 'grid', 
-    gridTemplateColumns: '100px 1fr auto', 
-    gap: '1.5rem', 
-    padding: '1.5rem 0', 
-    borderBottom: '1px solid #F0EDE8', 
-    alignItems: 'center' 
+  cartItem: {
+    display: 'grid',
+    gridTemplateColumns: '80px 1fr auto',
+    gap: '1rem',
+    padding: '1.25rem 0',
+    borderBottom: '1px solid #F3F4F6',
+    alignItems: 'center'
   },
-  itemImage: { 
-    width: '100px', 
-    height: '100px', 
-    background: '#F8F7F5',
+  itemImage: {
+    width: '80px',
+    height: '80px',
+    background: '#F9FAFB',
     borderRadius: '8px',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    border: '1px solid #E5E7EB'
   },
-  productImage: { 
-    width: '100%', 
-    height: '100%', 
-    objectFit: 'cover' 
+  productImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain',
+    padding: '4px'
   },
-  itemDetails: { 
-    display: 'flex', 
-    flexDirection: 'column', 
-    gap: '0.5rem' 
+  itemDetails: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.25rem'
   },
-  itemName: { 
-    fontSize: '1rem', 
-    fontWeight: '500', 
-    color: '#1A1A1A' 
+  itemName: {
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    color: '#1F2937'
   },
-  itemUnit: { 
-    fontSize: '0.8125rem', 
-    color: '#8B8B8B' 
+  itemUnit: {
+    fontSize: '0.8rem',
+    color: '#6B7280'
   },
-  itemPrice: { 
-    fontSize: '0.875rem', 
-    color: '#5A5A5A',
-    fontWeight: '500'
+  itemPrice: {
+    fontSize: '0.9rem',
+    color: '#374151',
+    fontWeight: '600'
   },
-  itemActions: { 
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems: 'flex-end', 
-    gap: '1rem' 
+  itemActions: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    gap: '0.75rem'
   },
-  quantityControl: { 
-    display: 'flex', 
-    alignItems: 'center', 
-    gap: '0.75rem', 
-    border: '1px solid #E5E2DD', 
-    padding: '0.25rem',
+  quantityControl: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    border: '1px solid #E5E7EB',
+    padding: '2px',
     borderRadius: '6px',
-    background: '#FFFFFF'
+    background: '#F9FAFB'
   },
-  quantityBtn: { 
-    width: '32px', 
-    height: '32px', 
-    background: 'transparent', 
-    border: 'none', 
-    color: '#1A1A1A', 
-    fontSize: '1.25rem', 
+  quantityBtn: {
+    width: '28px',
+    height: '28px',
+    background: 'white',
+    border: '1px solid #E5E7EB',
+    color: '#0c831f',
+    fontSize: '1.1rem',
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'background 0.2s',
+    transition: 'all 0.2s',
     borderRadius: '4px',
     fontWeight: '600'
   },
-  quantity: { 
-    fontSize: '0.9375rem', 
-    minWidth: '30px', 
+  quantity: {
+    fontSize: '0.9rem',
+    minWidth: '24px',
     textAlign: 'center',
     fontWeight: '600',
-    color: '#1A1A1A'
+    color: '#1F2937'
   },
-  itemTotal: { 
-    fontSize: '1.25rem', 
-    fontWeight: '600', 
-    color: '#1A1A1A' 
+  itemTotal: {
+    fontSize: '1rem',
+    fontWeight: '700',
+    color: '#1F2937'
   },
-  removeBtn: { 
-    background: 'transparent', 
-    border: 'none', 
-    color: '#ef4444', 
-    fontSize: '0.8125rem', 
-    cursor: 'pointer', 
-    textDecoration: 'underline',
+  removeBtn: {
+    background: 'transparent',
+    border: 'none',
+    color: '#EF4444',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    textDecoration: 'none',
     transition: 'color 0.2s',
     fontWeight: '500'
   },
-  summary: { 
-    marginTop: '3rem', 
-    padding: '2rem', 
-    background: '#F8F7F5',
-    borderRadius: '8px'
+  summary: {
+    marginTop: '2rem',
+    padding: '1.5rem',
+    background: '#F9FAFB',
+    borderRadius: '12px',
+    border: '1px solid #E5E7EB'
   },
-  summaryRow: { 
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    marginBottom: '1rem' 
+  summaryRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '0.75rem'
   },
-  summaryLabel: { 
-    fontSize: '0.9375rem', 
-    color: '#5A5A5A' 
+  summaryLabel: {
+    fontSize: '0.9rem',
+    color: '#6B7280'
   },
-  summaryValue: { 
-    fontSize: '0.9375rem', 
-    color: '#1A1A1A',
-    fontWeight: '500'
+  summaryValue: {
+    fontSize: '0.9rem',
+    color: '#1F2937',
+    fontWeight: '600'
   },
   freeDelivery: {
-    fontSize: '0.9375rem',
-    color: '#10b981',
+    fontSize: '0.9rem',
+    color: '#0c831f',
     fontWeight: '700'
   },
   deliveryHint: {
-    background: '#FFF3CD',
-    color: '#856404',
+    background: '#FFFBEB',
+    color: '#B45309',
     padding: '0.75rem',
-    borderRadius: '6px',
-    fontSize: '0.8125rem',
+    borderRadius: '8px',
+    fontSize: '0.85rem',
     marginTop: '0.5rem',
     marginBottom: '1rem',
     fontWeight: '500',
-    textAlign: 'center'
+    textAlign: 'center',
+    border: '1px solid #FEF3C7'
   },
-  totalRow: { 
-    display: 'flex', 
-    justifyContent: 'space-between', 
-    paddingTop: '1rem', 
-    marginTop: '1rem', 
-    borderTop: '1px solid #E5E2DD' 
+  totalRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingTop: '1rem',
+    marginTop: '1rem',
+    borderTop: '1px solid #E5E7EB'
   },
-  totalLabel: { 
-    fontSize: '1.25rem', 
-    fontWeight: '500',
-    color: '#1A1A1A'
+  totalLabel: {
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: '#1F2937'
   },
-  totalValue: { 
-    fontSize: '1.75rem', 
-    fontWeight: '600',
-    color: '#1A1A1A'
+  totalValue: {
+    fontSize: '1.5rem',
+    fontWeight: '800',
+    color: '#1F2937'
   },
-  checkoutBtn: { 
-    width: '100%', 
-    padding: '1rem', 
-    marginTop: '1.5rem', 
-    background: '#1A1A1A', 
-    color: '#FFFFFF', 
-    border: 'none', 
-    fontSize: '0.9375rem', 
-    fontWeight: '600', 
-    letterSpacing: '0.5px', 
-    textTransform: 'uppercase', 
+  checkoutBtn: {
+    width: '100%',
+    padding: '1rem',
+    marginTop: '1.5rem',
+    background: '#0c831f',
+    color: '#FFFFFF',
+    border: 'none',
+    fontSize: '1rem',
+    fontWeight: '700',
+    letterSpacing: '0.5px',
     cursor: 'pointer',
-    borderRadius: '6px',
+    borderRadius: '8px',
     transition: 'background 0.2s'
   },
   continueShoppingBtn: {
     width: '100%',
-    padding: '1rem',
-    marginTop: '0.75rem',
-    background: 'transparent',
-    color: '#1A1A1A',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.9375rem',
-    fontWeight: '500',
-    letterSpacing: '0.3px',
-    textTransform: 'uppercase',
+    padding: '0.75rem',
+    marginTop: '1rem',
+    background: 'white',
+    color: '#0c831f',
+    border: '1px solid #0c831f',
+    fontSize: '0.9rem',
+    fontWeight: '600',
     cursor: 'pointer',
-    borderRadius: '6px',
+    borderRadius: '8px',
     transition: 'all 0.2s'
   },
   // ✅ Loading state
@@ -473,53 +483,53 @@ const styles = {
     textAlign: 'center'
   },
   spinner: {
-    width: '50px',
-    height: '50px',
-    border: '4px solid #e5e7eb',
-    borderTop: '4px solid #1A1A1A',
+    width: '40px',
+    height: '40px',
+    border: '3px solid #E5E7EB',
+    borderTop: '3px solid #0c831f',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite',
     marginBottom: '1rem'
   },
   loadingText: {
-    fontSize: '1rem',
-    color: '#8B8B8B'
+    fontSize: '0.9rem',
+    color: '#6B7280'
   },
   // ✅ Empty cart
-  emptyCart: { 
-    minHeight: '80vh', 
-    display: 'flex', 
-    flexDirection: 'column', 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    textAlign: 'center' 
+  emptyCart: {
+    minHeight: '80vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+    background: '#F3F4F6'
   },
-  emptyIcon: { 
-    marginBottom: '2rem', 
-    opacity: 0.3 
+  emptyIcon: {
+    marginBottom: '1.5rem',
+    opacity: 0.5,
+    color: '#9CA3AF'
   },
-  emptyTitle: { 
-    fontSize: '1.5rem', 
-    fontWeight: '300', 
-    color: '#1A1A1A', 
-    marginBottom: '0.5rem' 
+  emptyTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '800',
+    color: '#1F2937',
+    marginBottom: '0.5rem'
   },
-  emptyText: { 
-    fontSize: '1rem', 
-    color: '#8B8B8B', 
-    marginBottom: '2rem' 
+  emptyText: {
+    fontSize: '1rem',
+    color: '#6B7280',
+    marginBottom: '2rem'
   },
-  continueBtn: { 
-    padding: '1rem 2rem', 
-    background: '#1A1A1A', 
-    color: '#FFFFFF', 
-    border: 'none', 
-    fontSize: '0.875rem', 
-    fontWeight: '600', 
-    textTransform: 'uppercase', 
+  continueBtn: {
+    padding: '0.75rem 2rem',
+    background: '#0c831f',
+    color: '#FFFFFF',
+    border: 'none',
+    fontSize: '1rem',
+    fontWeight: '700',
     cursor: 'pointer',
-    borderRadius: '6px',
-    letterSpacing: '0.5px',
+    borderRadius: '8px',
     transition: 'background 0.2s'
   }
 };

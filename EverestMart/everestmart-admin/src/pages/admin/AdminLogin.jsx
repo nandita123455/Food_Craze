@@ -46,17 +46,21 @@ function AdminLogin({ setAdmin }) {
 
   return (
     <div style={styles.container}>
-      <div style={styles.loginBox}>
-        <div style={styles.header}>
-          <h1 style={styles.logo}>🚀 Quixo</h1>
-          <h2 style={styles.title}>Admin Portal</h2>
-          <p style={styles.subtitle}>Authorized Access Only</p>
+      {/* Background Graphic */}
+      <div style={styles.bgGraphic}></div>
+
+      <div style={styles.loginWrapper}>
+        <div style={styles.brandSection}>
+          <img src="/logo.svg" alt="Food Craze Admin" style={{ width: '250px', marginBottom: '1rem' }} />
+          <p style={styles.brandSubtitle}>Enterprise Management Portal</p>
         </div>
 
-        <form onSubmit={handleLogin} style={styles.form}>
+        <form onSubmit={handleLogin} style={styles.formContainer}>
+          <h2 style={styles.loginTitle}>Sign In</h2>
+
           {error && (
-            <div style={styles.error}>
-              ⚠️ {error}
+            <div style={styles.errorBanner}>
+              <span style={{ marginRight: '8px' }}>🚫</span> {error}
             </div>
           )}
 
@@ -66,7 +70,7 @@ function AdminLogin({ setAdmin }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@quixo.com"
+              placeholder="admin@foodcraze.com"
               required
               style={styles.input}
               autoComplete="email"
@@ -75,7 +79,7 @@ function AdminLogin({ setAdmin }) {
 
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <div style={styles.passwordContainer}>
+            <div style={styles.passwordWrapper}>
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
@@ -88,20 +92,9 @@ function AdminLogin({ setAdmin }) {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                style={styles.toggleBtn}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                style={styles.eyeToggle}
               >
-                {showPassword ? (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                  </svg>
-                ) : (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                )}
+                {showPassword ? 'Hide' : 'Show'}
               </button>
             </div>
           </div>
@@ -111,50 +104,22 @@ function AdminLogin({ setAdmin }) {
             disabled={loading}
             style={{
               ...styles.submitBtn,
-              opacity: loading ? 0.6 : 1,
-              cursor: loading ? 'not-allowed' : 'pointer'
+              opacity: loading ? 0.7 : 1,
+              cursor: loading ? 'wait' : 'pointer'
             }}
           >
-            {loading ? (
-              <span style={styles.loadingContent}>
-                <span style={styles.spinner}></span>
-                Authenticating...
-              </span>
-            ) : (
-              '🔐 Login to Admin Panel'
-            )}
+            {loading ? 'Authenticating...' : 'Access Dashboard →'}
           </button>
-        </form>
 
-        <div style={styles.footer}>
-          <p style={styles.footerText}>
-            🔒 Secure Connection • All activities are logged
-          </p>
-        </div>
+          <div style={styles.footerLink}>
+            <a href="#" style={styles.link}>Forgot Credentials?</a>
+          </div>
+        </form>
       </div>
 
-      {/* Add CSS animations */}
-      <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        input:focus {
-          border-color: #667eea !important;
-          box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15) !important;
-        }
-        
-        button[type="submit"]:hover:not(:disabled) {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-        
-        button[type="submit"]:active:not(:disabled) {
-          transform: translateY(0);
-        }
-      `}</style>
+      <div style={styles.footer}>
+        <p>🔒 Secure 256-bit SSL Connection | Food Craze System v1.1.0</p>
+      </div>
     </div>
   );
 }
@@ -163,151 +128,190 @@ const styles = {
   container: {
     minHeight: '100vh',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    padding: '2rem',
-    fontFamily: 'system-ui, sans-serif'
+    background: '#F3F4F6',
+    color: '#1F2937',
+    fontFamily: "'Inter', sans-serif",
+    position: 'relative',
+    overflow: 'hidden'
   },
-  loginBox: {
-    background: '#FFFFFF',
-    borderRadius: '16px',
-    boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-    maxWidth: '480px',
+  bgGraphic: {
+    position: 'absolute',
     width: '100%',
+    height: '100%',
+    background: 'radial-gradient(circle at 50% 50%, rgba(12, 131, 31, 0.05) 0%, rgba(243, 244, 246, 0) 70%)',
+    zIndex: 0
+  },
+  loginWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    background: '#FFFFFF',
+    borderRadius: '24px',
+    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
     overflow: 'hidden',
-    animation: 'fadeIn 0.5s ease'
+    maxWidth: '440px',
+    width: '90%',
+    zIndex: 1,
+    border: '1px solid #E5E7EB'
   },
-  header: {
-    background: '#1A1A1A',
-    color: '#FFFFFF',
-    padding: '3rem 2rem',
+  brandSection: {
+    padding: '3rem 2rem 1rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     textAlign: 'center'
   },
-  logo: {
-    fontSize: '2.5rem',
-    margin: '0 0 1rem 0',
-    fontWeight: '300'
-  },
-  title: {
-    fontSize: '1.5rem',
-    fontWeight: '400',
-    margin: '0 0 0.5rem 0',
-    textTransform: 'uppercase',
-    letterSpacing: '2px'
-  },
-  subtitle: {
-    fontSize: '0.875rem',
-    color: '#E5E2DD',
-    margin: 0
-  },
-  form: {
-    padding: '3rem 2rem'
-  },
-  error: {
-    background: '#FEE2E2',
-    color: '#991B1B',
-    padding: '1rem',
-    borderRadius: '8px',
+  logoCircle: {
+    fontSize: '3rem',
+    background: '#ecfdf5',
+    width: '80px',
+    height: '80px',
+    borderRadius: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: '1.5rem',
-    fontSize: '0.875rem',
-    border: '2px solid #FCA5A5',
-    textAlign: 'center'
+    color: '#0c831f'
+  },
+  brandTitle: {
+    fontSize: '2rem',
+    fontWeight: '800',
+    color: '#1F2937',
+    margin: '0 0 0.5rem 0',
+    letterSpacing: '-0.02em'
+  },
+  brandSubtitle: {
+    fontSize: '0.95rem',
+    color: '#6B7280',
+    fontWeight: '500'
+  },
+  formContainer: {
+    padding: '2rem',
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  loginTitle: {
+    display: 'none' // Hidden for cleaner look
   },
   inputGroup: {
-    marginBottom: '1.5rem'
+    marginBottom: '1.25rem'
   },
   label: {
     display: 'block',
-    fontSize: '0.875rem',
+    fontSize: '0.9rem',
     fontWeight: '600',
-    color: '#1A1A1A',
-    marginBottom: '0.5rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    color: '#374151',
+    marginBottom: '0.5rem'
   },
   input: {
     width: '100%',
-    padding: '1rem',
+    padding: '0.875rem',
+    background: '#F9FAFB',
+    border: '1px solid #D1D5DB',
+    borderRadius: '12px',
+    color: '#1F2937',
     fontSize: '1rem',
-    border: '2px solid #E5E2DD',
-    borderRadius: '8px',
     outline: 'none',
     transition: 'all 0.2s',
-    fontFamily: 'system-ui, sans-serif',
     boxSizing: 'border-box'
   },
-  passwordContainer: {
+  passwordWrapper: {
     position: 'relative',
     display: 'flex',
     alignItems: 'center'
   },
   passwordInput: {
     width: '100%',
-    padding: '1rem',
-    paddingRight: '3rem',
+    padding: '0.875rem',
+    paddingRight: '4rem',
+    background: '#F9FAFB',
+    border: '1px solid #D1D5DB',
+    borderRadius: '12px',
+    color: '#1F2937',
     fontSize: '1rem',
-    border: '2px solid #E5E2DD',
-    borderRadius: '8px',
     outline: 'none',
-    transition: 'all 0.2s',
-    fontFamily: 'system-ui, sans-serif',
     boxSizing: 'border-box'
   },
-  toggleBtn: {
+  eyeToggle: {
     position: 'absolute',
-    right: '0.75rem',
+    right: '1rem',
     background: 'none',
     border: 'none',
-    cursor: 'pointer',
-    padding: '0.5rem',
     color: '#6B7280',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'color 0.2s'
+    cursor: 'pointer',
+    fontSize: '0.85rem',
+    fontWeight: '600',
+    padding: '0.25rem'
   },
   submitBtn: {
     width: '100%',
-    padding: '1.25rem',
-    background: '#1A1A1A',
-    color: '#FFFFFF',
+    padding: '1rem',
+    background: '#0c831f',
+    color: 'white',
     border: 'none',
-    borderRadius: '8px',
+    borderRadius: '12px',
     fontSize: '1rem',
-    fontWeight: '600',
+    fontWeight: '700',
     cursor: 'pointer',
-    textTransform: 'uppercase',
-    letterSpacing: '1px',
-    transition: 'all 0.3s ease',
-    marginTop: '1rem'
+    marginTop: '0.5rem',
+    marginBottom: '1.5rem',
+    boxShadow: '0 4px 6px -1px rgba(12, 131, 31, 0.2)',
+    transition: 'all 0.2s'
   },
-  loadingContent: {
+  footerLink: {
+    textAlign: 'center'
+  },
+  link: {
+    color: '#0c831f',
+    textDecoration: 'none',
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    transition: 'color 0.2s'
+  },
+  errorBanner: {
+    background: '#FEF2F2',
+    border: '1px solid #FECACA',
+    color: '#DC2626',
+    padding: '0.75rem',
+    borderRadius: '8px',
+    marginBottom: '1.5rem',
+    fontSize: '0.9rem',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.5rem'
-  },
-  spinner: {
-    width: '18px',
-    height: '18px',
-    border: '3px solid rgba(255,255,255,0.3)',
-    borderTop: '3px solid white',
-    borderRadius: '50%',
-    animation: 'spin 1s linear infinite',
-    display: 'inline-block'
+    fontWeight: '500'
   },
   footer: {
-    background: '#F8F7F5',
-    padding: '1.5rem 2rem',
+    marginTop: '2rem',
     textAlign: 'center',
-    borderTop: '1px solid #E5E2DD'
-  },
-  footerText: {
-    fontSize: '0.8125rem',
-    color: '#8B8B8B',
-    margin: 0
+    color: '#9CA3AF',
+    fontSize: '0.85rem'
   }
 };
+
+// Insert styles for responsiveness
+const styleSheet = document.createElement('style');
+styleSheet.innerText = `
+  @media (max-width: 768px) {
+    div[style*="flex-direction: row"] {
+      flex-direction: column !important;
+    }
+    div[style*="padding: 4rem"] {
+      padding: 2rem !important;
+    }
+    div[style*="min-height: 500px"] {
+      min-height: auto !important;
+    }
+  }
+  input:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2) !important;
+  }
+  button[type="submit"]:hover:not(:disabled) {
+    background: #2563eb !important;
+  }
+`;
+document.head.appendChild(styleSheet);
 
 export default AdminLogin;

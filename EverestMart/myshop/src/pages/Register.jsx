@@ -115,7 +115,7 @@ function Register() {
         localStorage.setItem('user', JSON.stringify(data.user));
 
         // Show success message
-        alert('🎉 Registration successful! Welcome to Quixo!');
+        alert('🎉 Registration successful! Welcome to Food Craze!');
         navigate('/');
         window.location.reload();
       }
@@ -158,7 +158,7 @@ function Register() {
         {step === 1 ? (
           <>
             <h1 style={styles.title}>📝 Create Account</h1>
-            <p style={styles.subtitle}>Join Quixo for lightning-fast deliveries</p>
+            <p style={styles.subtitle}>Join Food Craze for lightning-fast deliveries</p>
 
             {/* Google Signup Button */}
             <button onClick={handleGoogleSignup} style={styles.googleBtn}>

@@ -56,8 +56,8 @@ function Navbar() {
         {/* Logo */}
         <div style={styles.brand} onClick={() => navigate('/')}>
           <img
-            src="/assets/logo.png"
-            alt="Quixo"
+            src="/assets/logo.svg"
+            alt="Food Craze"
             style={styles.logoImage}
             onError={(e) => {
               e.target.style.display = 'none';
@@ -65,7 +65,7 @@ function Navbar() {
             }}
           />
           <div style={{ ...styles.logoFallback, display: 'none' }}>
-            <span style={styles.logoText}>QUIXO</span>
+            <span style={styles.logoText}>FOOD CRAZE</span>
           </div>
         </div>
 
@@ -95,6 +95,19 @@ function Navbar() {
               <path d="M16 11V7C16 5.93913 15.5786 4.92172 14.8284 4.17157C14.0783 3.42143 13.0609 3 12 3C10.9391 3 9.92172 3.42143 9.17157 4.17157C8.42143 4.92172 8 5.93913 8 7V11M5 9H19L20 21H4L5 9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             Shop
+          </button>
+
+          <button
+            style={{
+              ...styles.navBtn,
+              ...(isActive('/recipes') ? styles.navBtnActive : {})
+            }}
+            onClick={() => navigate('/recipes')}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={styles.icon}>
+              <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Recipes
           </button>
 
           <button

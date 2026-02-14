@@ -4,7 +4,10 @@ import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminOrders from './pages/admin/AdminOrders';
 import ProductManagement from './pages/admin/ProductManagement';
+
 import RiderManagement from './pages/admin/RiderManagement';
+import RecipeManagement from './pages/admin/RecipeManagement';
+import AddEditRecipe from './pages/admin/AddEditRecipe';
 import './App.css';
 
 function App() {
@@ -50,7 +53,7 @@ function App() {
         {/* Top Navigation */}
         <nav style={styles.navbar}>
           <div style={styles.navBrand}>
-            <h2 style={styles.brandTitle}>Quixo</h2>
+            <h2 style={styles.brandTitle}>Food Craze</h2>
             <span style={styles.brandSubtitle}>ADMIN</span>
           </div>
 
@@ -104,6 +107,18 @@ function App() {
               </svg>
               Riders
             </Link>
+
+            <Link
+              to="/recipes"
+              style={activeTab === 'recipes' ? styles.navLinkActive : styles.navLink}
+              onClick={() => setActiveTab('recipes')}
+            >
+              <svg style={styles.icon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+              </svg>
+              Recipe Book
+            </Link>
           </div>
 
           <button onClick={handleLogout} style={styles.logoutBtn}>
@@ -123,6 +138,9 @@ function App() {
             <Route path="/orders" element={<AdminOrders />} />
             <Route path="/products" element={<ProductManagement />} />
             <Route path="/riders" element={<RiderManagement />} />
+            <Route path="/recipes" element={<RecipeManagement />} />
+            <Route path="/recipes/add" element={<AddEditRecipe />} />
+            <Route path="/recipes/edit/:id" element={<AddEditRecipe />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </div>
@@ -134,93 +152,100 @@ function App() {
 const styles = {
   app: {
     minHeight: '100vh',
-    background: '#F8F7F5'
+    display: 'flex',
+    background: '#F3F4F6'
   },
   navbar: {
-    background: '#1A1A1A',
-    color: '#FFFFFF',
-    padding: '0 2rem',
+    width: '260px',
+    background: 'white',
+    borderRight: '1px solid #E5E7EB',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #2A2A2A',
-    height: '60px'
+    flexDirection: 'column',
+    position: 'fixed',
+    top: 0,
+    bottom: 0,
+    zIndex: 100
   },
   navBrand: {
+    padding: '1.5rem',
+    borderBottom: '1px solid #F3F4F6',
     display: 'flex',
-    alignItems: 'baseline',
+    alignItems: 'center',
     gap: '0.5rem'
   },
   brandTitle: {
     margin: 0,
-    fontSize: '1.125rem',
-    fontWeight: '400',
-    letterSpacing: '0.5px'
+    fontSize: '1.5rem',
+    fontWeight: '800',
+    color: '#0c831f',
+    letterSpacing: '-0.02em'
   },
   brandSubtitle: {
-    fontSize: '0.6875rem',
-    color: '#8B8B8B',
-    fontWeight: '500',
-    letterSpacing: '1px'
+    fontSize: '0.7rem',
+    color: '#6B7280',
+    fontWeight: '600',
+    background: '#F3F4F6',
+    padding: '2px 6px',
+    borderRadius: '4px',
+    letterSpacing: '0.05em'
   },
   navLinks: {
     display: 'flex',
+    flexDirection: 'column',
     gap: '0.5rem',
-    alignItems: 'center'
+    padding: '1.5rem 1rem',
+    flex: 1
   },
   navLink: {
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
-    padding: '0.625rem 1rem',
-    color: '#8B8B8B',
+    gap: '0.75rem',
+    padding: '0.75rem 1rem',
+    color: '#4B5563',
     textDecoration: 'none',
-    fontSize: '0.8125rem',
+    fontSize: '0.95rem',
     fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
     transition: 'all 0.2s',
-    borderRadius: '4px'
+    borderRadius: '8px'
   },
   navLinkActive: {
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
-    padding: '0.625rem 1rem',
-    color: '#FFFFFF',
+    gap: '0.75rem',
+    padding: '0.75rem 1rem',
+    color: '#0c831f',
     textDecoration: 'none',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    background: '#2A2A2A',
-    borderRadius: '4px'
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    background: '#ecfdf5',
+    borderRadius: '8px'
   },
   icon: {
-    width: '16px',
-    height: '16px',
+    width: '20px',
+    height: '20px',
     strokeWidth: '2px'
   },
   logoutBtn: {
     display: 'flex',
     alignItems: 'center',
-    gap: '0.5rem',
+    gap: '0.75rem',
     background: 'transparent',
-    border: '1px solid #2A2A2A',
-    color: '#8B8B8B',
-    padding: '0.5rem 1rem',
-    borderRadius: '4px',
+    border: 'none',
+    borderTop: '1px solid #F3F4F6',
+    color: '#EF4444',
+    padding: '1.5rem',
+    width: '100%',
     cursor: 'pointer',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    transition: 'all 0.2s'
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    transition: 'background 0.2s',
+    textAlign: 'left'
   },
   content: {
+    flex: 1,
+    marginLeft: '260px',
     padding: '2rem',
-    maxWidth: '1400px',
-    margin: '0 auto'
+    maxWidth: '100%'
   }
 };
 

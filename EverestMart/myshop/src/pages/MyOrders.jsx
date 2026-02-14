@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import axios from 'axios';
 import config from '../config/config';
+import { useCart } from '../context/CartContext';
 
 const API_URL = config.API_BASE_URL;
 const SOCKET_URL = config.SOCKET_URL;
 
 function MyOrders() {
   const navigate = useNavigate();
+  const { cart, setCartItems } = useCart();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -85,7 +87,8 @@ function MyOrders() {
   };
 
   const handleReorder = (order) => {
-    const cartItems = order.items.map(item => ({
+    // Build reorder items from the order
+    const reorderItems = order.items.map(item => ({
       _id: item.product?._id || item.productId,
       name: item.product?.name || item.name,
       price: item.price,
@@ -93,7 +96,31 @@ function MyOrders() {
       image: item.product?.image || item.image
     }));
 
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    // Read current cart from localStorage (source of truth since Home.jsx writes there directly)
+    let existingCart = [];
+    try {
+      existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    } catch (e) {
+      existingCart = [];
+    }
+
+    // Merge with existing cart — add quantity if product already exists
+    const mergedCart = [...existingCart];
+    reorderItems.forEach(newItem => {
+      const existingIndex = mergedCart.findIndex(item => item._id === newItem._id);
+      if (existingIndex >= 0) {
+        mergedCart[existingIndex] = {
+          ...mergedCart[existingIndex],
+          quantity: mergedCart[existingIndex].quantity + newItem.quantity
+        };
+      } else {
+        mergedCart.push(newItem);
+      }
+    });
+
+    // Update both localStorage and CartContext
+    localStorage.setItem('cart', JSON.stringify(mergedCart));
+    setCartItems(mergedCart);
     window.dispatchEvent(new Event('cartUpdated'));
 
     alert('✅ Items added to cart!');

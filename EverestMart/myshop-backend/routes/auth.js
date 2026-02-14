@@ -7,6 +7,36 @@ const Rider = require('../models/Rider');
 const { auth } = require('../middleware/auth');
 const passport = require('../config/passport');
 const { sendWelcomeEmail, sendLoginNotification } = require('../utils/emailService');
+const path = require('path');
+const fs = require('fs');
+const multer = require('multer');
+
+// Configure Multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const dir = 'uploads/riders';
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    cb(null, dir);
+  },
+  filename: function (req, file, cb) {
+    cb(null, 'rider-' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/') || file.mimetype === 'application/pdf') {
+      cb(null, true);
+    } else {
+      cb(new Error('Only images and PDFs are allowed'));
+    }
+  }
+});
+
 const AutomationService = require('../services/AutomationService');
 
 // JWT Secret
@@ -27,18 +57,18 @@ router.get('/google',
 // Google OAuth Callback
 // Google OAuth callback
 router.get('/google/callback',
-  passport.authenticate('google', { 
+  passport.authenticate('google', {
     failureRedirect: '/login',
-    session: true 
+    session: true
   }),
   async (req, res) => {
     try {
       // Generate JWT token
       const token = jwt.sign(
-        { 
+        {
           id: req.user._id,
           email: req.user.email,
-          isAdmin: req.user.isAdmin 
+          isAdmin: req.user.isAdmin
         },
         process.env.JWT_SECRET,
         { expiresIn: '30d' }
@@ -46,7 +76,7 @@ router.get('/google/callback',
 
       // ✅ FIX: Use CLIENT_URL from environment or default to 5173
       const clientURL = process.env.CLIENT_URL || 'http://localhost:5173';
-      
+
       // User data to send
       const userData = {
         _id: req.user._id,
@@ -57,18 +87,18 @@ router.get('/google/callback',
 
       // Send welcome email for new users
       if (req.user.isNewUser) {
-        const emailQueue = require('../config/simpleQueue');
+        const { emailQueue } = require('../config/simpleQueue');
         await emailQueue.add('send-email', {
           to: req.user.email,
-          subject: 'Welcome to EverestMart! 🎉',
-          text: `Hi ${req.user.name}, welcome to EverestMart!`,
-          html: `<h1>Welcome ${req.user.name}!</h1><p>Thank you for joining EverestMart.</p>`
+          subject: 'Welcome to Food Craze! 🎉',
+          text: `Hi ${req.user.name}, welcome to Food Craze!`,
+          html: `<h1>Welcome ${req.user.name}!</h1><p>Thank you for joining Food Craze.</p>`
         });
       }
 
       // ✅ FIX: Redirect to correct frontend URL with token
       res.redirect(`${clientURL}/login?token=${token}&user=${encodeURIComponent(JSON.stringify(userData))}`);
-      
+
     } catch (error) {
       console.error('Google callback error:', error);
       res.redirect(`${process.env.CLIENT_URL || 'http://localhost:5173'}/login?error=auth_failed`);
@@ -310,6 +340,75 @@ router.post('/admin/login', async (req, res) => {
 // ===================================================
 // RIDER AUTH ROUTES
 // ===================================================
+
+// Rider Registration
+router.post('/rider/register', upload.fields([
+  { name: 'citizenshipProof', maxCount: 1 },
+  { name: 'policeRecord', maxCount: 1 },
+  { name: 'rcDocument', maxCount: 1 },
+  { name: 'insurance', maxCount: 1 }
+]), async (req, res) => {
+  try {
+    const { name, email, phone, password, panCard, bikeModel, bikeRegistration } = req.body;
+
+    console.log('🚴 Rider registration attempt:', email);
+
+    // Check if rider exists (email or phone)
+    const existingRider = await Rider.findOne({ $or: [{ email }, { phone }] });
+    if (existingRider) {
+      return res.status(400).json({ error: 'Rider already exists with this email or phone' });
+    }
+
+    // Hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Get file paths
+    const files = req.files || {};
+    const citizenshipProof = files.citizenshipProof ? files.citizenshipProof[0].path : null;
+    const policeRecord = files.policeRecord ? files.policeRecord[0].path : null;
+    const rcDocument = files.rcDocument ? files.rcDocument[0].path : null;
+    const insurance = files.insurance ? files.insurance[0].path : null;
+
+    // Create Rider
+    const rider = await Rider.create({
+      name,
+      email,
+      phone,
+      password: hashedPassword,
+      panCard,
+      citizenshipProof,
+      policeRecord,
+      bikeDetails: {
+        model: bikeModel,
+        registrationNumber: bikeRegistration,
+        rcDocument,
+        insurance
+      },
+      status: 'pending' // Default status
+    });
+
+    console.log('✅ Rider registered successfully:', email);
+
+    // Send notification (optional)
+    // sendRiderWelcomeEmail(email, name); 
+
+    res.status(201).json({
+      success: true,
+      message: 'Registration successful! Please wait for admin approval.',
+      rider: {
+        _id: rider._id,
+        name: rider.name,
+        email: rider.email,
+        status: rider.status
+      }
+    });
+
+  } catch (error) {
+    console.error('❌ Rider Registration Error:', error);
+    res.status(500).json({ error: 'Registration failed. Please try again.' });
+  }
+});
 
 // Rider Login
 router.post('/rider/login', async (req, res) => {

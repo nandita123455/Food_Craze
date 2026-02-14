@@ -15,7 +15,7 @@ function Wishlist() {
   const loadWishlist = async () => {
     try {
       const token = localStorage.getItem('token');
-      
+
       if (!token) {
         navigate('/login');
         return;
@@ -40,7 +40,7 @@ function Wishlist() {
   const removeFromWishlist = async (productId) => {
     try {
       const token = localStorage.getItem('token');
-      
+
       // ✅ FIXED: Consistent API URL
       await axios.delete(`${API_URL}/wishlist/${productId}`, {
         headers: { Authorization: `Bearer ${token}` }
@@ -68,7 +68,7 @@ function Wishlist() {
           _id: product._id,
           name: product.name,
           price: product.price,
-          image: product.image || product.images?.[0],
+          image: product.image,
           unitQuantity: product.unitQuantity || '1',
           unit: product.unit || 'piece',
           quantity: 1
@@ -77,10 +77,10 @@ function Wishlist() {
 
       localStorage.setItem('cart', JSON.stringify(cart));
       window.dispatchEvent(new Event('cartUpdated'));
-      
+
       // Remove from wishlist
       await removeFromWishlist(product._id);
-      
+
       alert('✅ Moved to cart!');
     } catch (error) {
       console.error('Move to cart error:', error);
@@ -112,7 +112,7 @@ function Wishlist() {
           <div style={styles.emptyIcon}>💖</div>
           <h2>Your wishlist is empty</h2>
           <p>Save your favorite items to buy them later!</p>
-          <button 
+          <button
             style={styles.shopBtn}
             onClick={() => navigate('/products')}
           >
@@ -125,8 +125,8 @@ function Wishlist() {
             <div key={item._id} style={styles.card}>
               {/* Product Image */}
               <div style={styles.imageContainer}>
-                <img 
-                  src={item.image || item.images?.[0] || '/placeholder.png'}
+                <img
+                  src={item.image || '/placeholder.png'}
                   alt={item.name}
                   style={styles.image}
                   onClick={() => navigate(`/product/${item._id}`)}
@@ -141,13 +141,13 @@ function Wishlist() {
 
               {/* Product Info */}
               <div style={styles.info}>
-                <h3 
+                <h3
                   style={styles.productName}
                   onClick={() => navigate(`/product/${item._id}`)}
                 >
                   {item.name}
                 </h3>
-                
+
                 <div style={styles.priceRow}>
                   <span style={styles.price}>₹{item.price}</span>
                   {item.rating > 0 && (
@@ -167,14 +167,14 @@ function Wishlist() {
               {/* Actions */}
               <div style={styles.actions}>
                 <button
-                  style={{...styles.btn, ...styles.cartBtn}}
+                  style={{ ...styles.btn, ...styles.cartBtn }}
                   onClick={() => moveToCart(item)}
                   disabled={item.stock === 0}
                 >
                   {item.stock === 0 ? '❌ Out of Stock' : '🛒 Move to Cart'}
                 </button>
                 <button
-                  style={{...styles.btn, ...styles.removeBtn}}
+                  style={{ ...styles.btn, ...styles.removeBtn }}
                   onClick={() => removeFromWishlist(item._id)}
                 >
                   🗑️ Remove

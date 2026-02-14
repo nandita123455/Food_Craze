@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect, useContext, useRef } from 'react';
 
 // Create and export the context
 export const CartContext = createContext();
@@ -14,34 +14,41 @@ export function useCart() {
 
 // CartProvider component
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
+  // ✅ Initialize cart directly from localStorage (no race condition)
+  const [cart, setCart] = useState(() => {
+    try {
+      const savedCart = localStorage.getItem('cart');
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
 
-  // Save cart to localStorage whenever it changes
+  const isInitialized = useRef(false);
+
+  // Save cart to localStorage whenever it changes (skip first render)
   useEffect(() => {
+    if (!isInitialized.current) {
+      isInitialized.current = true;
+      return;
+    }
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (product) => {
     setCart(prevCart => {
       const existingItem = prevCart.find(item => item._id === product._id);
+      const quantityToAdd = product.quantity || 1;
 
       if (existingItem) {
         return prevCart.map(item =>
           item._id === product._id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + quantityToAdd }
             : item
         );
       }
 
-      return [...prevCart, { ...product, quantity: 1 }];
+      return [...prevCart, { ...product, quantity: quantityToAdd }];
     });
   };
 
@@ -66,6 +73,11 @@ export function CartProvider({ children }) {
     setCart([]);
   };
 
+  // Set cart items directly (used by reorder)
+  const setCartItems = (items) => {
+    setCart(items);
+  };
+
   const getCartTotal = () => {
     return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
@@ -81,6 +93,7 @@ export function CartProvider({ children }) {
     removeFromCart,
     updateQuantity,
     clearCart,
+    setCartItems,
     getCartTotal,
     getItemQuantity
   };

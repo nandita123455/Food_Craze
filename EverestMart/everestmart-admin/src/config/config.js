@@ -10,7 +10,7 @@ const config = {
 
     // Application Settings
     APP_ENV: process.env.REACT_APP_ENV || 'development',
-    APP_NAME: process.env.REACT_APP_NAME || 'Quixo Admin',
+    APP_NAME: process.env.REACT_APP_NAME || 'Food Craze Admin',
     ENABLE_DEBUG: process.env.REACT_APP_ENABLE_DEBUG !== 'false',
 
     // Helper Methods

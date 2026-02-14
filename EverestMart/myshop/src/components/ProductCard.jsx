@@ -1,6 +1,7 @@
-import { useCart } from '../context/CartContext'
-import { useNavigate } from 'react-router-dom'
-import BehaviorTracker from '../services/behaviorTracker'
+import { useCart } from '../context/CartContext';
+import { useNavigate } from 'react-router-dom';
+import BehaviorTracker from '../services/behaviorTracker';
+import config from '../config/config';
 
 function ProductCard({ product }) {
   const { addToCart } = useCart()
@@ -55,29 +56,33 @@ function ProductCard({ product }) {
       onClick={handleCardClick}
     >
       <img
-        src={product.image?.startsWith('http') ? product.image : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.image}`}
+        src={config.getAssetUrl(product.image) || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNmM2Y0ZjYiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjOWNhM2FmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+'}
         alt={product.name}
         style={styles.image}
-        onError={(e) => { e.target.src = 'https://via.placeholder.com/300?text=No+Image' }}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgMzAwIDMwMCI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiNmM2Y0ZjYiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9ImFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjOWNhM2FmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Tm8gSW1hZ2U8L3RleHQ+PC9zdmc+';
+        }}
       />
       <div style={styles.content}>
         <span style={styles.category}>{product.category}</span>
         <h3 style={styles.title}>{product.name}</h3>
         <p style={styles.description}>{product.description}</p>
         <div style={styles.footer}>
-          <p style={styles.price}>₹{product.price.toLocaleString()}</p>
           <button onClick={handleAddToCart} style={styles.button}>
-            Add to Cart
+            ADD
           </button>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
 const styles = {
   card: {
-    border: '1px solid #e5e7eb',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: '#e5e7eb',
     borderRadius: '12px',
     overflow: 'hidden',
     transition: 'transform 0.2s, box-shadow 0.2s',
@@ -122,15 +127,17 @@ const styles = {
     margin: 0
   },
   button: {
-    background: '#2563eb',
-    color: 'white',
-    border: 'none',
-    padding: '0.75rem 1.5rem',
-    borderRadius: '8px',
+    background: '#fff',
+    color: '#2563eb',
+    border: '1px solid #2563eb',
+    padding: '0.4rem 1.2rem',
+    borderRadius: '6px',
     cursor: 'pointer',
-    fontSize: '1rem',
-    fontWeight: '600',
-    transition: 'background 0.2s'
+    fontSize: '0.875rem',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    transition: 'all 0.2s',
+    boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
   }
 }
 
@@ -153,8 +160,10 @@ styleSheet.textContent = `
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   }
   button:hover {
-    background: #1d4ed8 !important;
+    background: #2563eb !important;
+    color: white !important;
     transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
   }
 `
 document.head.appendChild(styleSheet)

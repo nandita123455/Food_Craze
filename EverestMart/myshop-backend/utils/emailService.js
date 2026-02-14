@@ -115,13 +115,13 @@ const getWelcomeEmailTemplate = (userName) => {
     <body>
       <div class="container">
         <div class="header">
-          <h1>🏔️ Welcome to Quixo</h1>
+          <h1>🏔️ Welcome to Food Craze</h1>
         </div>
         
         <div class="content">
           <h2>Hello ${userName}! 👋</h2>
           <p>
-            Thank you for joining Quixo! We're thrilled to have you as part of our community.
+            Thank you for joining Food Craze! We're thrilled to have you as part of our community.
             Your account has been successfully created, and you're all set to start shopping.
           </p>
           
@@ -152,12 +152,12 @@ const getWelcomeEmailTemplate = (userName) => {
           
           <p style="margin-top: 30px; font-size: 14px; color: #8B8B8B;">
             Need help? Contact our support team at 
-            <a href="mailto:support@quixo.com" style="color: #667eea;">support@quixo.com</a>
+            <a href="mailto:support@foodcraze.com" style="color: #667eea;">support@foodcraze.com</a>
           </p>
         </div>
         
         <div class="footer">
-          <p>© 2026 Quixo. All rights reserved.</p>
+          <p>© 2026 Food Craze. All rights reserved.</p>
           <p>Premium groceries delivered in 10 minutes</p>
           <div class="social-links">
             <a href="#">Facebook</a> • 
@@ -237,7 +237,7 @@ const getLoginNotificationTemplate = (userName, loginTime, ipAddress) => {
         
         <div class="content">
           <h2>Hello ${userName},</h2>
-          <p>We detected a new login to your Quixo account.</p>
+          <p>We detected a new login to your Food Craze account.</p>
           
           <div class="info-box">
             <div class="info-item"><strong>Time:</strong> ${loginTime}</div>
@@ -251,12 +251,12 @@ const getLoginNotificationTemplate = (userName, loginTime, ipAddress) => {
           
           <p style="margin-top: 30px; font-size: 14px; color: #8B8B8B;">
             Need help? Contact us at 
-            <a href="mailto:support@quixo.com" style="color: #667eea;">support@quixo.com</a>
+            <a href="mailto:support@foodcraze.com" style="color: #667eea;">support@foodcraze.com</a>
           </p>
         </div>
         
         <div class="footer">
-          <p>© 2026 Quixo. All rights reserved.</p>
+          <p>© 2026 Food Craze. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -383,7 +383,7 @@ const getOrderConfirmationTemplate = (userName, orderId, orderTotal, items) => {
         </div>
         
         <div class="footer">
-          <p>© 2026 Quixo. All rights reserved.</p>
+          <p>© 2026 Food Craze. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -397,9 +397,9 @@ const sendWelcomeEmail = async (userEmail, userName) => {
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: `"Quixo" <${process.env.EMAIL_USER}>`,
+      from: `"Food Craze" <${process.env.EMAIL_USER}>`,
       to: userEmail,
-      subject: '🎉 Welcome to Quixo - Your Premium Grocery Delivery',
+      subject: '🎉 Welcome to Food Craze - Your Premium Grocery Delivery',
       html: getWelcomeEmailTemplate(userName)
     };
 
@@ -423,9 +423,9 @@ const sendLoginNotification = async (userEmail, userName, ipAddress) => {
     });
 
     const mailOptions = {
-      from: `"Quixo Security" <${process.env.EMAIL_USER}>`,
+      from: `"Food Craze Security" <${process.env.EMAIL_USER}>`,
       to: userEmail,
-      subject: '🔐 New Login to Your Quixo Account',
+      subject: '🔐 New Login to Your Food Craze Account',
       html: getLoginNotificationTemplate(userName, loginTime, ipAddress)
     };
 
@@ -444,7 +444,7 @@ const sendOrderConfirmation = async (userEmail, userName, orderId, orderTotal, i
     const transporter = createTransporter();
 
     const mailOptions = {
-      from: `"Quixo Orders" <${process.env.EMAIL_USER}>`,
+      from: `"Food Craze Orders" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `✅ Order Confirmed - #${orderId}`,
       html: getOrderConfirmationTemplate(userName, orderId, orderTotal, items)

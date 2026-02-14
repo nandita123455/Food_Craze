@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import config from '../../config/config';
 
 function AdminProducts() {
   const [products, setProducts] = useState([]);
@@ -17,12 +18,12 @@ function AdminProducts() {
   const navigate = useNavigate();
 
   const categories = [
-    'Mobile Phones', 'Laptops', 'Televisions', 'Chicken', 'Mutton', 
+    'Mobile Phones', 'Laptops', 'Televisions', 'Chicken', 'Mutton',
     'Vegetables - Leafy Greens', 'Fruits - Citrus', 'Dairy - Milk',
     'Bread & Buns', 'Rice', 'Soft Drinks', 'Chips & Namkeen'
     // Add more from your schema as needed
   ];
-  
+
 
   useEffect(() => {
     fetchProducts();
@@ -30,7 +31,7 @@ function AdminProducts() {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:5000`http://localhost:5000'}/api/products');
+      const { data } = await axios.get(`${config.API_URL}/products`);
       setProducts(data);
     } catch (error) {
       console.error('Error:', error);
@@ -39,25 +40,25 @@ function AdminProducts() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const token = localStorage.getItem('token');
-      const config = {
+      const axiosConfig = {
         headers: { Authorization: `Bearer ${token}` }
       };
 
       if (editingProduct) {
         await axios.put(
-          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products/${editingProduct._id}`,
+          `${config.API_URL}/products/${editingProduct._id}`,
           formData,
-          config
+          axiosConfig
         );
         alert('Product updated successfully!');
       } else {
         await axios.post(
-          `http://localhost:5000`http://localhost:5000'}/api/products',
+          `${config.API_URL}/products`,
           formData,
-          config
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         alert('Product added successfully!');
       }
@@ -89,7 +90,7 @@ function AdminProducts() {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/products/${id}`, {
+      await axios.delete(`${config.API_URL}/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert('Product deleted successfully!');
@@ -108,7 +109,7 @@ function AdminProducts() {
         </button>
       </div>
 
-      <button 
+      <button
         onClick={() => {
           setShowForm(!showForm);
           setEditingProduct(null);
@@ -123,7 +124,7 @@ function AdminProducts() {
       {showForm && (
         <form onSubmit={handleSubmit} style={styles.form}>
           <h2>{editingProduct ? 'Edit Product' : 'Add New Product'}</h2>
-          
+
           <input
             type="text"
             placeholder="Product Name"
@@ -209,7 +210,7 @@ function AdminProducts() {
             {products.map(product => (
               <tr key={product._id} style={styles.tableRow}>
                 <td style={styles.td}>
-                  <img src={product.image} alt={product.name} style={styles.productImg} />
+                  <img src={config.getAssetUrl(product.image)} alt={product.name} style={styles.productImg} />
                 </td>
                 <td style={styles.td}>{product.name}</td>
                 <td style={styles.td}>
@@ -238,7 +239,7 @@ const styles = {
   container: {
     maxWidth: '1400px',
     margin: '0 auto',
-    padding: '2rem'
+    fontFamily: 'inherit'
   },
   header: {
     display: 'flex',
@@ -247,126 +248,155 @@ const styles = {
     marginBottom: '2rem'
   },
   title: {
-    fontSize: '2.5rem',
-    color: '#111827'
+    fontSize: '1.8rem',
+    fontWeight: '800',
+    color: '#1F2937',
+    margin: 0,
+    letterSpacing: '-0.02em'
   },
   backBtn: {
-    background: '#6b7280',
-    color: 'white',
+    background: '#FFFFFF',
+    color: '#374151',
+    border: '1px solid #D1D5DB',
+    padding: '0.6rem 1.2rem',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    fontSize: '0.9rem',
+    transition: 'all 0.2s'
+  },
+  addBtn: {
+    background: '#0c831f',
+    color: '#FFFFFF',
     border: 'none',
     padding: '0.75rem 1.5rem',
     borderRadius: '8px',
+    fontSize: '0.95rem',
+    fontWeight: '700',
     cursor: 'pointer',
-    fontWeight: '600'
-  },
-  addBtn: {
-    background: '#2563eb',
-    color: 'white',
-    border: 'none',
-    padding: '1rem 2rem',
-    borderRadius: '8px',
-    fontSize: '1.1rem',
-    fontWeight: '600',
-    cursor: 'pointer',
-    marginBottom: '2rem'
+    marginBottom: '2rem',
+    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.1)',
+    transition: 'background 0.2s'
   },
   form: {
-    background: 'white',
+    background: '#FFFFFF',
     padding: '2rem',
     borderRadius: '12px',
     marginBottom: '2rem',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+    boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)',
+    border: '1px solid #E5E7EB',
+    maxWidth: '800px',
+    margin: '0 auto 2rem auto'
   },
   input: {
     width: '100%',
     padding: '0.75rem',
-    border: '1px solid #d1d5db',
+    margin: '0 0 1rem 0',
+    border: '1px solid #D1D5DB',
     borderRadius: '8px',
-    fontSize: '1rem',
-    marginBottom: '1rem',
-    boxSizing: 'border-box'
+    fontSize: '0.95rem',
+    boxSizing: 'border-box',
+    outline: 'none',
+    transition: 'border 0.2s',
+    background: '#F9FAFB'
   },
   imagePreview: {
     marginBottom: '1rem',
-    textAlign: 'center'
+    textAlign: 'center',
+    background: '#F9FAFB',
+    padding: '1rem',
+    borderRadius: '8px'
   },
   previewImg: {
     maxWidth: '200px',
     maxHeight: '200px',
     borderRadius: '8px',
-    objectFit: 'cover'
+    objectFit: 'contain'
   },
   submitBtn: {
-    background: '#10b981',
-    color: 'white',
+    background: '#0c831f',
+    color: '#FFFFFF',
     border: 'none',
-    padding: '1rem 2rem',
+    padding: '0.75rem',
     borderRadius: '8px',
-    fontSize: '1.1rem',
-    fontWeight: '600',
+    fontSize: '1rem',
+    fontWeight: '700',
     cursor: 'pointer',
-    width: '100%'
+    width: '100%',
+    transition: 'background 0.2s'
   },
   tableContainer: {
-    background: 'white',
+    background: '#FFFFFF',
     borderRadius: '12px',
-    padding: '1.5rem',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-    overflowX: 'auto'
+    padding: '0',
+    boxShadow: '0 1px 3px 0 rgba(0,0,0,0.05)',
+    overflowX: 'auto',
+    border: '1px solid #E5E7EB'
   },
   table: {
     width: '100%',
-    borderCollapse: 'collapse'
+    borderCollapse: 'separate',
+    borderSpacing: '0'
   },
   tableHeader: {
-    background: '#f3f4f6'
+    background: '#F9FAFB'
   },
   th: {
     padding: '1rem',
     textAlign: 'left',
     fontWeight: '600',
-    color: '#374151',
-    borderBottom: '2px solid #e5e7eb'
+    color: '#6B7280',
+    borderBottom: '1px solid #E5E7EB',
+    fontSize: '0.85rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em'
   },
   tableRow: {
-    borderBottom: '1px solid #e5e7eb'
+    transition: 'background 0.1s'
   },
   td: {
     padding: '1rem',
-    color: '#6b7280'
+    color: '#1F2937',
+    borderBottom: '1px solid #F3F4F6',
+    verticalAlign: 'middle',
+    fontSize: '0.95rem'
   },
   productImg: {
-    width: '60px',
-    height: '60px',
-    objectFit: 'cover',
-    borderRadius: '8px'
+    width: '48px',
+    height: '48px',
+    objectFit: 'contain',
+    borderRadius: '6px',
+    border: '1px solid #F3F4F6',
+    background: '#F9FAFB'
   },
   categoryBadge: {
-    background: '#dbeafe',
-    color: '#1e40af',
+    background: '#F3F4F6',
+    color: '#4B5563',
     padding: '0.25rem 0.75rem',
-    borderRadius: '12px',
-    fontSize: '0.85rem',
+    borderRadius: '9999px',
+    fontSize: '0.8rem',
     fontWeight: '600'
   },
   editBtn: {
-    background: '#f59e0b',
-    color: 'white',
-    border: 'none',
-    padding: '0.5rem 1rem',
+    background: '#FFFFFF',
+    color: '#374151',
+    border: '1px solid #D1D5DB',
+    padding: '0.4rem 0.8rem',
     borderRadius: '6px',
     cursor: 'pointer',
     marginRight: '0.5rem',
-    fontWeight: '600'
+    fontWeight: '600',
+    fontSize: '0.85rem'
   },
   deleteBtn: {
-    background: '#ef4444',
-    color: 'white',
-    border: 'none',
-    padding: '0.5rem 1rem',
+    background: '#FEF2F2',
+    color: '#DC2626',
+    border: '1px solid #FECACA',
+    padding: '0.4rem 0.8rem',
     borderRadius: '6px',
     cursor: 'pointer',
-    fontWeight: '600'
+    fontWeight: '600',
+    fontSize: '0.85rem'
   }
 };
 

@@ -54,11 +54,11 @@ function ProductManagement() {
     try {
       setLoading(true);
       const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
+
       const { data } = await axios.get(`${API_URL}/products`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
-      
+
       setProducts(Array.isArray(data.products) ? data.products : Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Failed to load products:', error);
@@ -71,11 +71,11 @@ function ProductManagement() {
   const loadCategories = async () => {
     try {
       const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
+
       const { data } = await axios.get(`${API_URL}/categories`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
-      
+
       setCategories(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error('Load categories error:', error);
@@ -99,12 +99,12 @@ function ProductManagement() {
 
   const handleCreateCategory = async (e) => {
     e.preventDefault();
-    
+
     if (!categoryFormData.name || categoryFormData.name.trim() === '') {
       alert('❌ Please enter a category name!');
       return;
     }
-    
+
     try {
       const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
       const { data } = await axios.post(
@@ -116,7 +116,7 @@ function ProductManagement() {
         },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      
+
       alert(`✅ Category "${data.category.name}" created!`);
       setCategories([...categories, data.category]);
       setFormData({ ...formData, category: data.category.name });
@@ -129,17 +129,17 @@ function ProductManagement() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.category || formData.category.trim() === '') {
       alert('❌ Please select a category!');
       return;
     }
-    
+
     setLoading(true);
 
     try {
       const token = localStorage.getItem('adminToken') || localStorage.getItem('token');
-      
+
       const formDataToSend = new FormData();
       formDataToSend.append('name', formData.name);
       formDataToSend.append('description', formData.description);
@@ -150,7 +150,7 @@ function ProductManagement() {
       formDataToSend.append('unit', formData.unit);
       formDataToSend.append('unitQuantity', formData.unitQuantity);
       formDataToSend.append('lowStockThreshold', formData.lowStockThreshold);
-      
+
       if (formData.image) {
         formDataToSend.append('image', formData.image);
       }
@@ -247,13 +247,13 @@ function ProductManagement() {
   };
 
   const filteredProducts = products.filter(product => {
-    const matchesSearch = 
+    const matchesSearch =
       product.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.brand?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       product.category?.toLowerCase().includes(searchQuery.toLowerCase());
-    
+
     const matchesCategory = filterCategory === 'all' || product.category === filterCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -273,14 +273,14 @@ function ProductManagement() {
           <h1 style={styles.title}>Product Management</h1>
           <div style={styles.statsRow}>
             <span style={styles.statItem}>Total: {stats.total}</span>
-            <span style={{...styles.statItem, color: '#10b981'}}>In Stock: {stats.inStock}</span>
-            <span style={{...styles.statItem, color: '#f59e0b'}}>Low: {stats.lowStock}</span>
-            <span style={{...styles.statItem, color: '#ef4444'}}>Out: {stats.outOfStock}</span>
+            <span style={{ ...styles.statItem, color: '#10b981' }}>In Stock: {stats.inStock}</span>
+            <span style={{ ...styles.statItem, color: '#f59e0b' }}>Low: {stats.lowStock}</span>
+            <span style={{ ...styles.statItem, color: '#ef4444' }}>Out: {stats.outOfStock}</span>
             <span style={styles.statItem}>Value: ₹{stats.totalValue.toFixed(2)}</span>
           </div>
         </div>
-        <button 
-          style={styles.addBtn} 
+        <button
+          style={styles.addBtn}
           onClick={() => {
             console.log('Add Product clicked');
             setEditingProduct(null);
@@ -313,7 +313,7 @@ function ProductManagement() {
               </h2>
               <button style={styles.closeBtn} onClick={resetForm}>×</button>
             </div>
-            
+
             <form onSubmit={handleSubmit} style={styles.form}>
               <div style={styles.formRow}>
                 <div style={styles.formGroup}>
@@ -383,7 +383,7 @@ function ProductManagement() {
                       value={categoryFormData.icon}
                       onChange={handleCategoryInputChange}
                       placeholder="📦"
-                      style={{...styles.input, width: '60px'}}
+                      style={{ ...styles.input, width: '60px' }}
                       maxLength="2"
                     />
                     <button type="button" style={styles.saveCategoryBtn} onClick={handleCreateCategory}>
@@ -504,7 +504,7 @@ function ProductManagement() {
           onChange={(e) => setSearchQuery(e.target.value)}
           style={styles.searchInput}
         />
-        
+
         <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} style={styles.filterSelect}>
           <option value="all">All Categories</option>
           {categories.map(cat => (
@@ -529,21 +529,21 @@ function ProductManagement() {
               <div key={product._id} style={styles.productCard}>
                 {stockStatus === 'out' && <div style={styles.outBadge}>OUT OF STOCK</div>}
                 {stockStatus === 'low' && <div style={styles.lowBadge}>LOW STOCK</div>}
-                
-                <img 
-                  src={`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${product.image}`} 
+
+                <img
+                  src={`${API_URL.replace('/api', '')}${product.image}`}
                   alt={product.name}
-                  style={{...styles.productImage, opacity: stockStatus === 'out' ? 0.5 : 1}}
+                  style={{ ...styles.productImage, opacity: stockStatus === 'out' ? 0.5 : 1 }}
                   onError={(e) => {
                     e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23f0f0f0" width="200" height="200"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="20" dy="10.5" font-weight="bold" x="50%25" y="50%25" text-anchor="middle"%3ENo Image%3C/text%3E%3C/svg%3E';
                   }}
                 />
-                
+
                 <div style={styles.productInfo}>
                   <h3 style={styles.productName}>{product.name}</h3>
                   {product.brand && <p style={styles.brand}>{product.brand}</p>}
                   <p style={styles.productDesc}>{product.description}</p>
-                  
+
                   <div style={styles.productMeta}>
                     <span style={styles.price}>₹{product.price}</span>
                     <span style={styles.unit}>{product.unitQuantity} {product.unit}</span>
@@ -575,44 +575,50 @@ function ProductManagement() {
 
 const styles = {
   container: {
-    fontFamily: 'system-ui, sans-serif'
+    fontFamily: 'inherit',
+    maxWidth: '1200px',
+    margin: '0 auto'
   },
   header: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: '2rem'
+    marginBottom: '2rem',
+    flexWrap: 'wrap',
+    gap: '1rem'
   },
   title: {
-    fontSize: '1.5rem',
-    fontWeight: '400',
-    color: '#1A1A1A',
+    fontSize: '1.8rem',
+    fontWeight: '800',
+    color: '#1F2937',
     margin: '0 0 0.5rem 0',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    letterSpacing: '-0.02em'
   },
   statsRow: {
     display: 'flex',
-    gap: '1.5rem',
+    gap: '1rem',
     flexWrap: 'wrap'
   },
   statItem: {
-    fontSize: '0.8125rem',
-    color: '#5A5A5A',
+    fontSize: '0.9rem',
+    color: '#4B5563',
     fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    background: '#FFFFFF',
+    padding: '0.25rem 0.75rem',
+    borderRadius: '6px',
+    border: '1px solid #E5E7EB'
   },
   addBtn: {
     padding: '0.75rem 1.5rem',
-    background: '#1A1A1A',
+    background: '#0c831f',
     color: '#FFFFFF',
     border: 'none',
     cursor: 'pointer',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.9rem',
+    fontWeight: '700',
+    borderRadius: '8px',
+    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.1)',
+    transition: 'background 0.2s'
   },
   modal: {
     position: 'fixed',
@@ -620,98 +626,99 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'rgba(0, 0, 0, 0.7)',
+    background: 'rgba(0, 0, 0, 0.5)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
-    padding: '2rem'
+    padding: '2rem',
+    backdropFilter: 'blur(4px)'
   },
   modalContent: {
     background: '#FFFFFF',
     maxWidth: '800px',
     width: '100%',
     maxHeight: '90vh',
-    overflow: 'auto'
+    overflow: 'auto',
+    borderRadius: '16px',
+    boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
   },
   modalHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '1.5rem',
-    borderBottom: '1px solid #E5E2DD'
+    borderBottom: '1px solid #F3F4F6'
   },
   modalTitle: {
-    fontSize: '1.125rem',
-    fontWeight: '500',
-    color: '#1A1A1A',
-    margin: 0,
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '1.25rem',
+    fontWeight: '700',
+    color: '#1F2937',
+    margin: 0
   },
   closeBtn: {
     background: 'none',
     border: 'none',
     fontSize: '2rem',
     cursor: 'pointer',
-    color: '#8B8B8B',
+    color: '#9CA3AF',
     padding: 0,
-    lineHeight: 1
+    lineHeight: 0.5
   },
   form: {
-    padding: '1.5rem',
+    padding: '2rem',
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem'
+    gap: '1.5rem'
   },
   formRow: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: '1rem'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+    gap: '1.5rem'
   },
   formGroup: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    gap: '0.5rem'
   },
   label: {
-    marginBottom: '0.5rem',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    color: '#5A5A5A',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    color: '#374151'
   },
   input: {
     padding: '0.75rem',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.875rem',
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
+    fontSize: '0.95rem',
     outline: 'none',
-    fontFamily: 'inherit'
+    transition: 'border 0.2s',
+    background: '#F9FAFB'
   },
   textarea: {
     padding: '0.75rem',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.875rem',
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
+    fontSize: '0.95rem',
     fontFamily: 'inherit',
     resize: 'vertical',
-    outline: 'none'
+    outline: 'none',
+    background: '#F9FAFB'
   },
   categoryHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '0.5rem'
+    alignItems: 'center'
   },
   newCategoryBtn: {
-    padding: '0.375rem 0.75rem',
-    background: '#1A1A1A',
-    color: '#FFFFFF',
-    border: 'none',
+    padding: '0.3rem 0.6rem',
+    background: '#EFF6FF',
+    color: '#2563EB',
+    border: '1px solid #BFDBFE',
     cursor: 'pointer',
-    fontSize: '0.75rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.8rem',
+    fontWeight: '600',
+    borderRadius: '6px'
   },
   inlineCategoryForm: {
     display: 'flex',
@@ -719,17 +726,21 @@ const styles = {
   },
   saveCategoryBtn: {
     padding: '0.75rem 1.5rem',
-    background: '#10b981',
+    background: '#2563EB',
     color: '#FFFFFF',
     border: 'none',
     cursor: 'pointer',
-    fontWeight: '500',
+    fontWeight: '600',
+    borderRadius: '8px',
     whiteSpace: 'nowrap'
   },
   fileInput: {
     padding: '0.5rem',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.875rem'
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
+    fontSize: '0.9rem',
+    background: '#F9FAFB',
+    width: '100%'
   },
   formActions: {
     display: 'grid',
@@ -739,66 +750,76 @@ const styles = {
   },
   submitBtn: {
     padding: '1rem',
-    background: '#1A1A1A',
+    background: '#0c831f',
     color: '#FFFFFF',
     border: 'none',
     cursor: 'pointer',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '1rem',
+    fontWeight: '700',
+    borderRadius: '8px',
+    transition: 'background 0.2s'
   },
   cancelBtn: {
     padding: '1rem',
     background: '#FFFFFF',
-    color: '#1A1A1A',
-    border: '1px solid #E5E2DD',
+    color: '#374151',
+    border: '1px solid #D1D5DB',
     cursor: 'pointer',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '1rem',
+    fontWeight: '600',
+    borderRadius: '8px',
+    transition: 'background 0.2s'
   },
   filters: {
     display: 'flex',
     gap: '1rem',
-    marginBottom: '1.5rem'
+    marginBottom: '2rem',
+    background: '#FFFFFF',
+    padding: '1rem',
+    borderRadius: '12px',
+    border: '1px solid #E5E7EB',
+    boxShadow: '0 1px 2px 0 rgba(0,0,0,0.05)'
   },
   searchInput: {
     flex: 1,
     padding: '0.75rem 1rem',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.875rem',
-    outline: 'none'
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
+    fontSize: '0.95rem',
+    outline: 'none',
+    background: '#F9FAFB'
   },
   filterSelect: {
     padding: '0.75rem 1rem',
-    border: '1px solid #E5E2DD',
-    fontSize: '0.875rem',
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
+    fontSize: '0.95rem',
     minWidth: '200px',
-    outline: 'none'
+    outline: 'none',
+    background: '#F9FAFB'
   },
   loading: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: '4rem',
-    color: '#8B8B8B'
+    color: '#6B7280'
   },
   spinner: {
     width: '40px',
     height: '40px',
-    border: '3px solid #E5E2DD',
-    borderTop: '3px solid #1A1A1A',
+    border: '3px solid #E5E7EB',
+    borderTop: '3px solid #0c831f',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite'
   },
   empty: {
     textAlign: 'center',
     padding: '4rem',
-    color: '#8B8B8B',
+    color: '#9CA3AF',
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD'
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px'
   },
   productsGrid: {
     display: 'grid',
@@ -807,129 +828,133 @@ const styles = {
   },
   productCard: {
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD',
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px',
     overflow: 'hidden',
-    position: 'relative'
+    position: 'relative',
+    transition: 'transform 0.2s, box-shadow 0.2s',
+    display: 'flex',
+    flexDirection: 'column'
   },
   outBadge: {
     position: 'absolute',
-    top: '1rem',
-    right: '1rem',
-    background: '#ef4444',
-    color: '#FFFFFF',
-    padding: '0.375rem 0.75rem',
-    fontSize: '0.6875rem',
-    fontWeight: '600',
-    letterSpacing: '0.5px',
-    zIndex: 10
+    top: '12px',
+    right: '12px',
+    background: '#EF4444',
+    color: 'white',
+    fontSize: '0.7rem',
+    fontWeight: '700',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    zIndex: 1
   },
   lowBadge: {
     position: 'absolute',
-    top: '1rem',
-    right: '1rem',
-    background: '#f59e0b',
-    color: '#FFFFFF',
-    padding: '0.375rem 0.75rem',
-    fontSize: '0.6875rem',
-    fontWeight: '600',
-    letterSpacing: '0.5px',
-    zIndex: 10
+    top: '12px',
+    right: '12px',
+    background: '#F59E0B',
+    color: 'white',
+    fontSize: '0.7rem',
+    fontWeight: '700',
+    padding: '4px 8px',
+    borderRadius: '4px',
+    zIndex: 1
   },
   productImage: {
     width: '100%',
     height: '200px',
-    objectFit: 'cover'
-  },
-  productInfo: {
+    objectFit: 'contain',
+    background: '#F9FAFB',
+    borderBottom: '1px solid #F3F4F6',
     padding: '1rem'
   },
+  productInfo: {
+    padding: '1.25rem',
+    display: 'flex',
+    flexDirection: 'column',
+    flex: 1
+  },
   productName: {
-    fontSize: '1rem',
-    fontWeight: '500',
-    marginBottom: '0.25rem',
-    color: '#1A1A1A'
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: '#1F2937',
+    margin: '0 0 0.25rem 0',
+    lineHeight: '1.3'
   },
   brand: {
-    fontSize: '0.75rem',
-    color: '#8B8B8B',
-    marginBottom: '0.5rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    fontWeight: '500'
+    fontSize: '0.85rem',
+    color: '#6B7280',
+    margin: '0 0 0.5rem 0'
   },
   productDesc: {
-    fontSize: '0.875rem',
-    color: '#8B8B8B',
-    marginBottom: '0.75rem',
-    lineHeight: '1.4',
+    fontSize: '0.9rem',
+    color: '#4B5563',
+    margin: '0 0 1rem 0',
+    overflow: 'hidden',
     display: '-webkit-box',
-    WebkitLineClamp: 2,
+    WebkitLineClamp: '2',
     WebkitBoxOrient: 'vertical',
-    overflow: 'hidden'
+    lineHeight: '1.5',
+    height: '2.8rem'
   },
   productMeta: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '0.5rem'
+    alignItems: 'center',
+    marginBottom: '0.75rem'
   },
   price: {
-    fontSize: '1.125rem',
-    fontWeight: '600',
-    color: '#1A1A1A'
+    fontSize: '1.1rem',
+    fontWeight: '800',
+    color: '#1F2937'
   },
   unit: {
-    fontSize: '0.875rem',
-    color: '#8B8B8B',
-    background: '#F8F7F5',
-    padding: '0.25rem 0.75rem',
-    fontWeight: '500'
+    fontSize: '0.85rem',
+    color: '#6B7280'
   },
   stockBadge: {
-    display: 'inline-block',
-    padding: '0.25rem 0.75rem',
-    color: '#FFFFFF',
     fontSize: '0.75rem',
     fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    color: '#FFFFFF',
+    padding: '2px 8px',
+    borderRadius: '12px'
   },
   category: {
-    display: 'inline-block',
-    padding: '0.25rem 0.75rem',
-    background: '#F8F7F5',
-    color: '#5A5A5A',
-    fontSize: '0.75rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.8rem',
+    color: '#6B7280',
+    background: '#F3F4F6',
+    padding: '2px 8px',
+    borderRadius: '4px'
   },
   productActions: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    gap: '0.5rem',
-    marginTop: '1rem'
+    gap: '0.75rem',
+    marginTop: 'auto',
+    paddingTop: '1rem',
+    borderTop: '1px solid #F3F4F6'
   },
   editBtn: {
-    padding: '0.625rem',
-    background: '#1A1A1A',
-    color: '#FFFFFF',
-    border: 'none',
+    padding: '0.5rem',
+    background: '#FFFFFF',
+    border: '1px solid #D1D5DB',
+    color: '#374151',
+    borderRadius: '6px',
     cursor: 'pointer',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.85rem',
+    fontWeight: '600',
+    transition: 'all 0.2s'
   },
   deleteBtn: {
-    padding: '0.625rem',
-    background: '#FFFFFF',
-    color: '#1A1A1A',
-    border: '1px solid #E5E2DD',
+    padding: '0.5rem',
+    background: '#FEF2F2',
+    border: '1px solid #FECACA',
+    color: '#DC2626',
+    borderRadius: '6px',
     cursor: 'pointer',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.85rem',
+    fontWeight: '600',
+    transition: 'all 0.2s'
   }
 };
 

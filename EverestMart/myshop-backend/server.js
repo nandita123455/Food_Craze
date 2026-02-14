@@ -1,7 +1,7 @@
-// ============================================
-// QUIXO BACKEND SERVER
+﻿// ============================================
+// FOOD CRAZE BACKEND SERVER
 // Version: 1.1.0 - Admin Domain Isolation
-// Production Ready - Handles 1000+ concurrent users
+// Food Craze Backend - 10-minute grocery delivery platform with support for 1000+ concurrent users
 // Security: Separate Client & Admin Domains
 // ============================================
 
@@ -21,6 +21,8 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
+const xss = require('xss-clean');
+const hpp = require('hpp');
 const path = require('path');
 
 // ============================================
@@ -49,7 +51,7 @@ if (process.env.NODE_ENV !== 'test') {
   require('./workers/orderWorker');
   require('./workers/inventoryWorker');
   require('./jobs/scheduledJobs');
-  console.log('🤖 Automation workers initialized');
+  console.log('ðŸ¤– Automation workers initialized');
 }
 
 // ============================================
@@ -67,7 +69,7 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'myshop-session-secret';
 
-// ✅ UPDATED: Separate Client and Admin URLs
+// âœ… UPDATED: Separate Client and Admin URLs
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const ADMIN_URL = process.env.ADMIN_URL || 'http://localhost:3001';
 const PRODUCTION_CLIENT_URL = process.env.PRODUCTION_CLIENT_URL || '';
@@ -87,7 +89,7 @@ const io = new Server(server, {
   transports: ['websocket', 'polling'],
   pingTimeout: 60000,
   pingInterval: 25000,
-  maxHttpBufferSize: 1e6,
+  maxHttpBufferSize: 1e6, // 1MB
   perMessageDeflate: true
 });
 
@@ -118,17 +120,32 @@ app.set('etag', 'strong');
 
 // Helmet - Security headers
 app.use(helmet({
-  contentSecurityPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://trusted-scripts.com"], // Adjust as needed
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:"],
+      connectSrc: ["'self'", "https://api.stripe.com"], // Add external APIs
+      fontSrc: ["'self'", "https:", "data:"],
+      objectSrc: ["'none'"],
+      mediaSrc: ["'self'"],
+      frameSrc: ["'self'"]
+    }
+  },
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: 'cross-origin' },
   hsts: {
     maxAge: 31536000,
     includeSubDomains: true,
     preload: true
-  }
+  },
+  dnsPrefetchControl: { allow: false }, // Prevent DNS prefetching
+  frameguard: { action: 'deny' },       // Prevent clickjacking
+  hidePoweredBy: true                   // Hide X-Powered-By
 }));
 
-// ✅ ENHANCED: Rate Limiting with admin protection
+// âœ… ENHANCED: Rate Limiting with admin protection
 const createLimiter = (windowMs, max, message) => {
   if (SKIP_RATE_LIMIT || isDevelopment) {
     return (req, res, next) => next();
@@ -142,7 +159,7 @@ const createLimiter = (windowMs, max, message) => {
     legacyHeaders: false,
     skip: (req) => req.path === '/' || req.path === '/api/health',
     handler: (req, res) => {
-      console.log(`⚠️ Rate limit exceeded: ${req.ip} - ${req.path}`);
+      console.log(`âš ï¸ Rate limit exceeded: ${req.ip} - ${req.path}`);
       res.status(429).json({
         error: message,
         retryAfter: Math.ceil(windowMs / 1000)
@@ -151,74 +168,49 @@ const createLimiter = (windowMs, max, message) => {
   });
 };
 
-const generalLimiter = createLimiter(15 * 60 * 1000, 100, 'Too many requests');
-const authLimiter = createLimiter(15 * 60 * 1000, 20, 'Too many login attempts');
-const adminLimiter = createLimiter(15 * 60 * 1000, 50, 'Too many admin requests'); // ✅ NEW
-const paymentLimiter = createLimiter(60 * 1000, 10, 'Too many payment attempts');
+// ðŸ›¡ï¸ DoS Protection Limiters
+const globalLimiter = createLimiter(15 * 60 * 1000, 300, 'Too many requests from this IP'); // 300 req / 15 min globally
+const generalLimiter = createLimiter(15 * 60 * 1000, 100, 'Too many API requests');
+const authLimiter = createLimiter(15 * 60 * 1000, 10, 'Too many login attempts. Please try again later.'); // Strict auth limit
+const adminLimiter = createLimiter(15 * 60 * 1000, 50, 'Too many admin requests');
+const paymentLimiter = createLimiter(60 * 1000, 5, 'Too many payment attempts'); // Very strict payment limit
 
-// MongoDB injection protection
+// Apply Global Limiter to ALL requests
+app.use(globalLimiter);
+
+// ðŸ›¡ï¸ Body Limit - Prevent Large Payload Attacks
+// (Multer handles multipart/form-data separately, so this safely limits JSON attacks)
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+
+// ðŸ›¡ï¸ Data Sanitization against NoSQL Query Injection
 app.use(mongoSanitize());
 
+// ðŸ›¡ï¸ Data Sanitization against XSS
+app.use(xss());
+
+// ðŸ›¡ï¸ Prevent HTTP Parameter Pollution
+app.use(hpp());
+
 // ============================================
-// CORS CONFIGURATION - ADMIN ISOLATION
+// LOGGING & MONITORING
 // ============================================
 
-// ✅ UPDATED: Separate origins for client and admin
-const allowedOrigins = [
-  // Development URLs
-  'http://localhost:5173',        // Client dev (Vite)
-  'http://localhost:3001',        // Admin dev
-  'http://localhost:3000',        // Alternative port
-  'http://127.0.0.1:5173',
-  'http://127.0.0.1:3001',
+// âœ… Security Logger: Track suspicious activity
+app.use((req, res, next) => {
+  const start = Date.now();
 
-  // Environment-based URLs
-  CLIENT_URL,
-  ADMIN_URL,
-  PRODUCTION_CLIENT_URL,
-  PRODUCTION_ADMIN_URL
-].filter(Boolean);
-
-// Remove duplicates
-const uniqueOrigins = [...new Set(allowedOrigins)];
-
-console.log('🔒 CORS Allowed Origins:');
-uniqueOrigins.forEach(origin => console.log(`   - ${origin}`));
-
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, Postman)
-    if (!origin) {
-      return callback(null, true);
+  res.on('finish', () => {
+    // Log typical attack status codes
+    if (res.statusCode === 401 || res.statusCode === 403 || res.statusCode === 429 || res.statusCode >= 500) {
+      const duration = Date.now() - start;
+      const logMessage = `ðŸš¨ SECURITY ALERT: ${req.method} ${req.path} - Status: ${res.statusCode} - IP: ${req.ip} - User: ${req.user ? req.user.email : 'Anonymous'} - Time: ${duration}ms`;
+      console.warn(logMessage);
     }
+  });
 
-    // Check if origin is allowed
-    if (uniqueOrigins.includes(origin)) {
-      callback(null, true);
-    } else if (isDevelopment) {
-      // In development, log but allow
-      console.log('⚠️ CORS: Allowing dev origin:', origin);
-      callback(null, true);
-    } else {
-      // In production, block unknown origins
-      console.log('❌ CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['Content-Range', 'X-Content-Range', 'X-RateLimit-Limit', 'X-RateLimit-Remaining'],
-  maxAge: 86400 // 24 hours
-}));
-
-app.options('*', cors());
-
-// ============================================
-// BODY PARSER
-// ============================================
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+  next();
+});
 
 // ============================================
 // SIMPLE IN-MEMORY CACHE
@@ -320,28 +312,70 @@ if (isDevelopment) {
     res.on('finish', () => {
       const duration = Date.now() - start;
       const isAdmin = origin.includes('3001') || origin.includes('admin');
-      const emoji = isAdmin ? '🔐' : '🌐';
+      const emoji = isAdmin ? 'ðŸ”' : 'ðŸŒ';
       console.log(`${emoji} ${req.method} ${req.path} - ${res.statusCode} (${duration}ms) - ${origin}`);
     });
     next();
   });
 }
 
-// ✅ NEW: Origin-based request tracking
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
+// ============================================
+// CORS CONFIGURATION - ADMIN ISOLATION
+// ============================================
 
-  // Identify request source
-  if (origin) {
-    if (origin.includes('3001') || origin.includes('admin')) {
-      req.isAdminRequest = true;
-    } else {
-      req.isClientRequest = true;
+// âœ… UPDATED: Separate origins for client and admin
+const allowedOrigins = [
+  // Development URLs
+  'http://localhost:5173',        // Client dev (Vite)
+  'http://localhost:3001',        // Admin dev
+  'http://localhost:3000',        // Alternative port
+  'http://127.0.0.1:5173',
+  'http://127.0.0.1:3001',
+  'http://127.0.0.1:3000',
+
+  // Environment-based URLs
+  CLIENT_URL,
+  ADMIN_URL,
+  PRODUCTION_CLIENT_URL,
+  PRODUCTION_ADMIN_URL
+].filter(Boolean);
+
+// Remove duplicates
+const uniqueOrigins = [...new Set(allowedOrigins)];
+
+console.log('ðŸ”’ CORS Allowed Origins:');
+uniqueOrigins.forEach(origin => console.log(`   - ${origin}`));
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, Postman)
+    if (!origin) {
+      return callback(null, true);
     }
-  }
 
-  next();
-});
+    // Check if origin is allowed
+    if (uniqueOrigins.includes(origin)) {
+      callback(null, true);
+    } else if (isDevelopment) {
+      // In development, log but allow
+      console.log('âš ï¸ CORS: Allowing dev origin:', origin);
+      callback(null, true);
+    } else {
+      // In production, block unknown origins
+      console.log('âŒ CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range', 'X-RateLimit-Limit', 'X-RateLimit-Remaining'],
+  maxAge: 86400 // 24 hours
+}));
+
+app.options('*', cors());
+
+// ============================================
 
 // ============================================
 // SOCKET.IO EVENTS
@@ -350,26 +384,33 @@ io.on('connection', (socket) => {
   const origin = socket.handshake.headers.origin || 'unknown';
   const isAdmin = origin.includes('3001') || origin.includes('admin');
 
-  console.log(`✅ ${isAdmin ? 'Admin' : 'Client'} connected:`, socket.id);
+  console.log(`âœ… ${isAdmin ? 'Admin' : 'Client'} connected:`, socket.id);
 
   socket.on('join-order', (orderId) => {
     socket.join(`order-${orderId}`);
-    console.log(`📦 Socket ${socket.id} joined order: ${orderId}`);
+    console.log(`ðŸ“¦ Socket ${socket.id} joined order: ${orderId}`);
   });
 
   socket.on('join-rider', (riderId) => {
     socket.join(`rider-${riderId}`);
-    console.log(`🚴 Socket ${socket.id} joined rider: ${riderId}`);
+    console.log(`ðŸš´ Socket ${socket.id} joined rider: ${riderId}`);
   });
 
-  // ✅ NEW: Admin-only room
+  // âœ… NEW: Admin-only room
   socket.on('join-admin', (adminId) => {
     socket.join('admin-dashboard');
-    console.log(`🔐 Admin ${adminId} joined dashboard`);
+    console.log(`ðŸ” Admin ${adminId} joined dashboard`);
+  });
+
+  socket.on('update-location', (data) => {
+    // data: { orderId, location: { lat, lng }, heading }
+    // Broadcast to the specific order room so the customer tracking it receives updates
+    io.to(`order-${data.orderId}`).emit('live-location', data);
+    // console.log(`📍 Location update for order ${data.orderId}`);
   });
 
   socket.on('disconnect', () => {
-    console.log('❌ Client disconnected:', socket.id);
+    console.log('âŒ Client disconnected:', socket.id);
   });
 });
 
@@ -400,7 +441,7 @@ app.get('/api/health', (req, res) => {
 // Root endpoint
 app.get('/', (req, res) => {
   res.json({
-    message: '🚀 Quixo API v1.1.0',
+    message: 'ðŸš€ Food Craze API v1.1.0',
     status: 'running',
     environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString(),
@@ -438,13 +479,13 @@ app.get('/', (req, res) => {
   });
 });
 
-// ✅ UPDATED: Apply routes with caching and rate limiting
+// âœ… UPDATED: Apply routes with caching and rate limiting
 app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/payments', paymentLimiter, paymentRoutes);
 app.use('/api/rider', generalLimiter, riderRoutes);
 app.use('/api/products', simpleCache(60000), generalLimiter, productRoutes);
 app.use('/api/orders', generalLimiter, orderRoutes);
-app.use('/api/admin', adminLimiter, adminRoutes); // ✅ Admin-specific rate limit
+app.use('/api/admin', adminLimiter, adminRoutes); // âœ… Admin-specific rate limit
 app.use('/api/categories', simpleCache(120000), generalLimiter, categoryRoutes);
 app.use('/api/order-history', generalLimiter, orderHistoryRoutes);
 app.use('/api/wishlist', generalLimiter, wishlistRoutes);
@@ -452,6 +493,8 @@ app.use('/api/addresses', generalLimiter, addressRoutes);
 app.use('/api/reviews', generalLimiter, reviewRoutes);
 app.use('/api/cart', generalLimiter, cartRoutes);
 app.use('/api/behavior', generalLimiter, behaviorRoutes); // User behavior tracking
+app.use('/api/recipes', simpleCache(60000), generalLimiter, require('./routes/recipes')); // âœ… Recipe Book Routes
+app.use('/api/recommendations', generalLimiter, require('./routes/recommendations')); // âœ… Recommendation System Proxy
 
 // ============================================
 // ERROR HANDLERS
@@ -469,7 +512,7 @@ app.use((req, res) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error('❌ Error:', err.message);
+  console.error('âŒ Error:', err.message);
 
   // Don't expose stack traces in production
   const errorResponse = isDevelopment
@@ -505,32 +548,32 @@ const mongoOptions = {
 
 mongoose.connect(MONGO_URI, mongoOptions)
   .then(() => {
-    console.log('\n✅ MongoDB Connected:', mongoose.connection.name);
-    console.log('📊 Connection Pool: 100 (min: 10)');
-    console.log('🔒 Security: Helmet, Rate Limiting, CORS, Sanitization');
-    console.log('⚡ Performance: Compression, Caching, Connection Pooling');
-    console.log('🔐 Admin Isolation: ENABLED');
+    console.log('\nâœ… MongoDB Connected:', mongoose.connection.name);
+    console.log('ðŸ“Š Connection Pool: 100 (min: 10)');
+    console.log('ðŸ”’ Security: Helmet, Rate Limiting, CORS, Sanitization');
+    console.log('âš¡ Performance: Compression, Caching, Connection Pooling');
+    console.log('ðŸ” Admin Isolation: ENABLED');
 
     server.listen(PORT, () => {
-      console.log(`\n🚀 Server: http://localhost:${PORT}`);
-      console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`\n📱 Client App: ${CLIENT_URL}`);
-      console.log(`🔐 Admin App: ${ADMIN_URL}`);
-      console.log(`📡 Socket.IO: Ready`);
-      console.log(`💾 Cache: In-Memory (${CACHE_DURATION / 1000}s TTL)`);
-      console.log(`🔒 Rate Limiting: ${SKIP_RATE_LIMIT ? '❌ DISABLED (Testing Mode)' : '✅ ENABLED'}`);
+      console.log(`\nðŸš€ Server: http://localhost:${PORT}`);
+      console.log(`ðŸŒ Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`\nðŸ“± Client App: ${CLIENT_URL}`);
+      console.log(`ðŸ” Admin App: ${ADMIN_URL}`);
+      console.log(`ðŸ“¡ Socket.IO: Ready`);
+      console.log(`ðŸ’¾ Cache: In-Memory (${CACHE_DURATION / 1000}s TTL)`);
+      console.log(`ðŸ”’ Rate Limiting: ${SKIP_RATE_LIMIT ? 'âŒ DISABLED (Testing Mode)' : 'âœ… ENABLED'}`);
 
       if (isDevelopment) {
-        console.log('\n⚠️  Development Mode');
+        console.log('\nâš ï¸  Development Mode');
       }
 
-      console.log('\n✨ Ready to handle 1000+ concurrent users!');
-      console.log('🔐 Admin & Client domains isolated for security\n');
+      console.log('\nâœ¨ Ready to handle 1000+ concurrent users!');
+      console.log('ðŸ” Admin & Client domains isolated for security\n');
     });
   })
   .catch((err) => {
-    console.error('❌ MongoDB Connection Failed:', err.message);
-    console.error('💡 Check MONGODB_URI in .env file');
+    console.error('âŒ MongoDB Connection Failed:', err.message);
+    console.error('ðŸ’¡ Check MONGODB_URI in .env file');
     process.exit(1);
   });
 
@@ -541,15 +584,15 @@ let isShuttingDown = false;
 
 const gracefulShutdown = async (signal) => {
   if (isShuttingDown) {
-    console.log('⚠️  Shutdown already in progress...');
+    console.log('âš ï¸  Shutdown already in progress...');
     return;
   }
 
   isShuttingDown = true;
-  console.log(`\n👋 ${signal} received, shutting down gracefully...`);
+  console.log(`\nðŸ‘‹ ${signal} received, shutting down gracefully...`);
 
   const forceShutdownTimer = setTimeout(() => {
-    console.error('⚠️  Forced shutdown after timeout');
+    console.error('âš ï¸  Forced shutdown after timeout');
     process.exit(1);
   }, 10000);
 
@@ -558,9 +601,9 @@ const gracefulShutdown = async (signal) => {
     await new Promise((resolve) => {
       server.close((err) => {
         if (err) {
-          console.error('⚠️  Error closing HTTP server:', err.message);
+          console.error('âš ï¸  Error closing HTTP server:', err.message);
         } else {
-          console.log('✅ HTTP server closed');
+          console.log('âœ… HTTP server closed');
         }
         resolve();
       });
@@ -568,25 +611,25 @@ const gracefulShutdown = async (signal) => {
 
     // 2. Close Socket.IO connections
     io.close(() => {
-      console.log('✅ Socket.IO closed');
+      console.log('âœ… Socket.IO closed');
     });
 
     // 3. Close MongoDB connection
     await mongoose.connection.close();
-    console.log('✅ MongoDB connection closed');
+    console.log('âœ… MongoDB connection closed');
 
     // 4. Clear cache
     if (cache) {
       cache.clear();
-      console.log('✅ Cache cleared');
+      console.log('âœ… Cache cleared');
     }
 
     clearTimeout(forceShutdownTimer);
-    console.log('👋 Shutdown complete');
+    console.log('ðŸ‘‹ Shutdown complete');
     process.exit(0);
 
   } catch (error) {
-    console.error('❌ Shutdown error:', error.message);
+    console.error('âŒ Shutdown error:', error.message);
     clearTimeout(forceShutdownTimer);
     process.exit(1);
   }
@@ -603,12 +646,12 @@ process.on('SIGINT', () => {
 
 // Error handlers
 process.on('uncaughtException', (err) => {
-  console.error('❌ Uncaught Exception:', err.message);
+  console.error('âŒ Uncaught Exception:', err.message);
   if (!isShuttingDown) gracefulShutdown('UNCAUGHT_EXCEPTION');
 });
 
 process.on('unhandledRejection', (reason) => {
-  console.error('❌ Unhandled Rejection:', reason);
+  console.error('âŒ Unhandled Rejection:', reason);
   if (!isShuttingDown) gracefulShutdown('UNHANDLED_REJECTION');
 });
 

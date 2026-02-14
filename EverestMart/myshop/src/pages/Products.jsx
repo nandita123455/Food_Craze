@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { getProducts } from '../services/api'
 import ProductCard from '../components/ProductCard'
+import config from '../config/config'
 
 function Products() {
   const [products, setProducts] = useState([])
@@ -8,9 +10,48 @@ function Products() {
   const [filter, setFilter] = useState('All')
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('default')
+  const [categories, setCategories] = useState(['All'])
 
-  // ✅ Updated with actual categories from imported products
-  const categories = ['All', 'Groceries', 'Dairy', 'Snacks']
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    // Fetch categories on mount
+    const fetchCategories = async () => {
+      try {
+        // Use the centralized categories endpoint for consistency
+        const response = await fetch(`${config.API_BASE_URL}/categories`)
+        const data = await response.json()
+
+        // Handle array response from /api/categories
+        const categoryNames = Array.isArray(data)
+          ? data.map(c => c.name)
+          : (data.categories || [])
+
+        setCategories(['All', ...categoryNames])
+      } catch (error) {
+        console.error('Error fetching categories:', error)
+      }
+    }
+    fetchCategories()
+  }, [])
+
+  // Sync filter with URL query params
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const categoryParam = params.get('category')
+    const searchParam = params.get('search')
+
+    if (categoryParam) {
+      setFilter(categoryParam)
+    } else {
+      setFilter('All')
+    }
+
+    if (searchParam) {
+      setSearch(searchParam)
+    }
+  }, [location.search])
 
   useEffect(() => {
     fetchProducts()
@@ -20,9 +61,24 @@ function Products() {
     try {
       setLoading(true)
       const params = {}
+
       if (filter !== 'All') params.category = filter
       if (search) params.search = search
-      if (sortBy !== 'default') params.sort = sortBy
+
+      // Fix sort params to match backend expectation
+      if (sortBy === 'price-low') {
+        params.sortBy = 'price'
+        params.sortOrder = 'asc'
+      } else if (sortBy === 'price-high') {
+        params.sortBy = 'price'
+        params.sortOrder = 'desc'
+      } else if (sortBy === 'name') {
+        params.sortBy = 'name'
+        params.sortOrder = 'asc'
+      } else {
+        params.sortBy = 'createdAt'
+        params.sortOrder = 'desc'
+      }
 
       const data = await getProducts(params)
       setProducts(data.products || data || [])
@@ -32,6 +88,23 @@ function Products() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleCategoryClick = (category) => {
+    setFilter(category)
+    // Update URL without reloading
+    const params = new URLSearchParams(location.search)
+    if (category === 'All') {
+      params.delete('category')
+    } else {
+      params.set('category', category)
+    }
+    navigate({ search: params.toString() })
+  }
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value)
+    // Optional: Update URL for search too
   }
 
   return (
@@ -51,7 +124,7 @@ function Products() {
           type="text"
           placeholder="Search for products..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
           style={styles.searchInput}
         />
         {search && (
@@ -66,7 +139,7 @@ function Products() {
         {categories.map(category => (
           <button
             key={category}
-            onClick={() => setFilter(category)}
+            onClick={() => handleCategoryClick(category)}
             style={{
               ...styles.categoryTab,
               ...(filter === category ? styles.categoryTabActive : {})
@@ -111,7 +184,7 @@ function Products() {
       {!loading && products.length === 0 && (
         <div style={styles.empty}>
           <p style={styles.emptyText}>No products found</p>
-          <button onClick={() => { setSearch(''); setFilter('All') }} style={styles.clearButton}>
+          <button onClick={() => { setSearch(''); handleCategoryClick('All') }} style={styles.clearButton}>
             Clear Filters
           </button>
         </div>
@@ -122,28 +195,25 @@ function Products() {
 
 const styles = {
   container: {
-    padding: '2rem',
-    maxWidth: '1400px',
+    padding: '2rem 1rem',
+    maxWidth: '1280px',
     margin: '0 auto',
     minHeight: 'calc(100vh - 80px)',
-    background: '#f9fafb'
+    background: '#F3F4F6'
   },
   header: {
     marginBottom: '2rem',
     textAlign: 'center'
   },
   title: {
-    fontSize: '3rem',
-    fontWeight: '700',
+    fontSize: '2rem',
+    fontWeight: '800',
     marginBottom: '0.5rem',
-    color: '#111827',
-    background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent'
+    color: '#1F2937'
   },
   subtitle: {
-    fontSize: '1.1rem',
-    color: '#6b7280',
+    fontSize: '1rem',
+    color: '#6B7280',
     margin: 0
   },
   searchContainer: {
@@ -154,69 +224,64 @@ const styles = {
   },
   searchIcon: {
     position: 'absolute',
-    left: '1.5rem',
+    left: '1rem',
     top: '50%',
     transform: 'translateY(-50%)',
-    pointerEvents: 'none'
+    pointerEvents: 'none',
+    color: '#9CA3AF'
   },
   searchInput: {
     width: '100%',
-    padding: '1rem 1.5rem 1rem 3.5rem',
-    fontSize: '1.1rem',
-    border: '2px solid #e5e7eb',
-    borderRadius: '12px',
+    padding: '0.75rem 1rem 0.75rem 2.5rem',
+    fontSize: '1rem',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
     outline: 'none',
     transition: 'all 0.2s',
-    background: 'white'
+    background: 'white',
+    color: '#1F2937'
   },
   clearBtn: {
     position: 'absolute',
-    right: '1rem',
+    right: '0.75rem',
     top: '50%',
     transform: 'translateY(-50%)',
-    background: '#ef4444',
-    color: 'white',
+    background: '#F3F4F6',
+    color: '#6B7280',
     border: 'none',
     borderRadius: '50%',
-    width: '28px',
-    height: '28px',
+    width: '24px',
+    height: '24px',
     cursor: 'pointer',
-    fontSize: '0.9rem',
+    fontSize: '0.8rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center'
   },
   categoryTabs: {
     display: 'flex',
-    gap: '1rem',
+    gap: '0.75rem',
     marginBottom: '2rem',
-    borderBottom: '2px solid #e5e7eb',
     overflowX: 'auto',
-    paddingBottom: '0.5rem'
+    paddingBottom: '0.5rem',
+    scrollbarWidth: 'none'
   },
   categoryTab: {
-    position: 'relative',
-    padding: '0.75rem 1.5rem',
-    background: 'transparent',
-    border: 'none',
-    fontSize: '1rem',
+    padding: '0.5rem 1.25rem',
+    background: 'white',
+    border: '1px solid #E5E7EB',
+    borderRadius: '9999px',
+    fontSize: '0.9rem',
     fontWeight: '600',
     cursor: 'pointer',
-    color: '#6b7280',
+    color: '#4B5563',
     transition: 'all 0.2s',
     whiteSpace: 'nowrap'
   },
   categoryTabActive: {
-    color: '#2563eb'
-  },
-  activeIndicator: {
-    position: 'absolute',
-    bottom: '-10px',
-    left: 0,
-    right: 0,
-    height: '3px',
-    background: 'linear-gradient(90deg, #2563eb, #7c3aed)',
-    borderRadius: '3px 3px 0 0'
+    background: '#ecfdf5',
+    color: '#0c831f',
+    borderColor: '#0c831f'
   },
   filtersBar: {
     display: 'flex',
@@ -224,18 +289,19 @@ const styles = {
     marginBottom: '1.5rem'
   },
   sortSelect: {
-    padding: '0.75rem 1.25rem',
-    border: '2px solid #e5e7eb',
-    borderRadius: '10px',
-    fontSize: '0.95rem',
+    padding: '0.5rem 1rem',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    fontSize: '0.9rem',
     fontWeight: '500',
     cursor: 'pointer',
     background: 'white',
-    transition: 'all 0.2s'
+    color: '#374151',
+    outline: 'none'
   },
   results: {
-    color: '#6b7280',
-    fontSize: '1rem',
+    color: '#6B7280',
+    fontSize: '0.9rem',
     marginBottom: '1.5rem',
     textAlign: 'center',
     fontWeight: '500'
@@ -244,12 +310,12 @@ const styles = {
     textAlign: 'center',
     padding: '4rem',
     fontSize: '1.2rem',
-    color: '#6b7280'
+    color: '#6B7280'
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-    gap: '2rem',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gap: '1rem',
     marginBottom: '3rem'
   },
   empty: {
@@ -257,16 +323,16 @@ const styles = {
     padding: '4rem 2rem',
     background: 'white',
     borderRadius: '12px',
-    border: '2px dashed #e5e7eb'
+    border: '1px solid #E5E7EB'
   },
   emptyText: {
-    fontSize: '1.5rem',
-    color: '#6b7280',
+    fontSize: '1.2rem',
+    color: '#6B7280',
     marginBottom: '1.5rem'
   },
   clearButton: {
-    padding: '0.75rem 2rem',
-    background: '#2563eb',
+    padding: '0.75rem 1.5rem',
+    background: '#0c831f',
     color: 'white',
     border: 'none',
     borderRadius: '8px',

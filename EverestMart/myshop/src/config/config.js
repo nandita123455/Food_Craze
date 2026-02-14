@@ -14,7 +14,7 @@ const config = {
 
   // Application Settings
   APP_ENV: import.meta.env.VITE_APP_ENV || 'development',
-  APP_NAME: import.meta.env.VITE_APP_NAME || 'Quixo',
+  APP_NAME: import.meta.env.VITE_APP_NAME || 'Food Craze',
   ENABLE_ANALYTICS: import.meta.env.VITE_ENABLE_ANALYTICS === 'true',
   ENABLE_DEBUG: import.meta.env.VITE_ENABLE_DEBUG !== 'false', // Default true in dev
 
@@ -50,7 +50,11 @@ const config = {
   getAssetUrl: (path) => {
     if (!path) return '';
     if (path.startsWith('http') || path.startsWith('data:')) return path;
-    const assetPath = path.startsWith('/') ? path : `/${path}`;
+
+    // Normalize path (replace backslashes with forward slashes for Windows compatibility)
+    const normalizedPath = path.replace(/\\/g, '/');
+    const assetPath = normalizedPath.startsWith('/') ? normalizedPath : `/${normalizedPath}`;
+
     return `${config.API_URL}${assetPath}`;
   },
 };

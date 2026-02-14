@@ -62,17 +62,27 @@ userSessionSchema.index({ updatedAt: 1 }, { expireAfterSeconds: 1800 });
 
 // Static method to create or get active session
 userSessionSchema.statics.createOrGetSession = async function (sessionId, data = {}) {
-    let session = await this.findOne({ sessionId, isActive: true });
-
-    if (!session) {
-        session = new this({
-            sessionId,
-            ...data
-        });
-        await session.save();
+    try {
+        return await this.findOneAndUpdate(
+            { sessionId },
+            {
+                $setOnInsert: {
+                    ...data,
+                    isActive: true,
+                    startTime: new Date()
+                }
+            },
+            {
+                upsert: true,
+                new: true,
+                setDefaultsOnInsert: true
+            }
+        );
+    } catch (error) {
+        console.error('Error in createOrGetSession:', error);
+        // Fallback: try to find it if upsert failed (rare edge case with race conditions on unique index)
+        return this.findOne({ sessionId });
     }
-
-    return session;
 };
 
 // Update session statistics

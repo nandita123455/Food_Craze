@@ -44,7 +44,7 @@ export default function RiderLoginScreen({ navigation }) {
                 {/* Logo/Header */}
                 <View style={styles.header}>
                     <Text style={styles.emoji}>🏍️</Text>
-                    <Text style={styles.title}>QUIXO Rider</Text>
+                    <Text style={styles.title}>Food Craze Rider</Text>
                     <Text style={styles.subtitle}>Delivery Partner Login</Text>
                 </View>
 

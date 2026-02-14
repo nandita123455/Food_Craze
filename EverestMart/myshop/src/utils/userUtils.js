@@ -36,4 +36,4 @@ export const isRider = () => {
 };
 
 // NOTE: Admin access removed from client app for security
-// Admin panel is only accessible through everestmart-admin
+// Admin panel is only accessible through food-craze-admin

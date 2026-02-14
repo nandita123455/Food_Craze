@@ -14,7 +14,7 @@ function Footer() {
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
               </svg>
-              <span style={styles.logoText}>QUIXO</span>
+              <span style={styles.logoText}>FOOD CRAZE</span>
             </div>
             <p style={styles.tagline}>Groceries delivered in 10 minutes</p>
           </div>
@@ -38,14 +38,15 @@ function Footer() {
           {/* Contact */}
           <div style={styles.linksGroup}>
             <h4 style={styles.linksTitle}>Support</h4>
-            <a href="mailto:hello@quixo.com" style={styles.link}>hello@quixo.com</a>
-            <span style={styles.linkText}>1800-QUIXO-10</span>
+            <a href="mailto:hello@foodcraze.com" style={styles.link}>hello@foodcraze.com</a>
+            <span style={styles.linkText}>1800-FOOD-CRAZE</span>
+            <Link to="/rider/login" style={{ ...styles.link, color: '#ff9900', marginTop: '0.5rem', fontWeight: 'bold' }}>Rider Login</Link>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div style={styles.bottomBar}>
-          <p style={styles.copyright}>© {currentYear} Quixo. All rights reserved.</p>
+          <p style={styles.copyright}>© {currentYear} Food Craze. All rights reserved.</p>
           <div style={styles.socialLinks}>
             <a href="#" style={styles.socialIcon} aria-label="Twitter">
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">

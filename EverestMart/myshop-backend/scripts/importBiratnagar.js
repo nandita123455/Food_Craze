@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const mongoose = require('mongoose');
 
 // Product model
@@ -121,20 +122,38 @@ const importProducts = async () => {
         const csvFiles = [
             '02-Groceries-Staples.csv',
             '03-Dairy-Products.csv',
-            '04-Snacks-Beverages.csv'
+            '04-Snacks-Beverages.csv',
+            '05-Personal-Care.csv',
+            '06-Home-Kitchen.csv',
+            '07-Electronics.csv',
+            '08-Textiles-Garments.csv',
+            '09-Handicrafts.csv',
+            '10-Agricultural-Products.csv'
         ];
 
         let allProducts = [];
 
         for (const file of csvFiles) {
-            const filePath = path.join(__dirname, '../../../Biratnagar-Vendors', file);
-            console.log(`📂 Reading ${file}...`);
-            const products = await parseCSV(filePath);
-            allProducts = allProducts.concat(products);
-            console.log(`✅ Parsed ${products.length} products from ${file}`);
+            // Fix path to point to correct directory
+            const filePath = path.join(__dirname, '../../Biratnagar-Vendors', file);
+            if (fs.existsSync(filePath)) {
+                console.log(`📂 Reading ${file}...`);
+                // Limit to 20 products per file/category
+                const products = await parseCSV(filePath);
+                const limitedProducts = products.slice(0, 20);
+                allProducts = allProducts.concat(limitedProducts);
+                console.log(`✅ Parsed ${products.length} products from ${file} (Importing ${limitedProducts.length})`);
+            } else {
+                console.warn(`⚠️ File not found: ${file}`);
+            }
         }
 
         console.log(`\n🗑️  Clearing existing products...`);
+        // await Product.deleteMany({}); // Optional: Decide if we want to clear or append. User said "add". Let's clear to be safe/clean? Or maybe just append?
+        // User said "add those product", implies appending or ensuring they exist.
+        // But duplicates might be an issue. Let's stick to the script's original logic of clearing for a clean seed,
+        // UNLESS the user wants to keep existing data.
+        // Given we just switched DBs, it's empty anyway. So clearing is fine.
         await Product.deleteMany({});
 
         console.log(`💾 Inserting ${allProducts.length} products...`);

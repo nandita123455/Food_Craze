@@ -108,13 +108,13 @@ const getWelcomeEmailTemplate = (userName) => {
     <body>
       <div class="container">
         <div class="header">
-          <h1>🏔️ Welcome to EverestMart</h1>
+          <h1>🏔️ Welcome to Food Craze</h1>
         </div>
         
         <div class="content">
           <h2>Hello ${userName}! 👋</h2>
           <p>
-            Thank you for joining EverestMart! We're thrilled to have you as part of our community.
+            Thank you for joining Food Craze! We're thrilled to have you as part of our community.
             Your account has been successfully created, and you're all set to start shopping.
           </p>
           
@@ -145,12 +145,12 @@ const getWelcomeEmailTemplate = (userName) => {
           
           <p style="margin-top: 30px; font-size: 14px; color: #8B8B8B;">
             Need help? Contact our support team at 
-            <a href="mailto:support@everestmart.com" style="color: #667eea;">support@everestmart.com</a>
+            <a href="mailto:support@foodcraze.com" style="color: #667eea;">support@foodcraze.com</a>
           </p>
         </div>
         
         <div class="footer">
-          <p>© 2025 EverestMart. All rights reserved.</p>
+          <p>© 2025 Food Craze. All rights reserved.</p>>
           <p>Premium groceries delivered in 10 minutes</p>
           <div class="social-links">
             <a href="#">Facebook</a> • 
@@ -230,7 +230,7 @@ const getLoginNotificationTemplate = (userName, loginTime, ipAddress) => {
         
         <div class="content">
           <h2>Hello ${userName},</h2>
-          <p>We detected a new login to your EverestMart account.</p>
+          <p>We detected a new login to your Food Craze account.</p>
           
           <div class="info-box">
             <div class="info-item"><strong>Time:</strong> ${loginTime}</div>
@@ -244,12 +244,12 @@ const getLoginNotificationTemplate = (userName, loginTime, ipAddress) => {
           
           <p style="margin-top: 30px; font-size: 14px; color: #8B8B8B;">
             Need help? Contact us at 
-            <a href="mailto:support@everestmart.com" style="color: #667eea;">support@everestmart.com</a>
+            <a href="mailto:support@foodcraze.com" style="color: #667eea;">support@foodcraze.com</a>
           </p>
         </div>
         
         <div class="footer">
-          <p>© 2025 EverestMart. All rights reserved.</p>
+          <p>© 2025 Food Craze. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -376,7 +376,7 @@ const getOrderConfirmationTemplate = (userName, orderId, orderTotal, items) => {
         </div>
         
         <div class="footer">
-          <p>© 2025 EverestMart. All rights reserved.</p>
+          <p>© 2025 Food Craze. All rights reserved.</p>
         </div>
       </div>
     </body>
@@ -388,11 +388,11 @@ const getOrderConfirmationTemplate = (userName, orderId, orderTotal, items) => {
 const sendWelcomeEmail = async (userEmail, userName) => {
   try {
     const transporter = createTransporter();
-    
+
     const mailOptions = {
-      from: `"EverestMart" <${process.env.EMAIL_USER}>`,
+      from: `"Food Craze" <${process.env.EMAIL_USER}>`,
       to: userEmail,
-      subject: '🎉 Welcome to EverestMart - Your Premium Grocery Delivery',
+      subject: '🎉 Welcome to Food Craze - Your Premium Grocery Delivery',
       html: getWelcomeEmailTemplate(userName)
     };
 
@@ -409,16 +409,16 @@ const sendWelcomeEmail = async (userEmail, userName) => {
 const sendLoginNotification = async (userEmail, userName, ipAddress) => {
   try {
     const transporter = createTransporter();
-    const loginTime = new Date().toLocaleString('en-IN', { 
+    const loginTime = new Date().toLocaleString('en-IN', {
       timeZone: 'Asia/Kolkata',
       dateStyle: 'full',
       timeStyle: 'long'
     });
-    
+
     const mailOptions = {
-      from: `"EverestMart Security" <${process.env.EMAIL_USER}>`,
+      from: `"Food Craze Security" <${process.env.EMAIL_USER}>`,
       to: userEmail,
-      subject: '🔐 New Login to Your EverestMart Account',
+      subject: '🔐 New Login to Your Food Craze Account',
       html: getLoginNotificationTemplate(userName, loginTime, ipAddress)
     };
 
@@ -435,9 +435,9 @@ const sendLoginNotification = async (userEmail, userName, ipAddress) => {
 const sendOrderConfirmation = async (userEmail, userName, orderId, orderTotal, items) => {
   try {
     const transporter = createTransporter();
-    
+
     const mailOptions = {
-      from: `"EverestMart Orders" <${process.env.EMAIL_USER}>`,
+      from: `"Food Craze Orders" <${process.env.EMAIL_USER}>`,
       to: userEmail,
       subject: `✅ Order Confirmed - #${orderId}`,
       html: getOrderConfirmationTemplate(userName, orderId, orderTotal, items)

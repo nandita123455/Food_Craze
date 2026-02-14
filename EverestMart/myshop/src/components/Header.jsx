@@ -25,7 +25,7 @@ function Header() {
     <header style={styles.header}>
       <div style={styles.container}>
         <Link to="/" style={styles.logo}>
-          🏔️ EverestMart
+          🏔️ Food Craze
         </Link>
 
         <nav style={styles.nav}>

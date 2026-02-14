@@ -1,7 +1,7 @@
 {
-  "name": "myshop-backend",
+  "name": "food-craze-backend",
   "version": "1.0.0",
-  "description": "EverestMart Backend - 10-minute grocery delivery platform with support for 1000+ concurrent users",
+  "description": "Food Craze Backend - 10-minute grocery delivery platform with support for 1000+ concurrent users",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -25,15 +25,15 @@
     "socket.io",
     "payment-gateway"
   ],
-  "author": "EverestMart Team",
+  "author": "Food Craze Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/everestmart-backend"
+    "url": "https://github.com/yourusername/food-craze-backend"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
-    "axios": "^1.13.2",
+    "axios": "^1.13.5",
     "bcryptjs": "^2.4.3",
     "bull": "^4.16.5",
     "compression": "^1.8.1",
@@ -44,7 +44,9 @@
     "express-rate-limit": "^8.2.1",
     "express-session": "^1.18.2",
     "firebase-admin": "^13.6.0",
+    "fuse.js": "^7.1.0",
     "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
     "ioredis": "^5.9.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.20.3",
@@ -57,7 +59,8 @@
     "socket.io": "^4.8.1",
     "socket.io-client": "^4.8.3",
     "twilio": "^5.10.7",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "csv-parser": "^3.2.0",

@@ -22,21 +22,21 @@ function AdminDashboard() {
   const loadDashboardData = async () => {
     try {
       setLoading(true);
-      
+
       // Get all orders
       const ordersResponse = await adminApi.getAllOrders();
       const ordersData = ordersResponse.data.orders || ordersResponse.data || [];
-      
+
       // Get all products
       const productsResponse = await adminApi.getAllProducts();
       const productsData = productsResponse.data.products || productsResponse.data || [];
-      
+
       // Calculate stats
       const totalRevenue = ordersData.reduce((sum, order) => sum + (order.totalAmount || 0), 0);
       const pendingOrders = ordersData.filter(o => o.orderStatus === 'pending').length;
       const completedOrders = ordersData.filter(o => o.orderStatus === 'delivered').length;
       const lowStockProducts = productsData.filter(p => p.stock <= (p.lowStockThreshold || 10)).length;
-      
+
       setStats({
         totalOrders: ordersData.length,
         totalRevenue: totalRevenue,
@@ -47,10 +47,10 @@ function AdminDashboard() {
         totalUsers: 0,
         totalRiders: 0
       });
-      
+
       // Set recent orders (last 5)
       setRecentOrders(ordersData.slice(0, 5));
-      
+
     } catch (error) {
       console.error('Failed to load dashboard data:', error);
     } finally {
@@ -74,11 +74,11 @@ function AdminDashboard() {
         <div>
           <h1 style={styles.welcomeTitle}>Dashboard Overview</h1>
           <p style={styles.welcomeSubtitle}>
-            {new Date().toLocaleDateString('en-IN', { 
-              weekday: 'long', 
-              year: 'numeric', 
-              month: 'long', 
-              day: 'numeric' 
+            {new Date().toLocaleDateString('en-IN', {
+              weekday: 'long',
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
             })}
           </p>
         </div>
@@ -96,7 +96,7 @@ function AdminDashboard() {
             <div style={styles.statValue}>{stats.totalOrders}</div>
             <div style={styles.statLabel}>Total Orders</div>
             <div style={styles.statChange}>
-              <span style={{color: '#10b981'}}>↑ {stats.completedOrders} completed</span>
+              <span style={{ color: '#10b981' }}>↑ {stats.completedOrders} completed</span>
             </div>
           </div>
         </div>
@@ -112,7 +112,7 @@ function AdminDashboard() {
             <div style={styles.statValue}>₹{stats.totalRevenue.toFixed(2)}</div>
             <div style={styles.statLabel}>Total Revenue</div>
             <div style={styles.statChange}>
-              <span style={{color: '#10b981'}}>From {stats.completedOrders} orders</span>
+              <span style={{ color: '#10b981' }}>From {stats.completedOrders} orders</span>
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ function AdminDashboard() {
             <div style={styles.statValue}>{stats.pendingOrders}</div>
             <div style={styles.statLabel}>Pending Orders</div>
             <div style={styles.statChange}>
-              <span style={{color: stats.pendingOrders > 0 ? '#f59e0b' : '#6b7280'}}>
+              <span style={{ color: stats.pendingOrders > 0 ? '#f59e0b' : '#6b7280' }}>
                 Requires attention
               </span>
             </div>
@@ -147,7 +147,7 @@ function AdminDashboard() {
             <div style={styles.statValue}>{stats.totalProducts}</div>
             <div style={styles.statLabel}>Total Products</div>
             <div style={styles.statChange}>
-              <span style={{color: stats.lowStockProducts > 0 ? '#ef4444' : '#10b981'}}>
+              <span style={{ color: stats.lowStockProducts > 0 ? '#ef4444' : '#10b981' }}>
                 {stats.lowStockProducts > 0 ? `${stats.lowStockProducts} low stock` : 'All in stock'}
               </span>
             </div>
@@ -212,9 +212,9 @@ function AdminDashboard() {
                         {new Date(order.createdAt).toLocaleDateString('en-IN')}
                       </div>
                       <div style={styles.timeText}>
-                        {new Date(order.createdAt).toLocaleTimeString('en-IN', { 
-                          hour: '2-digit', 
-                          minute: '2-digit' 
+                        {new Date(order.createdAt).toLocaleTimeString('en-IN', {
+                          hour: '2-digit',
+                          minute: '2-digit'
                         })}
                       </div>
                     </td>
@@ -276,7 +276,9 @@ const getStatusColor = (status) => {
 
 const styles = {
   container: {
-    fontFamily: 'system-ui, sans-serif'
+    fontFamily: 'inherit',
+    maxWidth: '1200px',
+    margin: '0 auto'
   },
   loading: {
     display: 'flex',
@@ -285,134 +287,138 @@ const styles = {
     justifyContent: 'center',
     minHeight: '60vh',
     gap: '1rem',
-    color: '#6b7280'
+    color: '#6B7280'
   },
   spinner: {
     width: '40px',
     height: '40px',
-    border: '3px solid #E5E2DD',
-    borderTop: '3px solid #1A1A1A',
+    border: '3px solid #E5E7EB',
+    borderTop: '3px solid #0c831f',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite'
   },
   welcomeSection: {
     marginBottom: '2rem',
     paddingBottom: '1.5rem',
-    borderBottom: '1px solid #E5E2DD'
+    borderBottom: '1px solid #E5E7EB'
   },
   welcomeTitle: {
-    fontSize: '1.875rem',
-    fontWeight: '300',
-    color: '#1A1A1A',
+    fontSize: '2rem',
+    fontWeight: '800',
+    color: '#1F2937',
     margin: 0,
-    letterSpacing: '0.5px'
+    letterSpacing: '-0.02em'
   },
   welcomeSubtitle: {
-    fontSize: '0.875rem',
-    color: '#8B8B8B',
+    fontSize: '0.95rem',
+    color: '#6B7280',
     marginTop: '0.5rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontWeight: '500'
   },
   statsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
     gap: '1.5rem',
-    marginBottom: '2rem'
+    marginBottom: '2.5rem'
   },
   statCard: {
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD',
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px',
     padding: '1.5rem',
     display: 'flex',
     gap: '1rem',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+    transition: 'all 0.2s'
   },
   statIcon: {
     width: '48px',
     height: '48px',
-    background: '#F8F7F5',
+    background: '#ecfdf5',
+    borderRadius: '10px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexShrink: 0
+    flexShrink: 0,
+    color: '#0c831f'
   },
   iconSvg: {
     width: '24px',
     height: '24px',
     strokeWidth: '2px',
-    color: '#1A1A1A'
+    stroke: 'currentColor'
   },
   statContent: {
     flex: 1
   },
   statValue: {
-    fontSize: '1.875rem',
-    fontWeight: '300',
-    color: '#1A1A1A',
+    fontSize: '1.75rem',
+    fontWeight: '700',
+    color: '#1F2937',
     marginBottom: '0.25rem',
-    letterSpacing: '0.5px'
+    lineHeight: '1'
   },
   statLabel: {
-    fontSize: '0.8125rem',
-    color: '#8B8B8B',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px',
+    fontSize: '0.85rem',
+    color: '#6B7280',
+    fontWeight: '600',
     marginBottom: '0.5rem'
   },
   statChange: {
-    fontSize: '0.75rem',
+    fontSize: '0.8rem',
     fontWeight: '500'
   },
   section: {
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD',
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px',
     padding: '1.5rem',
-    marginBottom: '2rem'
+    marginBottom: '2rem',
+    boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
   },
   sectionHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '1.5rem'
+    marginBottom: '1.5rem',
+    paddingBottom: '1rem',
+    borderBottom: '1px solid #F3F4F6'
   },
   sectionTitle: {
-    fontSize: '1rem',
-    fontWeight: '400',
-    color: '#1A1A1A',
-    margin: 0,
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: '#1F2937',
+    margin: 0
   },
   viewAllLink: {
-    fontSize: '0.875rem',
-    color: '#1A1A1A',
+    fontSize: '0.9rem',
+    color: '#0c831f',
     textDecoration: 'none',
-    fontWeight: '500',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontWeight: '600',
+    transition: 'opacity 0.2s'
   },
   emptyState: {
     textAlign: 'center',
-    padding: '3rem',
-    color: '#8B8B8B'
+    padding: '4rem 2rem',
+    color: '#9CA3AF'
   },
   emptyIcon: {
-    width: '64px',
-    height: '64px',
-    strokeWidth: '1px',
-    color: '#D1D5DB',
+    width: '48px',
+    height: '48px',
+    strokeWidth: '1.5px',
+    color: '#E5E7EB',
     margin: '0 auto 1rem'
   },
   emptyText: {
-    fontSize: '1rem',
-    fontWeight: '500',
-    color: '#6b7280',
+    fontSize: '1.1rem',
+    fontWeight: '600',
+    color: '#4B5563',
     margin: '0 0 0.5rem 0'
   },
   emptySubtext: {
-    fontSize: '0.875rem',
-    color: '#9ca3af',
+    fontSize: '0.9rem',
+    color: '#9CA3AF',
     margin: 0
   },
   ordersTable: {
@@ -420,58 +426,63 @@ const styles = {
   },
   table: {
     width: '100%',
-    borderCollapse: 'collapse'
+    borderCollapse: 'separate',
+    borderSpacing: '0'
   },
   tableHeader: {
-    borderBottom: '1px solid #E5E2DD'
+    background: '#F9FAFB'
   },
   th: {
-    padding: '0.75rem',
+    padding: '0.75rem 1rem',
     textAlign: 'left',
-    fontSize: '0.8125rem',
-    fontWeight: '500',
-    color: '#5A5A5A',
+    fontSize: '0.8rem',
+    fontWeight: '600',
+    color: '#6B7280',
     textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    letterSpacing: '0.05em',
+    borderBottom: '1px solid #E5E7EB'
   },
   tableRow: {
-    borderBottom: '1px solid #F0EDE8'
+    transition: 'background 0.1s'
   },
   td: {
-    padding: '1rem 0.75rem',
-    fontSize: '0.875rem',
-    color: '#1A1A1A',
-    verticalAlign: 'top'
+    padding: '1rem',
+    fontSize: '0.9rem',
+    color: '#1F2937',
+    verticalAlign: 'top',
+    borderBottom: '1px solid #F3F4F6'
   },
   customerName: {
-    fontWeight: '500',
-    color: '#1A1A1A'
+    fontWeight: '600',
+    color: '#1F2937'
   },
   customerEmail: {
-    fontSize: '0.75rem',
-    color: '#8B8B8B',
+    fontSize: '0.8rem',
+    color: '#6B7280',
     marginTop: '0.25rem'
   },
   amount: {
-    fontSize: '1rem',
-    color: '#1A1A1A'
+    fontSize: '0.95rem',
+    color: '#1F2937',
+    fontWeight: '600'
   },
   statusBadge: {
     display: 'inline-block',
     padding: '0.25rem 0.75rem',
     color: '#FFFFFF',
-    fontSize: '0.6875rem',
+    fontSize: '0.75rem',
     fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    borderRadius: '9999px',
+    textTransform: 'capitalize'
   },
   dateText: {
-    fontSize: '0.875rem',
-    color: '#1A1A1A'
+    fontSize: '0.9rem',
+    color: '#374151',
+    fontWeight: '500'
   },
   timeText: {
-    fontSize: '0.75rem',
-    color: '#8B8B8B',
+    fontSize: '0.8rem',
+    color: '#9CA3AF',
     marginTop: '0.25rem'
   },
   quickActions: {
@@ -485,28 +496,28 @@ const styles = {
   },
   actionCard: {
     background: '#FFFFFF',
-    border: '1px solid #E5E2DD',
+    border: '1px solid #E5E7EB',
+    borderRadius: '12px',
     padding: '1.5rem',
     textDecoration: 'none',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '1rem',
+    gap: '0.75rem',
     transition: 'all 0.2s',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
   },
   actionIcon: {
     width: '32px',
     height: '32px',
     strokeWidth: '2px',
-    color: '#1A1A1A'
+    color: '#0c831f'
   },
   actionText: {
-    fontSize: '0.875rem',
-    fontWeight: '500',
-    color: '#1A1A1A',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    color: '#1F2937'
   }
 };
 

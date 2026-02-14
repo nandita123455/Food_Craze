@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './Home.css';
-import RecommendationService from '../services/recommendationService';
-import RecommendationSection from '../components/RecommendationSection';
-
+import RecommendedProducts from '../components/RecommendedProducts';
 import config from '../config/config';
 
 const api = {
@@ -19,11 +17,17 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [featuredProducts, setFeaturedProducts] = useState([]);
-  const [trendingProductIds, setTrendingProductIds] = useState([]);
-  const [recommendedProductIds, setRecommendedProductIds] = useState([]);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || '{}'));
 
   useEffect(() => {
     loadData();
+
+    // Listen for login/logout events to refresh recommendations
+    const handleAuthChange = () => {
+      setUser(JSON.parse(localStorage.getItem('user') || '{}'));
+    };
+    window.addEventListener('storage', handleAuthChange);
+    return () => window.removeEventListener('storage', handleAuthChange);
   }, []);
 
   const loadData = async () => {
@@ -37,42 +41,12 @@ function Home() {
       setProducts(productsData);
       setFeaturedProducts(productsData.slice(0, 8));
       setCategories(categoriesRes.data?.categories || categoriesRes.data || []);
-
-      // Load ML recommendations
-      loadRecommendations();
     } catch (error) {
       console.error('Error loading data:', error);
       setProducts([]);
       setCategories([]);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const loadRecommendations = async () => {
-    try {
-      // Get trending products
-      const trendingRes = await RecommendationService.getTrendingProducts(8);
-      if (trendingRes.success && trendingRes.recommendations) {
-        const ids = trendingRes.recommendations.map(r => r.product_id);
-        setTrendingProductIds(ids);
-      }
-
-      // Get personalized recommendations if user is logged in
-      const user = JSON.parse(localStorage.getItem('user') || '{}');
-      if (user._id || user.id) {
-        const userRecs = await RecommendationService.getUserRecommendations(
-          user._id || user.id,
-          8
-        );
-        if (userRecs.success && userRecs.recommendations) {
-          const ids = userRecs.recommendations.map(r => r.product_id);
-          setRecommendedProductIds(ids);
-        }
-      }
-    } catch (error) {
-      console.log('Recommendations unavailable:', error.message);
-      // Silently fail - recommendations are optional
     }
   };
 
@@ -262,29 +236,24 @@ function Home() {
         </div>
       </section>
 
-      {/* TRENDING PRODUCTS - ML Powered */}
-      {trendingProductIds.length > 0 && (
-        <section className="recommendations-section">
-          <RecommendationSection
-            title="🔥 Trending Now"
-            productIds={trendingProductIds}
+      {/* RECOMMENDATION SECTIONS */}
+      <div className="bg-gray-50 py-8 px-4">
+        <div className="max-w-7xl mx-auto">
+          {/* Personalized - Only if logged in */}
+          {user && (user._id || user.id) && (
+            <RecommendedProducts
+              type="user"
+              title={`👋 Picks for You, ${user.name?.split(' ')[0] || 'Member'}`}
+            />
+          )}
+
+          {/* Trending - Always visible */}
+          <RecommendedProducts
             type="trending"
+            title="🔥 Trending Now"
           />
-        </section>
-      )}
-
-      {/* PERSONALIZED RECOMMENDATIONS - ML Powered */}
-      {recommendedProductIds.length > 0 && (
-        <section className="recommendations-section">
-          <RecommendationSection
-            title="🎯 Recommended for You"
-            productIds={recommendedProductIds}
-            type="personalized"
-          />
-        </section>
-      )}
-
-
+        </div>
+      </div>
 
       {/* Floating Cart */}
       {JSON.parse(localStorage.getItem('cart') || '[]').length > 0 && (

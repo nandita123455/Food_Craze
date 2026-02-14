@@ -29,22 +29,22 @@ function Checkout() {
   // ✅ Extract addresses from any response format
   const extractAddressesFromResponse = (responseData) => {
     console.log('🔍 Extracting addresses from:', responseData);
-    
+
     if (Array.isArray(responseData)) {
       console.log('✅ Format: Direct array');
       return responseData;
     }
-    
+
     if (responseData.addresses && Array.isArray(responseData.addresses)) {
       console.log('✅ Format: Nested in addresses');
       return responseData.addresses;
     }
-    
+
     if (responseData.data && Array.isArray(responseData.data)) {
       console.log('✅ Format: Nested in data');
       return responseData.data;
     }
-    
+
     console.warn('⚠️ Unknown format, returning empty array');
     return [];
   };
@@ -52,14 +52,14 @@ function Checkout() {
   // ✅ Load cart and listen for updates
   useEffect(() => {
     loadCartFromStorage();
-    
+
     const handleCartUpdate = () => {
       console.log('🔄 Cart updated event received in Checkout');
       loadCartFromStorage();
     };
-    
+
     window.addEventListener('cartUpdated', handleCartUpdate);
-    
+
     return () => {
       window.removeEventListener('cartUpdated', handleCartUpdate);
     };
@@ -70,13 +70,13 @@ function Checkout() {
     try {
       const cart = JSON.parse(localStorage.getItem('cart') || '[]');
       console.log('📦 Loading cart in Checkout:', cart.length, 'items');
-      
+
       if (cart.length === 0) {
         console.log('⚠️ Cart is empty, redirecting...');
         navigate('/cart');
         return;
       }
-      
+
       setCartItems(cart);
     } catch (error) {
       console.error('Failed to load cart:', error);
@@ -128,10 +128,10 @@ function Checkout() {
         console.log('⚠️ No token - guest checkout');
         return;
       }
-      
+
       console.log('📍 [Checkout] Loading addresses...');
       console.log('API URL:', `${config.API_BASE_URL}/addresses`);
-      
+
       const response = await axios.get(`${config.API_BASE_URL}/addresses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -139,12 +139,12 @@ function Checkout() {
       console.log('📦 [Checkout] Full response:', response.data);
 
       const addressList = extractAddressesFromResponse(response.data);
-      
+
       console.log('📍 [Checkout] Extracted addresses:', addressList);
       console.log('📊 [Checkout] Count:', addressList.length);
-      
+
       setAddresses(addressList);
-      
+
       if (addressList.length === 0) {
         console.log('⚠️ No addresses found');
         return;
@@ -189,7 +189,7 @@ function Checkout() {
   // ✅ GPS Auto-Detection
   const detectCurrentLocation = () => {
     setDetectingLocation(true);
-    
+
     if (!navigator.geolocation) {
       alert('❌ Geolocation is not supported by your browser');
       setDetectingLocation(false);
@@ -200,7 +200,7 @@ function Checkout() {
       async (position) => {
         const { latitude, longitude } = position.coords;
         console.log('📍 GPS Location:', latitude, longitude);
-        
+
         try {
           const response = await axios.get(
             `https://maps.googleapis.com/maps/api/geocode/json?latlat=${latitude},${longitude}&key=${config.GOOGLE.mapsApiKey}`
@@ -231,7 +231,7 @@ function Checkout() {
           console.error('Geocoding error:', error);
           alert('⚠️ Location detected but could not fetch address. Please enter manually.');
         }
-        
+
         setDetectingLocation(false);
       },
       (error) => {
@@ -239,7 +239,7 @@ function Checkout() {
         if (error.code === 1) errorMsg += 'Please enable location permission';
         else if (error.code === 2) errorMsg += 'Location unavailable';
         else errorMsg += 'Request timeout';
-        
+
         alert(errorMsg);
         setDetectingLocation(false);
       },
@@ -260,7 +260,7 @@ function Checkout() {
 
     components.forEach(component => {
       const types = component.types;
-      
+
       if (types.includes('route') || types.includes('sublocality_level_2')) {
         street += (street ? ', ' : '') + component.long_name;
       }
@@ -343,7 +343,7 @@ function Checkout() {
   const saveManualAddress = async () => {
     try {
       const token = localStorage.getItem('token');
-      
+
       // Guest checkout - return simple object
       if (!token) {
         console.log('⚠️ Guest checkout - address not saved');
@@ -359,7 +359,7 @@ function Checkout() {
 
       // Logged-in user - save to database
       console.log('💾 Saving address to database...');
-      
+
       const addressData = {
         label: 'Home',
         fullName: formData.name,
@@ -387,28 +387,28 @@ function Checkout() {
 
       const savedAddress = response.data.address || response.data;
       const newAddressId = savedAddress._id;
-      
+
       if (!newAddressId) {
         throw new Error('No address ID returned');
       }
 
       console.log('✅ Address saved with ID:', newAddressId);
-      
+
       // Reload addresses
       await loadSavedAddresses();
-      
+
       return { _id: newAddressId };
-      
+
     } catch (error) {
       console.error('❌ Failed to save address:', error);
       console.error('Error details:', error.response?.data);
-      
-      const errorMsg = error.response?.data?.error || 
-                       error.response?.data?.message || 
-                       'Failed to save address';
-      
+
+      const errorMsg = error.response?.data?.error ||
+        error.response?.data?.message ||
+        'Failed to save address';
+
       alert(`⚠️ Address Save Warning\n\n${errorMsg}\n\nOrder will continue, but address won't be saved for reuse.`);
-      
+
       // Return simple object so order can proceed
       return {
         name: formData.name,
@@ -424,7 +424,7 @@ function Checkout() {
   // ✅ Handle order submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (submitting || loading) {
       console.warn('⚠️ Order already being placed...');
       return;
@@ -436,7 +436,7 @@ function Checkout() {
     try {
       // Re-check cart
       const currentCart = JSON.parse(localStorage.getItem('cart') || '[]');
-      
+
       if (currentCart.length === 0) {
         alert('❌ Your cart is empty!');
         navigate('/cart');
@@ -453,7 +453,7 @@ function Checkout() {
         console.log('✅ Using saved address:', selectedAddressId);
         shippingAddress = { _id: selectedAddressId };
         savedAddressId = selectedAddressId;
-      } 
+      }
       // SCENARIO 2: User entered new address
       else {
         // Validate fields
@@ -507,16 +507,16 @@ function Checkout() {
 
       if (response.data.success || response.data.order) {
         console.log('🗑️ Clearing cart...');
-        
+
         // Clear cart
         localStorage.removeItem('cart');
         localStorage.setItem('cart', JSON.stringify([]));
         setCartItems([]);
-        
+
         // Dispatch events
         window.dispatchEvent(new Event('cartUpdated'));
         window.dispatchEvent(new Event('storage'));
-        
+
         setTimeout(() => {
           window.dispatchEvent(new Event('cartUpdated'));
         }, 100);
@@ -543,13 +543,13 @@ function Checkout() {
 
     } catch (error) {
       console.error('❌ Order error:', error);
-      
+
       let errorMessage = 'Failed to place order. Please try again.';
-      
+
       if (error.response) {
-        errorMessage = error.response.data?.error || 
-                       error.response.data?.message ||
-                       `Server error: ${error.response.status}`;
+        errorMessage = error.response.data?.error ||
+          error.response.data?.message ||
+          `Server error: ${error.response.status}`;
       } else if (error.request) {
         errorMessage = 'No response from server. Check internet connection.';
       } else if (error.code === 'ECONNABORTED') {
@@ -664,7 +664,7 @@ function Checkout() {
                       >
                         <div style={styles.addressHeader}>
                           <span style={styles.addressLabel}>
-                            {address.label === 'Home' ? '🏠' : address.label === 'Work' ? '💼' : '📍'} 
+                            {address.label === 'Home' ? '🏠' : address.label === 'Work' ? '💼' : '📍'}
                             {' '}{address.label}
                           </span>
                           {address.isDefault && <span style={styles.defaultBadge}>Default</span>}
@@ -867,7 +867,13 @@ function Checkout() {
                 {cartItems.map((item) => (
                   <div key={item._id} style={styles.summaryItem}>
                     <img
-                      src={item.image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=100'}
+                      src={
+                        item.image
+                          ? (item.image.startsWith('http') || item.image.startsWith('data:')
+                            ? item.image
+                            : `${config.API_BASE_URL.replace('/api', '')}${item.image}`)
+                          : 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=100'
+                      }
                       alt={item.name}
                       style={styles.summaryItemImage}
                       onError={(e) => e.target.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=100'}
@@ -920,8 +926,8 @@ function Checkout() {
 const styles = {
   container: {
     minHeight: '100vh',
-    background: '#FFFFFF',
-    padding: '2rem'
+    background: '#F3F4F6',
+    padding: '2rem 1rem'
   },
   content: {
     maxWidth: '1200px',
@@ -929,257 +935,405 @@ const styles = {
   },
   title: {
     fontSize: '2rem',
-    fontWeight: '300',
-    color: '#1A1A1A',
+    fontWeight: '800',
+    color: '#1F2937',
     marginBottom: '2rem',
-    letterSpacing: '0.5px'
+    textAlign: 'center'
   },
   grid: {
     display: 'grid',
-    gridTemplateColumns: '1fr 400px',
-    gap: '3rem'
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '2rem'
   },
-  formSection: {},
+  formSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem'
+  },
   section: {
-    marginBottom: '2.5rem'
+    background: 'white',
+    padding: '1.5rem',
+    borderRadius: '12px',
+    border: '1px solid #E5E7EB',
+    boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
   },
   sectionTitle: {
-    fontSize: '1.125rem',
-    fontWeight: '400',
-    color: '#1A1A1A',
-    marginBottom: '1.5rem',
-    letterSpacing: '0.3px'
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: '#1F2937',
+    marginBottom: '1rem',
+    paddingBottom: '0.75rem',
+    borderBottom: '1px solid #F3F4F6'
   },
   formGroup: {
-    marginBottom: '1.25rem',
-    flex: 1
+    marginBottom: '1rem'
   },
   formRow: {
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr',
     gap: '1rem'
   },
   label: {
     display: 'block',
-    fontSize: '0.875rem',
-    color: '#5A5A5A',
-    marginBottom: '0.5rem',
-    letterSpacing: '0.2px',
-    fontWeight: '500'
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    color: '#374151',
+    marginBottom: '0.5rem'
   },
   input: {
     width: '100%',
-    padding: '0.875rem',
-    fontSize: '0.9375rem',
-    border: '1px solid #E5E2DD',
-    borderRadius: '4px',
+    padding: '0.75rem',
+    fontSize: '1rem',
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
     outline: 'none',
-    fontFamily: 'inherit',
-    color: '#1A1A1A',
-    transition: 'border-color 0.2s'
+    transition: 'border 0.2s',
+    background: '#F9FAFB'
   },
   textarea: {
     width: '100%',
-    padding: '0.875rem',
-    fontSize: '0.9375rem',
-    border: '1px solid #E5E2DD',
-    borderRadius: '4px',
+    padding: '0.75rem',
+    fontSize: '1rem',
+    border: '1px solid #D1D5DB',
+    borderRadius: '8px',
     outline: 'none',
-    fontFamily: 'inherit',
-    color: '#1A1A1A',
-    resize: 'vertical'
+    transition: 'border 0.2s',
+    resize: 'vertical',
+    background: '#F9FAFB'
   },
   gpsBtn: {
     width: '100%',
-    padding: '1rem',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
-    border: 'none',
-    fontSize: '0.9375rem',
-    fontWeight: '600',
-    cursor: 'pointer',
+    padding: '0.75rem',
     marginBottom: '1.5rem',
-    borderRadius: '6px',
-    letterSpacing: '0.3px',
-    transition: 'transform 0.2s',
-    boxShadow: '0 4px 12px rgba(102, 126, 234, 0.3)'
+    background: '#EFF6FF',
+    color: '#0c831f',
+    border: '1px dashed #0c831f',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontWeight: '600',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s'
   },
   gpsButtonLoading: {
-    background: '#8B8B8B',
-    cursor: 'not-allowed'
+    opacity: 0.7,
+    cursor: 'wait'
   },
-  radioGroup: {
+  savedAddresses: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem'
-  },
-  radioLabel: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    gap: '0.75rem',
-    cursor: 'pointer',
-    padding: '1rem',
-    border: '1px solid #E5E2DD',
-    borderRadius: '6px',
-    transition: 'border-color 0.2s'
-  },
-  radio: {
-    width: '18px',
-    height: '18px',
-    cursor: 'pointer',
-    marginTop: '2px'
-  },
-  radioText: {
-    fontSize: '0.9375rem',
-    color: '#1A1A1A',
-    fontWeight: '500'
-  },
-  radioDesc: {
-    fontSize: '0.8125rem',
-    color: '#8B8B8B',
-    margin: '0.25rem 0 0 0'
-  },
-  submitBtn: {
-    width: '100%',
-    padding: '1rem',
-    background: '#1A1A1A',
-    color: '#FFFFFF',
-    border: 'none',
-    fontSize: '0.9375rem',
-    fontWeight: '600',
-    letterSpacing: '0.5px',
-    textTransform: 'uppercase',
-    cursor: 'pointer',
-    transition: 'background 0.2s',
-    borderRadius: '6px'
-  },
-  submitBtnDisabled: {
-    background: '#8B8B8B',
-    cursor: 'not-allowed'
-  },
-  summarySection: {
-    position: 'sticky',
-    top: '2rem',
-    alignSelf: 'start'
-  },
-  summaryCard: {
-    background: '#F8F7F5',
-    padding: '2rem',
-    borderRadius: '8px'
-  },
-  summaryTitle: {
-    fontSize: '1.125rem',
-    fontWeight: '400',
-    color: '#1A1A1A',
-    marginBottom: '1.5rem',
-    letterSpacing: '0.3px'
-  },
-  summaryItems: {
+    gap: '1rem',
     marginBottom: '1.5rem'
   },
-  summaryItem: {
+  subsectionTitle: {
+    fontSize: '1rem',
+    fontWeight: '600',
+    color: '#4B5563',
+    marginBottom: '0.5rem'
+  },
+  addressCard: {
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    padding: '1rem',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    background: '#FFFFFF'
+  },
+  addressCardSelected: {
+    borderColor: '#0c831f',
+    background: '#ECFDF5',
+    boxShadow: '0 0 0 2px #0c831f'
+  },
+  addressHeader: {
     display: 'flex',
-    gap: '1rem',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '1rem'
+    marginBottom: '0.5rem'
   },
-  summaryItemImage: {
-    width: '60px',
-    height: '60px',
-    objectFit: 'cover',
-    borderRadius: '6px',
-    border: '1px solid #E5E2DD'
+  addressLabel: {
+    fontWeight: '700',
+    color: '#1F2937',
+    fontSize: '0.9rem'
   },
-  itemInfo: {
+  defaultBadge: {
+    background: '#E5E7EB',
+    color: '#374151',
+    fontSize: '0.75rem',
+    padding: '2px 6px',
+    borderRadius: '4px',
+    fontWeight: '600'
+  },
+  selectedBadge: {
+    background: '#0c831f',
+    color: 'white',
+    fontSize: '0.75rem',
+    padding: '2px 6px',
+    borderRadius: '4px',
+    fontWeight: '600'
+  },
+  addressDetails: {
+    fontSize: '0.9rem',
+    color: '#4B5563',
+    margin: 0,
+    lineHeight: '1.4'
+  },
+  addAddressBtn: {
+    width: '100%',
+    padding: '0.75rem',
+    background: 'white',
+    border: '1px solid #0c831f',
+    color: '#0c831f',
+    borderRadius: '8px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    marginTop: '0.5rem'
+  },
+  backToSavedBtn: {
+    background: 'transparent',
+    border: 'none',
+    color: '#0c831f',
+    cursor: 'pointer',
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    padding: '0.5rem 0',
+    textAlign: 'left',
+    marginTop: '0.5rem'
+  },
+  divider: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: '0.25rem',
-    flex: 1
+    alignItems: 'center',
+    margin: '1.5rem 0',
+    color: '#9CA3AF',
+    fontSize: '0.85rem'
   },
-  itemName: {
-    fontSize: '0.9375rem',
-    color: '#1A1A1A'
+  dividerLine: {
+    flex: 1,
+    border: 'none',
+    borderTop: '1px solid #E5E7EB',
+    margin: '0 1rem'
   },
-  itemQty: {
-    fontSize: '0.8125rem',
-    color: '#8B8B8B'
+  dividerText: {
+    fontWeight: '600'
   },
-  itemPrice: {
-    fontSize: '0.9375rem',
-    color: '#1A1A1A',
-    fontWeight: '500'
+  summarySection: {
+    alignSelf: 'start',
+    position: 'sticky',
+    top: '2rem'
   },
-  summaryDivider: {
-    height: '1px',
-    background: '#E5E2DD',
-    margin: '1.5rem 0'
+  orderSummary: {
+    background: 'white',
+    padding: '1.5rem',
+    borderRadius: '12px',
+    border: '1px solid #E5E7EB',
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)'
+  },
+  summaryTitle: {
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: '#1F2937',
+    marginBottom: '1rem',
+    paddingBottom: '0.75rem',
+    borderBottom: '1px solid #F3F4F6'
   },
   summaryRow: {
     display: 'flex',
     justifyContent: 'space-between',
+    marginBottom: '0.75rem',
+    fontSize: '0.95rem'
+  },
+  summaryTotalRow: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    paddingTop: '1rem',
+    marginTop: '1rem',
+    borderTop: '1px solid #E5E7EB',
+    fontWeight: '800',
+    fontSize: '1.1rem',
+    color: '#1F2937'
+  },
+  placeOrderBtn: {
+    width: '100%',
+    padding: '1rem',
+    marginTop: '1.5rem',
+    background: '#0c831f',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: '700',
+    cursor: 'pointer',
+    transition: 'background 0.2s',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  },
+  paymentMethods: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem'
+  },
+  paymentOption: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+    padding: '1rem',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'all 0.2s'
+  },
+  paymentOptionSelected: {
+    borderColor: '#0c831f',
+    background: '#ECFDF5'
+  },
+  radioInput: {
+    accentColor: '#0c831f',
+    width: '18px',
+    height: '18px'
+  },
+  paymentLabel: {
+    fontWeight: '600',
+    color: '#374151'
+  },
+  error: {
+    background: '#fee2e2',
+    color: '#ef4444',
+    padding: '1rem',
+    borderRadius: '8px',
+    marginBottom: '1rem',
+    fontSize: '0.9rem',
+    fontWeight: '500'
+  },
+  radioGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem'
+  },
+  radioLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+    padding: '1rem',
+    border: '1px solid #E5E7EB',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'all 0.2s',
+    background: '#FFFFFF'
+  },
+  radio: {
+    accentColor: '#0c831f',
+    width: '18px',
+    height: '18px'
+  },
+  radioText: {
+    fontWeight: '600',
+    color: '#374151'
+  },
+  radioDesc: {
+    fontSize: '0.8rem',
+    color: '#6B7280',
+    margin: 0
+  },
+  submitBtn: {
+    width: '100%',
+    padding: '1rem',
+    marginTop: '1.5rem',
+    background: '#0c831f',
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: '700',
+    cursor: 'pointer',
+    transition: 'background 0.2s',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+  },
+  submitBtnDisabled: {
+    background: '#A7F3D0',
+    cursor: 'not-allowed'
+  },
+  summaryCard: {
+    background: 'white',
+    padding: '1.5rem',
+    borderRadius: '12px',
+    border: '1px solid #E5E7EB',
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.05)'
+  },
+  summaryItems: {
     marginBottom: '1rem'
   },
+  summaryItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    marginBottom: '0.75rem'
+  },
+  summaryItemImage: {
+    width: '50px',
+    height: '50px',
+    objectFit: 'cover',
+    borderRadius: '6px',
+    border: '1px solid #E5E7EB'
+  },
+  itemInfo: {
+    flex: 1
+  },
+  itemName: {
+    fontSize: '0.9rem',
+    fontWeight: '500',
+    color: '#374151'
+  },
+  itemQty: {
+    fontSize: '0.8rem',
+    color: '#6B7280'
+  },
+  itemPrice: {
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    color: '#1F2937'
+  },
+  summaryDivider: {
+    height: '1px',
+    background: '#E5E7EB',
+    margin: '1rem 0'
+  },
   summaryLabel: {
-    fontSize: '0.9375rem',
-    color: '#5A5A5A'
+    color: '#4B5563'
   },
   summaryValue: {
-    fontSize: '0.9375rem',
-    color: '#1A1A1A'
+    color: '#1F2937',
+    fontWeight: '600'
   },
   deliveryFree: {
-    fontSize: '0.9375rem',
-    color: '#10b981',
+    color: '#0c831f',
     fontWeight: '700'
   },
   deliveryHint: {
-    background: '#FFF3CD',
-    color: '#856404',
+    background: '#ECFDF5',
+    color: '#0c831f',
     padding: '0.75rem',
-    borderRadius: '6px',
-    fontSize: '0.8125rem',
-    marginTop: '0.5rem',
-    marginBottom: '1rem',
+    borderRadius: '8px',
+    fontSize: '0.85rem',
+    marginTop: '0.75rem',
+    textAlign: 'center',
     fontWeight: '500',
-    textAlign: 'center'
+    border: '1px solid #A7F3D0'
   },
   totalRow: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginTop: '1.5rem'
+    marginTop: '1.5rem',
+    paddingTop: '1rem',
+    borderTop: '1px solid #E5E7EB',
+    fontSize: '1.2rem',
+    fontWeight: '800',
+    color: '#1F2937'
   },
   totalLabel: {
-    fontSize: '1.125rem',
-    fontWeight: '400',
-    color: '#1A1A1A'
+    fontSize: '1.1rem',
+    fontWeight: '700',
+    color: '#1F2937'
   },
   totalValue: {
     fontSize: '1.5rem',
-    fontWeight: '600',
-    color: '#1A1A1A'
-  },
-  savedAddresses: {
-    marginBottom: '2rem'
-  },
-  subsectionTitle: {
-    fontSize: '1rem',
-    fontWeight: '500',
-    color: '#1A1A1A',
-    marginBottom: '1rem'
-  },
-  addressCard: {
-    padding: '1rem',
-    border: '2px solid #E5E2DD',
-    borderRadius: '8px',
-    marginBottom: '1rem',
-    cursor: 'pointer',
-    transition: 'all 0.2s'
-  },
-  addressCardSelected: {
-    borderColor: '#2563eb',
-    background: '#f0f9ff'
-  },
-  addressHeader: {
     display: 'flex',
     alignItems: 'center',
     gap: '0.75rem',

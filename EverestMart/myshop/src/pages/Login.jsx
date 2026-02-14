@@ -8,7 +8,7 @@ import config from '../config/config';
 function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [loginMode, setLoginMode] = useState('email');
+  const [loginMode, setLoginMode] = useState('phone'); // Default to phone like Blinkit
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -34,13 +34,8 @@ function Login() {
       const user = JSON.parse(decodeURIComponent(userStr));
       window.history.replaceState({}, '', '/login');
 
-      // ✅ Quixo Welcome Message
-      alert(`Welcome to Quixo, ${user.name}! 🛒✨
-
-Your account is now active.
-Enjoy peak-quality products with lightning-fast deliveries! 🚀
-
-Happy Shopping! 🛒✨`);
+      // ✅ Food Craze Welcome Message
+      alert(`Welcome to Food Craze, ${user.name}! 🛒`);
 
       // ✅ Navigate after alert
       setTimeout(() => {
@@ -62,7 +57,7 @@ Happy Shopping! 🛒✨`);
 
     try {
       await login(formData);
-      alert('Login successful!');
+      // alert('Login successful!'); // Removed for cleaner flow
       navigate('/');
       window.location.reload();
     } catch (err) {
@@ -71,7 +66,7 @@ Happy Shopping! 🛒✨`);
     }
   };
 
-  // ✅ Google OAuth Login - FIXED
+  // ✅ Google OAuth Login
   const handleGoogleLogin = () => {
     window.location.href = `${config.API_BASE_URL}/auth/google`;
   };
@@ -79,7 +74,7 @@ Happy Shopping! 🛒✨`);
   // Send OTP
   const sendOTP = async () => {
     if (!phoneNumber.startsWith('+')) {
-      setError('Phone number must include country code (e.g., +919876543210)');
+      setError('Enter valid number with code (e.g., +91...)');
       return;
     }
 
@@ -90,16 +85,12 @@ Happy Shopping! 🛒✨`);
       if (window.recaptchaVerifier) {
         try {
           window.recaptchaVerifier.clear();
-        } catch (e) {
-          console.log('Could not clear verifier:', e);
-        }
+        } catch (e) { }
         window.recaptchaVerifier = null;
       }
 
-      console.log('📱 Sending OTP to:', phoneNumber);
-
       window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        'size': 'normal',
+        'size': 'invisible', // Invisible captcha for cleaner UI
         'callback': (response) => {
           console.log('✅ reCAPTCHA solved');
         }
@@ -111,11 +102,10 @@ Happy Shopping! 🛒✨`);
       window.confirmationResult = confirmationResult;
 
       setOtpSent(true);
-      alert('✅ OTP sent to your phone! Check your messages.');
       setLoading(false);
     } catch (err) {
       console.error('❌ Error sending OTP:', err);
-      setError(err.message || 'Failed to send OTP. Please try again.');
+      setError(err.message || 'Failed to send OTP.');
       setLoading(false);
 
       if (window.recaptchaVerifier) {
@@ -130,7 +120,7 @@ Happy Shopping! 🛒✨`);
   // Verify OTP
   const verifyOTP = async () => {
     if (otp.length !== 6) {
-      setError('Please enter a valid 6-digit OTP');
+      setError('Enter 6-digit OTP');
       return;
     }
 
@@ -148,12 +138,11 @@ Happy Shopping! 🛒✨`);
         phoneNumber: user.phoneNumber
       }));
 
-      alert('✅ Login successful!');
       navigate('/');
       window.location.reload();
     } catch (err) {
       console.error('❌ Error verifying OTP:', err);
-      setError('Invalid OTP. Please try again.');
+      setError('Invalid OTP.');
       setLoading(false);
     }
   };
@@ -162,213 +151,153 @@ Happy Shopping! 🛒✨`);
     setOtpSent(false);
     setOtp('');
     setError('');
-
-    if (window.recaptchaVerifier) {
-      try {
-        window.recaptchaVerifier.clear();
-      } catch (e) {
-        console.log('Error clearing verifier:', e);
-      }
-      window.recaptchaVerifier = null;
-    }
   };
 
   return (
     <div style={styles.container}>
-      <div style={styles.formCard}>
-        <h1 style={styles.title}>🔐 Login to Quixo</h1>
-
-        {/* ✅ Google Login Button - ALWAYS VISIBLE */}
-        <button
-          onClick={handleGoogleLogin}
-          style={styles.googleBtn}
-        >
-          <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
-            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
-            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
-            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
-          </svg>
-          Continue with Google
-        </button>
-
-        {/* Divider */}
-        <div style={styles.divider}>
-          <span style={styles.dividerLine}></span>
-          <span style={styles.dividerText}>OR</span>
-          <span style={styles.dividerLine}></span>
+      <div style={styles.contentWrapper}>
+        {/* Left Side - Brand/Promo (Hidden on mobile) */}
+        <div style={styles.promoSection}>
+          <h1 style={styles.promoTitle}>India's last minute app</h1>
+          <p style={styles.promoText}>Log in or Sign up</p>
+          <div style={styles.promoIcon}>🛒</div>
         </div>
 
-        {/* Login Mode Toggle */}
-        <div style={styles.toggleContainer}>
-          <button
-            style={{
-              ...styles.toggleBtn,
-              ...(loginMode === 'email' ? styles.toggleBtnActive : {})
-            }}
-            onClick={() => {
-              setLoginMode('email');
-              setError('');
-              resetPhoneLogin();
-            }}
-          >
-            📧 Email
-          </button>
-          <button
-            style={{
-              ...styles.toggleBtn,
-              ...(loginMode === 'phone' ? styles.toggleBtnActive : {})
-            }}
-            onClick={() => {
-              setLoginMode('phone');
-              setError('');
-            }}
-          >
-            📱 Phone
-          </button>
-        </div>
+        {/* Right Side - Login Form */}
+        <div style={styles.formSection}>
+          <div style={styles.card}>
+            <h2 style={styles.cardTitle}>
+              {otpSent ? 'Enter OTP' : loginMode === 'phone' ? 'Phone Number Verification' : 'Email Login'}
+            </h2>
+            <p style={styles.cardSubtitle}>
+              {otpSent
+                ? `We've sent a code to ${phoneNumber}`
+                : loginMode === 'phone'
+                  ? 'Enter your phone number to login/sign up'
+                  : 'Enter your email and password'}
+            </p>
 
-        {error && <div style={styles.error}>{error}</div>}
+            {error && <div style={styles.error}>{error}</div>}
 
-        {/* Email/Password Login Form */}
-        {loginMode === 'email' && (
-          <form onSubmit={handleSubmit}>
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Email</label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                required
-                style={styles.input}
-                placeholder="your@email.com"
-              />
-            </div>
-
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Password</label>
-              <div style={styles.passwordContainer}>
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  required
-                  style={styles.passwordInput}
-                  placeholder="••••••••"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  style={styles.toggleBtn}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                >
-                  {showPassword ? (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
-                      <line x1="1" y1="1" x2="23" y2="23" />
-                    </svg>
-                  ) : (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                      <circle cx="12" cy="12" r="3" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              style={styles.submitBtn}
-              disabled={loading}
-            >
-              {loading ? 'Logging in...' : 'Login'}
-            </button>
-          </form>
-        )}
-
-        {/* Phone OTP Login Form */}
-        {loginMode === 'phone' && (
-          <div>
-            <div style={styles.inputGroup}>
-              <label style={styles.label}>Phone Number</label>
-              <input
-                type="tel"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                disabled={otpSent}
-                style={{
-                  ...styles.input,
-                  backgroundColor: otpSent ? '#f3f4f6' : 'white'
-                }}
-                placeholder="+919876543210"
-              />
-              <small style={styles.hint}>
-                Include country code (e.g., +91 for India)
-              </small>
-            </div>
-
+            {/* Login Mode Toggle */}
             {!otpSent && (
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                marginBottom: '1.5rem',
-                minHeight: '78px'
-              }}>
-                <div id="recaptcha-container"></div>
+              <div style={styles.toggleContainer}>
+                <button
+                  style={{ ...styles.toggleBtn, ...(loginMode === 'phone' ? styles.toggleBtnActive : {}) }}
+                  onClick={() => { setLoginMode('phone'); setError(''); }}
+                >Phone</button>
+                <div style={styles.toggleDivider}></div>
+                <button
+                  style={{ ...styles.toggleBtn, ...(loginMode === 'email' ? styles.toggleBtnActive : {}) }}
+                  onClick={() => { setLoginMode('email'); setError(''); }}
+                >Email</button>
               </div>
             )}
 
-            {!otpSent ? (
-              <button
-                onClick={sendOTP}
-                style={styles.submitBtn}
-                disabled={loading || !phoneNumber}
-              >
-                {loading ? 'Sending OTP...' : 'Send OTP'}
-              </button>
-            ) : (
-              <>
-                <div style={styles.inputGroup}>
-                  <label style={styles.label}>Enter OTP</label>
+            {/* Phone Login */}
+            {loginMode === 'phone' && (
+              <div style={styles.formGroup}>
+                {!otpSent ? (
+                  <>
+                    <div style={styles.inputWrapper}>
+                      <span style={styles.inputPrefix}>📞</span>
+                      <input
+                        type="tel"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="+91 90000 00000"
+                        style={styles.input}
+                      />
+                    </div>
+                    <div id="recaptcha-container"></div>
+                    <button
+                      onClick={sendOTP}
+                      style={styles.ctaBtn}
+                      disabled={loading || !phoneNumber}
+                    >
+                      {loading ? 'Sending...' : 'Next'}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <input
+                      type="text"
+                      value={otp}
+                      onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                      placeholder="Enter 6-digit OTP"
+                      style={{ ...styles.input, textAlign: 'center', letterSpacing: '4px' }}
+                      maxLength={6}
+                      autoFocus
+                    />
+                    <button
+                      onClick={verifyOTP}
+                      style={styles.ctaBtn}
+                      disabled={loading || otp.length !== 6}
+                    >
+                      {loading ? 'Verifying...' : 'Verify & Proceed'}
+                    </button>
+                    <button onClick={resetPhoneLogin} style={styles.backBtn}>Back to number</button>
+                  </>
+                )}
+              </div>
+            )}
+
+            {/* Email Login */}
+            {loginMode === 'email' && (
+              <form onSubmit={handleSubmit} style={styles.formGroup}>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="Email Address"
+                  required
+                  style={styles.input}
+                />
+                <div style={{ ...styles.inputWrapper, marginTop: '10px' }}>
                   <input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                    style={styles.input}
-                    placeholder="123456"
-                    maxLength={6}
-                    autoFocus
+                    type={showPassword ? 'text' : 'password'}
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    placeholder="Password"
+                    required
+                    style={{ ...styles.input, width: '100%' }}
                   />
-                  <small style={styles.hint}>
-                    Enter the 6-digit code sent to your phone
-                  </small>
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={styles.eyeBtn}
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
                 </div>
 
                 <button
-                  onClick={verifyOTP}
-                  style={styles.submitBtn}
-                  disabled={loading || otp.length !== 6}
-                >
-                  {loading ? 'Verifying...' : 'Verify & Login'}
-                </button>
-
-                <button
-                  onClick={resetPhoneLogin}
-                  style={styles.secondaryBtn}
+                  type="submit"
+                  style={styles.ctaBtn}
                   disabled={loading}
                 >
-                  Change Number
+                  {loading ? 'Logging in...' : 'Login'}
+                </button>
+              </form>
+            )}
+
+            {!otpSent && (
+              <>
+                <div style={styles.divider}>
+                  <span>OR</span>
+                </div>
+                <button onClick={handleGoogleLogin} style={styles.googleBtn}>
+                  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" width="18" />
+                  Continue with Google
                 </button>
               </>
             )}
-          </div>
-        )}
 
-        <p style={styles.switchText}>
-          Don't have an account?
-          <Link to="/register" style={styles.link}> Register here</Link>
-        </p>
+            <p style={styles.terms}>
+              By continuing, you agree to our <a href="#" style={styles.termLink}>Terms of Service</a> & <a href="#" style={styles.termLink}>Privacy Policy</a>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -376,208 +305,218 @@ Happy Shopping! 🛒✨`);
 
 const styles = {
   container: {
-    minHeight: 'calc(100vh - 80px)',
+    minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '2rem',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    background: '#FFFFFF', // Minimalist White Background
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
   },
-  formCard: {
-    background: 'white',
-    padding: '3rem',
-    borderRadius: '16px',
-    boxShadow: '0 8px 32px rgba(0,0,0,0.2)',
+  contentWrapper: {
+    display: 'flex',
     width: '100%',
-    maxWidth: '450px'
+    maxWidth: '900px',
+    height: '100vh',
+    maxHeight: '600px',
   },
-  title: {
+  promoSection: {
+    flex: 1,
+    background: '#F8F8F8', // Very light grey
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '40px',
+    borderRight: '1px solid #E0E0E0',
+    '@media (max-width: 768px)': {
+      display: 'none', // Mobile hidden
+    },
+  },
+  promoTitle: {
+    fontSize: '2.5rem',
+    fontWeight: '800',
+    color: '#1A1A1A',
+    marginBottom: '10px',
     textAlign: 'center',
-    marginBottom: '2rem',
-    color: '#111827',
-    fontSize: '2rem'
   },
-  googleBtn: {
+  promoText: {
+    fontSize: '1.2rem',
+    color: '#666',
+    textAlign: 'center',
+  },
+  promoIcon: {
+    fontSize: '5rem',
+    marginTop: '20px',
+  },
+  formSection: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '20px',
+    background: '#FFFFFF',
+  },
+  card: {
     width: '100%',
-    padding: '0.95rem',
-    background: 'white',
-    border: '2px solid #e5e7eb',
-    borderRadius: '10px',
+    maxWidth: '360px',
+  },
+  cardTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    color: '#000',
+    marginBottom: '8px',
+    textAlign: 'center',
+  },
+  cardSubtitle: {
+    fontSize: '0.9rem',
+    color: '#777',
+    textAlign: 'center',
+    marginBottom: '24px',
+    lineHeight: '1.4',
+  },
+  error: {
+    background: '#fee2e2',
+    color: '#ef4444',
+    padding: '10px',
+    borderRadius: '4px',
+    fontSize: '0.875rem',
+    marginBottom: '16px',
+    textAlign: 'center',
+  },
+  toggleContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '20px',
+    borderBottom: '1px solid #eee',
+  },
+  toggleBtn: {
+    background: 'none',
+    border: 'none',
+    padding: '10px 20px',
     fontSize: '1rem',
-    fontWeight: '600',
+    color: '#888',
     cursor: 'pointer',
+    fontWeight: '600',
+    borderBottom: '2px solid transparent',
+  },
+  toggleBtnActive: {
+    color: '#1A1A1A',
+    borderBottom: '2px solid #0c831f', // Blinkit Green/Black
+  },
+  toggleDivider: {
+    width: '1px',
+    background: '#eee',
+    height: '20px',
+    alignSelf: 'center',
+  },
+  formGroup: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+  },
+  inputWrapper: {
+    position: 'relative',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    gap: '0.75rem',
-    transition: 'all 0.3s',
-    color: '#374151',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-    marginBottom: '1.5rem'
+    width: '100%',
+  },
+  inputPrefix: {
+    position: 'absolute',
+    left: '12px',
+    zIndex: 1,
+    fontSize: '1rem',
+  },
+  input: {
+    width: '100%',
+    padding: '14px',
+    paddingLeft: '14px', // Adjust based on prefix
+    border: '1px solid #ddd',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    outline: 'none',
+    transition: 'border-color 0.2s',
+    boxSizing: 'border-box',
+    background: '#fff',
+  },
+  ctaBtn: {
+    width: '100%',
+    padding: '14px',
+    background: '#0c831f', // Blinkit Green
+    color: 'white',
+    border: 'none',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: '700',
+    cursor: 'pointer',
+    marginTop: '8px',
+  },
+  backBtn: {
+    background: 'none',
+    border: 'none',
+    color: '#0c831f',
+    marginTop: '10px',
+    cursor: 'pointer',
+    fontSize: '0.9rem',
+    fontWeight: '600',
   },
   divider: {
     display: 'flex',
     alignItems: 'center',
-    margin: '1.5rem 0',
-    gap: '1rem'
-  },
-  dividerLine: {
-    flex: 1,
-    height: '1px',
-    background: '#e5e7eb'
-  },
-  dividerText: {
-    color: '#9ca3af',
-    fontWeight: '500',
-    fontSize: '0.875rem'
-  },
-  toggleContainer: {
-    display: 'flex',
-    gap: '0.5rem',
-    marginBottom: '2rem',
-    background: '#f3f4f6',
-    padding: '0.25rem',
-    borderRadius: '10px'
-  },
-  toggleBtn: {
-    flex: 1,
-    padding: '0.75rem',
-    border: 'none',
-    background: 'transparent',
-    borderRadius: '8px',
-    fontSize: '1rem',
-    cursor: 'pointer',
+    justifyContent: 'center',
+    margin: '20px 0',
+    color: '#aaa',
+    fontSize: '0.8rem',
     fontWeight: '600',
-    color: '#6b7280',
-    transition: 'all 0.2s'
   },
-  toggleBtnActive: {
-    background: 'white',
-    color: '#667eea',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-  },
-  error: {
-    background: '#fee2e2',
-    color: '#991b1b',
-    padding: '1rem',
-    borderRadius: '8px',
-    marginBottom: '1.5rem',
-    textAlign: 'center',
-    fontSize: '0.9rem'
-  },
-  inputGroup: {
-    marginBottom: '1.5rem'
-  },
-  label: {
-    display: 'block',
-    marginBottom: '0.5rem',
-    color: '#374151',
-    fontWeight: '600'
-  },
-  input: {
+  googleBtn: {
     width: '100%',
-    padding: '0.875rem',
-    border: '2px solid #e5e7eb',
+    padding: '12px',
+    background: '#FFFFFF',
+    border: '1px solid #ddd',
     borderRadius: '8px',
-    fontSize: '16px',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.2s, box-shadow 0.2s',
-    outline: 'none'
-  },
-  passwordContainer: {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center'
-  },
-  passwordInput: {
-    width: '100%',
-    padding: '0.875rem',
-    paddingRight: '3rem',
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    fontSize: '16px',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.2s, box-shadow 0.2s',
-    outline: 'none'
-  },
-  toggleBtn: {
-    position: 'absolute',
-    right: '0.75rem',
-    background: 'none',
-    border: 'none',
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    color: '#333',
     cursor: 'pointer',
-    padding: '0.5rem',
-    color: '#6B7280',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    transition: 'color 0.2s'
+    gap: '10px',
+    transition: 'background 0.2s',
   },
-  hint: {
-    display: 'block',
-    marginTop: '0.25rem',
-    fontSize: '0.875rem',
-    color: '#6b7280'
-  },
-  submitBtn: {
-    width: '100%',
-    padding: '1rem',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    color: 'white',
+  eyeBtn: {
+    position: 'absolute',
+    right: '12px',
+    background: 'none',
     border: 'none',
-    borderRadius: '8px',
-    fontSize: '1.1rem',
-    fontWeight: 'bold',
     cursor: 'pointer',
-    marginBottom: '0.75rem',
-    transition: 'transform 0.2s, box-shadow 0.2s'
-  },
-  secondaryBtn: {
-    width: '100%',
-    padding: '0.875rem',
-    background: 'transparent',
-    color: '#667eea',
-    border: '2px solid #667eea',
-    borderRadius: '8px',
-    fontSize: '1rem',
+    color: '#666',
+    fontSize: '0.8rem',
     fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.2s'
   },
-  switchText: {
+  terms: {
+    fontSize: '0.75rem',
+    color: '#999',
     textAlign: 'center',
-    marginTop: '1.5rem',
-    color: '#6b7280'
+    marginTop: '24px',
+    lineHeight: '1.4',
   },
-  link: {
-    color: '#667eea',
+  termLink: {
+    color: '#0c831f',
     textDecoration: 'none',
-    fontWeight: '600'
   }
 };
 
-// Add CSS animations for better UX
-const styleSheet = document.createElement('style');
-styleSheet.textContent = `
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+// Add responsiveness
+const style = document.createElement('style');
+style.textContent = `
+  @media (max-width: 768px) {
+    div[style*="display: none"] { display: none !important; }
+    div[style*="flex-direction: row"] { flex-direction: column !important; }
+    div[style*="height: 100vh"] { height: auto !important; min-height: 100vh; }
   }
-  
-  input:focus {
-    border-color: #667eea !important;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15) !important;
-  }
-  
-  button[type="submit"]:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
-  }
-  
-  button[type="submit"]:active:not(:disabled) {
-    transform: translateY(0);
-  }
+  input:focus { border-color: #0c831f !important; }
 `;
-document.head.appendChild(styleSheet);
+document.head.appendChild(style);
 
 export default Login;

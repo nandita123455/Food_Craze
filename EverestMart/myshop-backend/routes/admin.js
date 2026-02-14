@@ -12,10 +12,10 @@ router.get('/stats', auth, isAdmin, async (req, res) => {
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    
+
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - today.getDay());
-    
+
     const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
     // Parallel queries for better performance
@@ -77,18 +77,18 @@ router.get('/stats', auth, isAdmin, async (req, res) => {
 router.get('/orders', auth, isAdmin, async (req, res) => {
   try {
     const { status, page = 1, limit = 50 } = req.query;
-    
+
     const query = status && status !== 'all' ? { orderStatus: status } : {};
-    
+
     const orders = await Order.find(query)
       .populate('user', 'name email phone')
       .populate('rider', 'name phone isAvailable')
       .populate('items.product', 'name price images')
       .sort({ createdAt: -1 })
       .limit(limit * 1);
-    
+
     console.log(`📦 Admin fetched ${orders.length} orders`);
-    
+
     // ✅ Return simple array (not object)
     res.json(orders);
   } catch (error) {
@@ -105,11 +105,11 @@ router.get('/orders/:id', auth, isAdmin, async (req, res) => {
       .populate('user', 'name email phone')
       .populate('rider', 'name phone email')
       .populate('items.product');
-    
+
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
-    
+
     res.json(order);
   } catch (error) {
     console.error('❌ Order fetch error:', error);
@@ -121,35 +121,35 @@ router.get('/orders/:id', auth, isAdmin, async (req, res) => {
 router.put('/orders/:id/status', auth, isAdmin, async (req, res) => {
   try {
     const { orderStatus } = req.body;
-    
+
     const validStatuses = [
       'pending', 'confirmed', 'processing', 'preparing',
       'shipped', 'out_for_delivery', 'delivered', 'cancelled'
     ];
-    
+
     if (!validStatuses.includes(orderStatus)) {
       return res.status(400).json({ error: 'Invalid order status' });
     }
-    
+
     const order = await Order.findByIdAndUpdate(
       req.params.id,
-      { 
+      {
         orderStatus,
-        ...(orderStatus === 'delivered' && { 
+        ...(orderStatus === 'delivered' && {
           'tracking.deliveredAt': new Date(),
           paymentStatus: 'paid'
         }),
-        ...(orderStatus === 'cancelled' && { 
-          'tracking.cancelledAt': new Date() 
+        ...(orderStatus === 'cancelled' && {
+          'tracking.cancelledAt': new Date()
         })
       },
       { new: true }
     ).populate('user', 'name email');
-    
+
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
-    
+
     // Emit socket notification
     const io = req.app.get('io');
     if (io) {
@@ -158,7 +158,7 @@ router.put('/orders/:id/status', auth, isAdmin, async (req, res) => {
         message: `Your order status has been updated to ${orderStatus}`
       });
     }
-    
+
     console.log(`✅ Order ${order._id.toString().slice(-8)} → ${orderStatus}`);
     res.json(order);
   } catch (error) {
@@ -171,11 +171,11 @@ router.put('/orders/:id/status', auth, isAdmin, async (req, res) => {
 router.delete('/orders/:id', auth, isAdmin, async (req, res) => {
   try {
     const order = await Order.findByIdAndDelete(req.params.id);
-    
+
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
-    
+
     console.log(`🗑️ Order ${order._id.toString().slice(-8)} deleted`);
     res.json({ message: 'Order deleted successfully' });
   } catch (error) {
@@ -186,14 +186,14 @@ router.delete('/orders/:id', auth, isAdmin, async (req, res) => {
 
 // ==================== RIDERS ====================
 
-// Get all approved riders
+// Get all riders (for admin dashboard)
 router.get('/riders', auth, isAdmin, async (req, res) => {
   try {
-    const riders = await Rider.find({ status: 'approved' })
+    const riders = await Rider.find({}) // Removed { status: 'approved' } filter
       .select('-password')
-      .sort({ totalDeliveries: -1 });
-    
-    console.log(`🏍️ Found ${riders.length} approved riders`);
+      .sort({ createdAt: -1 }); // Sort by newest first
+
+    console.log(`🏍️ Found ${riders.length} riders (all status)`);
     res.json(riders);
   } catch (error) {
     console.error('❌ Riders fetch error:', error);
@@ -207,7 +207,7 @@ router.get('/riders/pending', auth, isAdmin, async (req, res) => {
     const riders = await Rider.find({ status: 'pending' })
       .select('-password')
       .sort({ createdAt: -1 });
-    
+
     console.log(`🏍️ Found ${riders.length} pending riders`);
     res.json(riders);
   } catch (error) {
@@ -224,7 +224,7 @@ router.get('/riders/live', auth, isAdmin, async (req, res) => {
       isAvailable: true,
       'currentLocation.lat': { $exists: true }
     }).select('-password');
-    
+
     console.log(`🗺️ Found ${riders.length} live riders`);
     res.json(riders);
   } catch (error) {
@@ -237,17 +237,17 @@ router.get('/riders/live', auth, isAdmin, async (req, res) => {
 router.get('/riders/:id', auth, isAdmin, async (req, res) => {
   try {
     const rider = await Rider.findById(req.params.id).select('-password');
-    
+
     if (!rider) {
       return res.status(404).json({ error: 'Rider not found' });
     }
-    
+
     // Get rider's delivery history
-    const deliveries = await Order.find({ 
+    const deliveries = await Order.find({
       rider: rider._id,
       orderStatus: 'delivered'
     }).sort({ 'tracking.deliveredAt': -1 }).limit(10);
-    
+
     res.json({ rider, deliveries });
   } catch (error) {
     console.error('❌ Rider fetch error:', error);
@@ -259,52 +259,52 @@ router.get('/riders/:id', auth, isAdmin, async (req, res) => {
 router.put('/riders/:id/status', auth, isAdmin, async (req, res) => {
   try {
     const { status, rejectionReason } = req.body;
-    
+
     const validStatuses = ['pending', 'approved', 'rejected', 'suspended'];
-    
+
     if (!validStatuses.includes(status)) {
       return res.status(400).json({ error: 'Invalid status' });
     }
-    
+
     if ((status === 'rejected' || status === 'suspended') && !rejectionReason) {
       return res.status(400).json({ error: 'Rejection reason is required' });
     }
-    
+
     const updateData = { status };
-    
+
     if (rejectionReason) {
       updateData.rejectionReason = rejectionReason;
     }
-    
+
     // If suspending, set isAvailable to false
     if (status === 'suspended') {
       updateData.isAvailable = false;
     }
-    
+
     const rider = await Rider.findByIdAndUpdate(
       req.params.id,
       updateData,
       { new: true }
     ).select('-password');
-    
+
     if (!rider) {
       return res.status(404).json({ error: 'Rider not found' });
     }
-    
+
     console.log(`✅ Rider ${rider.name} → ${status}`);
-    
+
     // Emit real-time notification
     const io = req.app.get('io');
     if (io) {
       io.emit('rider-status-update', {
         riderId: rider._id,
         status,
-        message: status === 'approved' 
-          ? 'Congratulations! Your account has been approved.' 
+        message: status === 'approved'
+          ? 'Congratulations! Your account has been approved.'
           : `Your account has been ${status}. ${rejectionReason || ''}`
       });
     }
-    
+
     res.json(rider);
   } catch (error) {
     console.error('❌ Rider status update error:', error);
@@ -316,23 +316,23 @@ router.put('/riders/:id/status', auth, isAdmin, async (req, res) => {
 router.delete('/riders/:id', auth, isAdmin, async (req, res) => {
   try {
     const rider = await Rider.findByIdAndDelete(req.params.id);
-    
+
     if (!rider) {
       return res.status(404).json({ error: 'Rider not found' });
     }
-    
+
     // Check if rider has active deliveries
     const activeDeliveries = await Order.countDocuments({
       rider: rider._id,
       orderStatus: { $in: ['preparing', 'shipped', 'out_for_delivery'] }
     });
-    
+
     if (activeDeliveries > 0) {
-      return res.status(400).json({ 
-        error: 'Cannot delete rider with active deliveries' 
+      return res.status(400).json({
+        error: 'Cannot delete rider with active deliveries'
       });
     }
-    
+
     console.log(`🗑️ Rider ${rider.name} deleted`);
     res.json({ message: 'Rider deleted successfully' });
   } catch (error) {
@@ -347,14 +347,14 @@ router.delete('/riders/:id', auth, isAdmin, async (req, res) => {
 router.get('/products', auth, isAdmin, async (req, res) => {
   try {
     const { category, inStock } = req.query;
-    
+
     const query = {};
     if (category) query.category = category;
     if (inStock === 'true') query.stock = { $gt: 0 };
     if (inStock === 'false') query.stock = 0;
-    
+
     const products = await Product.find(query).sort({ createdAt: -1 });
-    
+
     console.log(`🛒 Admin fetched ${products.length} products`);
     res.json(products);
   } catch (error) {
@@ -369,15 +369,15 @@ router.get('/products', auth, isAdmin, async (req, res) => {
 router.get('/users', auth, isAdmin, async (req, res) => {
   try {
     const { page = 1, limit = 50 } = req.query;
-    
+
     const users = await User.find({})
       .select('-password')
       .sort({ createdAt: -1 })
       .limit(limit * 1)
       .skip((page - 1) * limit);
-    
+
     const total = await User.countDocuments();
-    
+
     // Get order counts for each user
     const usersWithStats = await Promise.all(
       users.map(async (user) => {
@@ -386,7 +386,7 @@ router.get('/users', auth, isAdmin, async (req, res) => {
           { $match: { user: user._id, paymentStatus: 'paid' } },
           { $group: { _id: null, total: { $sum: '$totalAmount' } } }
         ]);
-        
+
         return {
           ...user.toObject(),
           orderCount,
@@ -394,9 +394,9 @@ router.get('/users', auth, isAdmin, async (req, res) => {
         };
       })
     );
-    
+
     console.log(`👥 Admin fetched ${users.length} users`);
-    
+
     res.json({
       users: usersWithStats,
       totalPages: Math.ceil(total / limit),
@@ -413,16 +413,16 @@ router.get('/users', auth, isAdmin, async (req, res) => {
 router.get('/users/:id', auth, isAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
-    
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    
+
     // Get user's orders
     const orders = await Order.find({ user: user._id })
       .sort({ createdAt: -1 })
       .limit(10);
-    
+
     res.json({ user, orders });
   } catch (error) {
     console.error('❌ User fetch error:', error);
@@ -434,17 +434,17 @@ router.get('/users/:id', auth, isAdmin, async (req, res) => {
 router.put('/users/:id/block', auth, isAdmin, async (req, res) => {
   try {
     const { blocked } = req.body;
-    
+
     const user = await User.findByIdAndUpdate(
       req.params.id,
       { isBlocked: blocked },
       { new: true }
     ).select('-password');
-    
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    
+
     console.log(`${blocked ? '🚫' : '✅'} User ${user.name} ${blocked ? 'blocked' : 'unblocked'}`);
     res.json(user);
   } catch (error) {
@@ -459,10 +459,10 @@ router.put('/users/:id/block', auth, isAdmin, async (req, res) => {
 router.get('/analytics/revenue', auth, isAdmin, async (req, res) => {
   try {
     const { period = 'month' } = req.query; // day, week, month, year
-    
+
     const now = new Date();
     let startDate;
-    
+
     switch (period) {
       case 'day':
         startDate = new Date(now.setHours(0, 0, 0, 0));
@@ -479,17 +479,17 @@ router.get('/analytics/revenue', auth, isAdmin, async (req, res) => {
       default:
         startDate = new Date(now.setMonth(now.getMonth() - 1));
     }
-    
+
     const revenueData = await Order.aggregate([
-      { 
-        $match: { 
+      {
+        $match: {
           paymentStatus: 'paid',
           createdAt: { $gte: startDate }
-        } 
+        }
       },
       {
         $group: {
-          _id: { 
+          _id: {
             $dateToString: { format: '%Y-%m-%d', date: '$createdAt' }
           },
           revenue: { $sum: '$totalAmount' },
@@ -498,7 +498,7 @@ router.get('/analytics/revenue', auth, isAdmin, async (req, res) => {
       },
       { $sort: { _id: 1 } }
     ]);
-    
+
     res.json(revenueData);
   } catch (error) {
     console.error('❌ Analytics error:', error);
@@ -530,7 +530,7 @@ router.get('/analytics/top-products', auth, isAdmin, async (req, res) => {
       },
       { $unwind: '$product' }
     ]);
-    
+
     res.json(topProducts);
   } catch (error) {
     console.error('❌ Top products error:', error);

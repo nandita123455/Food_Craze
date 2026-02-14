@@ -86,16 +86,15 @@ function App() {
           {/* Enhanced Navigation */}
           <header className="admin-header">
             <div className="nav-brand">
-              <div className="logo">🏔️</div>
-              <h1>EverestMart Admin</h1>
+              <img src="/logo.svg" alt="Food Craze Admin" style={{ height: '50px' }} />
             </div>
-            
+
             <nav className="admin-nav">
               <a href="/" className="nav-link">Dashboard</a>
               <a href="/orders" className="nav-link">Orders</a>
               <a href="/products" className="nav-link">Products</a>
               <a href="/products/manage" className="nav-link">Manage Products</a>
-              
+
               <div className="nav-actions">
                 <span className="admin-name">{admin.name || 'Admin'}</span>
                 <button onClick={handleLogout} className="logout-btn">

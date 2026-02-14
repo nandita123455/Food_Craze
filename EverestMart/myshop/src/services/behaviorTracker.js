@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
 const RECOMMENDATION_API = import.meta.env.VITE_RECOMMENDATION_API_URL || 'http://localhost:8001';
 
 // Behavior buffer for batch tracking
@@ -151,7 +151,8 @@ class BehaviorTracker {
             }
         });
 
-        navigator.sendBeacon(`${API_URL}/behavior/track`, data);
+        const blob = new Blob([data], { type: 'application/json' });
+        navigator.sendBeacon(`${API_URL}/behavior/track`, blob);
     }
 
     /**
@@ -345,19 +346,25 @@ window.addEventListener('beforeunload', () => {
     const sessionId = getSessionId();
     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
+    const endSessionData = JSON.stringify({
+        exitPage: window.location.pathname,
+        userId: user._id || user.id || null
+    });
+    const endSessionBlob = new Blob([endSessionData], { type: 'application/json' });
+
     navigator.sendBeacon(
         `${API_URL}/behavior/session/${sessionId}/end`,
-        JSON.stringify({
-            exitPage: window.location.pathname,
-            userId: user._id || user.id || null
-        })
+        endSessionBlob
     );
 
     // Also flush any pending behaviors
     if (behaviorBuffer.length > 0) {
+        const bufferData = JSON.stringify({ behaviors: behaviorBuffer });
+        const bufferBlob = new Blob([bufferData], { type: 'application/json' });
+
         navigator.sendBeacon(
             `${API_URL}/behavior/bulk`,
-            JSON.stringify({ behaviors: behaviorBuffer })
+            bufferBlob
         );
     }
 });

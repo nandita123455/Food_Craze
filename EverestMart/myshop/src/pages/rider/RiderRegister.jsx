@@ -29,25 +29,26 @@ function RiderRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
+
     const data = new FormData()
-    
+
     // Add text fields
     Object.keys(formData).forEach(key => {
       data.append(key, formData[key])
     })
-    
+
     // Add files
     Object.keys(files).forEach(key => {
       if (files[key]) data.append(key, files[key])
     })
-    
+
     try {
-     const response = await axios.post(`${config.API_BASE_URL}/rider/register`, data, {
+      // Corrected endpoint to match auth.js route
+      const response = await axios.post(`${config.API_BASE_URL}/auth/rider/register`, data, {
 
         headers: { 'Content-Type': 'multipart/form-data' }
       })
-      
+
       setMessage('✅ ' + response.data.message)
       alert('Registration submitted! Admin will verify your documents.')
     } catch (error) {
@@ -59,10 +60,10 @@ function RiderRegister() {
     <div style={styles.container}>
       <div style={styles.formBox}>
         <h1 style={styles.title}>🏍️ Rider Registration</h1>
-        <p style={styles.subtitle}>Join EverestMart Delivery Team</p>
-        
+        <p style={styles.subtitle}>Join Food Craze Delivery Team</p>
+
         {message && <div style={styles.message}>{message}</div>}
-        
+
         <form onSubmit={handleSubmit} style={styles.form}>
           {/* Personal Details */}
           <h3 style={styles.sectionTitle}>Personal Details</h3>
@@ -70,39 +71,39 @@ function RiderRegister() {
           <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required style={styles.input} />
           <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required style={styles.input} />
           <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required style={styles.input} />
-          
+
           {/* KYC Documents */}
           <h3 style={styles.sectionTitle}>KYC Documents</h3>
           <input type="text" name="panCard" placeholder="PAN Card Number" value={formData.panCard} onChange={handleChange} required style={styles.input} />
-          
+
           <label style={styles.fileLabel}>
             📄 Citizenship Proof (Aadhar/Passport)
             <input type="file" name="citizenshipProof" onChange={handleFileChange} required style={styles.fileInput} accept=".jpg,.jpeg,.png,.pdf" />
           </label>
-          
+
           <label style={styles.fileLabel}>
             🚔 Police Verification Certificate
             <input type="file" name="policeRecord" onChange={handleFileChange} required style={styles.fileInput} accept=".jpg,.jpeg,.png,.pdf" />
           </label>
-          
+
           {/* Bike Details */}
           <h3 style={styles.sectionTitle}>Bike Details</h3>
           <input type="text" name="bikeModel" placeholder="Bike Model (e.g., Honda Activa)" value={formData.bikeModel} onChange={handleChange} required style={styles.input} />
           <input type="text" name="bikeRegistration" placeholder="Registration Number (e.g., MH01AB1234)" value={formData.bikeRegistration} onChange={handleChange} required style={styles.input} />
-          
+
           <label style={styles.fileLabel}>
             📋 RC Book (Registration Certificate)
             <input type="file" name="rcDocument" onChange={handleFileChange} style={styles.fileInput} accept=".jpg,.jpeg,.png,.pdf" />
           </label>
-          
+
           <label style={styles.fileLabel}>
             🛡️ Insurance Document
             <input type="file" name="insurance" onChange={handleFileChange} style={styles.fileInput} accept=".jpg,.jpeg,.png,.pdf" />
           </label>
-          
+
           <button type="submit" style={styles.submitBtn}>🚀 Submit Registration</button>
         </form>
-        
+
         <p style={styles.loginLink}>
           Already registered? <a href="/rider/login">Login here</a>
         </p>

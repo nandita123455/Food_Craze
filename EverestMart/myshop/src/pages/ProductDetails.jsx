@@ -3,8 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { getProductById, getProducts } from '../services/api';
 import { useCart } from '../context/CartContext';
 import BehaviorTracker from '../services/behaviorTracker';
-import RecommendationService from '../services/recommendationService';
-import RecommendationSection from '../components/RecommendationSection';
+import RecommendedProducts from '../components/RecommendedProducts';
 
 function ProductDetails() {
   const { id } = useParams();
@@ -13,7 +12,6 @@ function ProductDetails() {
 
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [similarProductIds, setSimilarProductIds] = useState([]);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
@@ -34,17 +32,6 @@ function ProductDetails() {
         price: data.price,
         name: data.name
       });
-
-      // Fetch ML-based similar products
-      try {
-        const similarResponse = await RecommendationService.getSimilarProducts(id, 6);
-        if (similarResponse.success && similarResponse.recommendations) {
-          const ids = similarResponse.recommendations.map(r => r.product_id);
-          setSimilarProductIds(ids);
-        }
-      } catch (err) {
-        console.log('ML recommendations unavailable, using category fallback');
-      }
 
       // Fallback: Fetch related products (same category)
       const response = await getProducts({ category: data.category });
@@ -158,7 +145,7 @@ function ProductDetails() {
           <p style={styles.description}>{product.description}</p>
 
           <div style={styles.priceSection}>
-            <span style={styles.price}>₹{product.price.toLocaleString()}</span>
+            <span style={styles.price}>₹{product.price?.toLocaleString() || '0'}</span>
             <span style={styles.stock}>
               {product.stock > 0 ? '✓ In Stock' : '✗ Out of Stock'}
             </span>
@@ -239,10 +226,19 @@ function ProductDetails() {
         </div>
       </div>
 
-      {/* Related Products */}
+      {/* ML-Powered Similar Products */}
+      <div style={{ marginTop: '3rem' }}>
+        <RecommendedProducts
+          title="🤖 AI Recommended Similar Products"
+          type="similar"
+          productId={product._id}
+        />
+      </div>
+
+      {/* Related Products Section */}
       {relatedProducts.length > 0 && (
         <div style={styles.relatedSection}>
-          <h2 style={styles.relatedTitle}>You May Also Like</h2>
+          <h2 style={styles.relatedTitle}>More from {product.category}</h2>
           <div style={styles.relatedGrid}>
             {relatedProducts.map(relatedProduct => (
               <div
@@ -277,26 +273,15 @@ function ProductDetails() {
           </div>
         </div>
       )}
-
-      {/* ML-Powered Similar Products */}
-      {similarProductIds.length > 0 && (
-        <div style={{ marginTop: '3rem' }}>
-          <RecommendationSection
-            title="🤖 AI Recommended Similar Products"
-            productIds={similarProductIds}
-            type="similar"
-          />
-        </div>
-      )}
     </div>
   );
 }
 
 const styles = {
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1280px',
     margin: '0 auto',
-    padding: '2rem',
+    padding: '2rem 1rem',
     minHeight: 'calc(100vh - 80px)'
   },
   loading: {
@@ -308,111 +293,110 @@ const styles = {
     gap: '1rem'
   },
   spinner: {
-    width: '50px',
-    height: '50px',
-    border: '5px solid #e5e7eb',
-    borderTop: '5px solid #2563eb',
+    width: '40px',
+    height: '40px',
+    border: '3px solid #E5E7EB',
+    borderTop: '3px solid #0c831f',
     borderRadius: '50%',
     animation: 'spin 1s linear infinite'
   },
   loadingText: {
-    color: '#6b7280',
-    fontSize: '1.1rem'
+    color: '#6B7280',
+    fontSize: '1rem'
   },
   breadcrumb: {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
-    marginBottom: '2rem',
-    fontSize: '0.9rem'
+    marginBottom: '1rem',
+    fontSize: '0.85rem',
+    color: '#6B7280'
   },
   breadcrumbLink: {
-    color: '#2563eb',
+    color: '#0c831f',
     textDecoration: 'none',
-    fontWeight: '500',
-    transition: 'color 0.2s'
+    fontWeight: '500'
   },
   breadcrumbSeparator: {
-    color: '#9ca3af'
+    color: '#9CA3AF'
   },
   breadcrumbCurrent: {
-    color: '#6b7280'
+    color: '#374151'
   },
   productContainer: {
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '3rem',
-    marginBottom: '4rem',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '2rem',
+    marginBottom: '2rem',
     background: 'white',
-    padding: '2rem',
-    borderRadius: '16px',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+    borderRadius: '12px',
+    padding: '1.5rem',
+    border: '1px solid #E5E7EB'
   },
   imageSection: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    background: '#f9fafb',
-    borderRadius: '12px',
-    padding: '2rem'
+    background: 'white',
+    borderRadius: '8px',
+    padding: '1rem',
+    border: '1px solid #F3F4F6'
   },
   productImage: {
     width: '100%',
-    maxWidth: '450px',
-    height: 'auto',
-    borderRadius: '12px',
+    maxHeight: '400px',
     objectFit: 'contain'
   },
   infoSection: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.5rem'
+    gap: '1rem'
   },
   category: {
-    color: '#2563eb',
-    fontSize: '0.9rem',
-    fontWeight: '700',
+    color: '#6B7280',
+    fontSize: '0.8rem',
+    fontWeight: '600',
     textTransform: 'uppercase',
     letterSpacing: '0.05em'
   },
   productName: {
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    color: '#111827',
+    fontSize: '1.75rem',
+    fontWeight: '800',
+    color: '#1F2937',
     margin: 0,
     lineHeight: '1.2'
   },
   description: {
-    fontSize: '1.1rem',
-    color: '#6b7280',
-    lineHeight: '1.7'
+    fontSize: '1rem',
+    color: '#4B5563',
+    lineHeight: '1.6'
   },
   priceSection: {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
-    paddingTop: '1rem',
-    borderTop: '2px solid #e5e7eb'
+    paddingTop: '0.5rem',
+    borderTop: '1px solid #F3F4F6'
   },
   price: {
-    fontSize: '2.5rem',
-    fontWeight: 'bold',
-    color: '#2563eb'
+    fontSize: '1.75rem',
+    fontWeight: '800',
+    color: '#1F2937'
   },
   stock: {
-    color: '#10b981',
+    color: '#0c831f',
     fontWeight: '600',
-    fontSize: '1rem',
-    padding: '0.5rem 1rem',
-    background: '#d1fae5',
-    borderRadius: '8px'
+    fontSize: '0.85rem',
+    padding: '4px 8px',
+    background: '#ecfdf5',
+    borderRadius: '4px'
   },
   cartInfo: {
-    background: '#dbeafe',
-    color: '#1e40af',
-    padding: '0.875rem 1rem',
+    background: '#eff6ff',
+    color: '#1d4ed8',
+    padding: '0.75rem',
     borderRadius: '8px',
-    fontSize: '0.95rem',
+    fontSize: '0.9rem',
     fontWeight: '500'
   },
   quantitySection: {
@@ -423,149 +407,153 @@ const styles = {
   },
   label: {
     fontWeight: '600',
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     color: '#374151'
   },
   quantityControls: {
     display: 'flex',
     alignItems: 'center',
-    gap: '1rem',
-    background: '#f3f4f6',
-    padding: '0.5rem 1rem',
-    borderRadius: '10px',
-    border: '2px solid #e5e7eb'
+    gap: '0.5rem',
+    background: '#F9FAFB',
+    padding: '4px',
+    borderRadius: '8px',
+    border: '1px solid #E5E7EB'
   },
   qtyBtn: {
-    background: '#2563eb',
+    background: '#0c831f',
     color: 'white',
     border: 'none',
-    width: '38px',
-    height: '38px',
-    borderRadius: '8px',
-    fontSize: '1.3rem',
+    width: '32px',
+    height: '32px',
+    borderRadius: '6px',
+    fontSize: '1.2rem',
     cursor: 'pointer',
     fontWeight: 'bold',
-    transition: 'all 0.2s',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    transition: 'background 0.2s'
   },
   qtyDisplay: {
-    fontSize: '1.6rem',
+    fontSize: '1.25rem',
     fontWeight: 'bold',
-    minWidth: '45px',
+    minWidth: '40px',
     textAlign: 'center',
-    color: '#111827'
+    color: '#1F2937'
   },
   qtyLimit: {
-    fontSize: '0.85rem',
-    color: '#6b7280'
+    fontSize: '0.8rem',
+    color: '#9CA3AF'
   },
   actions: {
     display: 'flex',
-    gap: '1rem',
-    marginTop: '1rem'
+    gap: '0.75rem',
+    marginTop: '0.5rem'
   },
   addToCartBtn: {
     flex: 1,
-    background: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-    color: 'white',
-    border: 'none',
-    padding: '1.1rem 2rem',
-    borderRadius: '12px',
-    fontSize: '1.1rem',
+    background: 'white',
+    color: '#0c831f',
+    border: '1px solid #0c831f',
+    padding: '0.85rem',
+    borderRadius: '8px',
+    fontSize: '1rem',
     fontWeight: '700',
     cursor: 'pointer',
-    transition: 'all 0.3s',
-    boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)'
+    transition: 'all 0.2s'
   },
   buyNowBtn: {
     flex: 1,
-    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    background: '#0c831f',
     color: 'white',
     border: 'none',
-    padding: '1.1rem 2rem',
-    borderRadius: '12px',
-    fontSize: '1.1rem',
+    padding: '0.85rem',
+    borderRadius: '8px',
+    fontSize: '1rem',
     fontWeight: '700',
     cursor: 'pointer',
-    transition: 'all 0.3s',
-    boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)'
+    transition: 'all 0.2s',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
   },
   features: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.25rem',
-    marginTop: '1.5rem',
-    paddingTop: '1.5rem',
-    borderTop: '2px solid #e5e7eb'
+    gap: '1rem',
+    marginTop: '1rem',
+    paddingTop: '1rem',
+    borderTop: '1px solid #F3F4F6'
   },
   feature: {
     display: 'flex',
     alignItems: 'flex-start',
-    gap: '1rem'
+    gap: '0.75rem'
   },
   featureIcon: {
-    fontSize: '2rem',
-    flexShrink: 0
+    fontSize: '1.25rem',
+    flexShrink: 0,
+    color: '#0c831f'
   },
   featureText: {
-    color: '#6b7280',
-    fontSize: '0.9rem',
-    margin: '0.25rem 0 0 0'
+    color: '#6B7280',
+    fontSize: '0.85rem',
+    margin: '2px 0 0 0'
   },
   relatedSection: {
-    marginTop: '4rem'
+    marginTop: '3rem'
   },
   relatedTitle: {
-    fontSize: '2rem',
-    fontWeight: 'bold',
-    marginBottom: '2rem',
-    color: '#111827'
+    fontSize: '1.5rem',
+    fontWeight: '800',
+    marginBottom: '1.5rem',
+    color: '#1F2937'
   },
   relatedGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-    gap: '2rem'
+    gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+    gap: '1.5rem'
   },
   relatedCard: {
     background: 'white',
     borderRadius: '12px',
     overflow: 'hidden',
     cursor: 'pointer',
-    transition: 'all 0.3s',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-    border: '2px solid transparent'
+    transition: 'all 0.2s',
+    border: '1px solid #E5E7EB'
   },
   relatedImage: {
     width: '100%',
-    height: '220px',
-    objectFit: 'cover'
+    height: '160px',
+    objectFit: 'contain',
+    background: '#F9FAFB',
+    padding: '1rem'
   },
   relatedInfo: {
-    padding: '1.25rem'
+    padding: '1rem'
   },
   relatedName: {
-    fontSize: '1.1rem',
-    marginBottom: '0.5rem',
-    color: '#111827',
-    fontWeight: '600'
+    fontSize: '0.95rem',
+    marginBottom: '0.25rem',
+    color: '#1F2937',
+    fontWeight: '600',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
   },
   relatedPrice: {
-    fontSize: '1.4rem',
-    fontWeight: 'bold',
-    color: '#2563eb',
-    margin: '0 0 1rem 0'
+    fontSize: '1rem',
+    fontWeight: '700',
+    color: '#1F2937',
+    margin: '0 0 0.75rem 0'
   },
   quickAddBtn: {
     width: '100%',
-    padding: '0.75rem',
-    background: '#f3f4f6',
-    border: '2px solid #e5e7eb',
-    borderRadius: '8px',
-    fontSize: '0.95rem',
+    padding: '0.5rem',
+    background: 'white',
+    border: '1px solid #0c831f',
+    borderRadius: '6px',
+    fontSize: '0.85rem',
     fontWeight: '600',
-    color: '#374151',
+    color: '#0c831f',
     cursor: 'pointer',
     transition: 'all 0.2s'
   }

@@ -107,14 +107,13 @@ export const adminApi = {
 
   getRiderById: (id) => adminAPI.get(`/admin/riders/${id}`),
 
-  approveRider: (id) => adminAPI.put(`/admin/riders/${id}/approve`),
+  approveRider: (id) => adminAPI.put(`/admin/riders/${id}/status`, { status: 'approved' }),
 
-  rejectRider: (id, reason) => adminAPI.put(`/admin/riders/${id}/reject`, { reason }),
-  // Suspend rider
-  suspendRider: (riderId) => api.put(`/riders/${riderId}/suspend`),
+  rejectRider: (id, reason) => adminAPI.put(`/admin/riders/${id}/status`, { status: 'rejected', rejectionReason: reason }),
 
-  // Activate rider  
-  activateRider: (riderId) => api.put(`/riders/${riderId}/activate`),
+  suspendRider: (riderId) => adminAPI.put(`/admin/riders/${riderId}/status`, { status: 'suspended' }),
+
+  activateRider: (riderId) => adminAPI.put(`/admin/riders/${riderId}/status`, { status: 'approved' }),
 
   updateRiderStatus: (id, status) =>
     adminAPI.put(`/admin/riders/${id}/status`, { status }),

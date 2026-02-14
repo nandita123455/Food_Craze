@@ -12,6 +12,9 @@ import PaymentFailure from './pages/PaymentFailure';
 import OrderHistory from './pages/OrderHistory';
 import MyOrders from './pages/MyOrders';
 import Wishlist from './pages/Wishlist';
+import Recipes from './pages/Recipes';
+import RecipeDetails from './pages/RecipeDetails';
+import OrderDetailsPage from './pages/OrderDetailsPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import RiderDashboard from './pages/rider/RiderDashboard';
@@ -69,9 +72,14 @@ function App() {
               <Route path="/orders" element={<MyOrders />} />
               <Route path="/my-orders" element={<MyOrders />} />
               <Route path="/order-history" element={<OrderHistory />} />
+              <Route path="/order/:orderId" element={<OrderDetailsPage />} />
 
               {/* Wishlist Route */}
               <Route path="/wishlist" element={<Wishlist />} />
+
+              {/* Recipe Routes */}
+              <Route path="/recipes" element={<Recipes />} />
+              <Route path="/recipe/:id" element={<RecipeDetails />} />
 
               {/* Auth Pages */}
               <Route path="/login" element={<Login setUser={setUser} />} />

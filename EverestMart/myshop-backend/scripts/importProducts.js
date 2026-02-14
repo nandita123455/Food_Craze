@@ -120,7 +120,7 @@ async function importProducts() {
         let allProducts = [];
 
         for (const file of files) {
-            const filePath = path.join(__dirname, '../../../Biratnagar-Vendors', file);
+            const filePath = path.join('C:\\Users\\drago\\OneDrive\\Desktop\\EverestMart\\Biratnagar-Vendors', file);
             console.log(`\n📂 Reading ${file}...`);
 
             const content = fs.readFileSync(filePath, 'utf-8');
