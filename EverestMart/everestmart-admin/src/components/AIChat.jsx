@@ -21,7 +21,7 @@ const AIChat = () => {
     const response = await fetch('https://api.x.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer xai-dsQsYYHPeIzXCvPo6X7GJhC4jOjcCuHS2nNTAWanE1CucldyVXPCxLGlIPtSwgyQdbyzXq5dxCTsIa5I',
+        'Authorization': `Bearer ${import.meta.env.VITE_XAI_API_KEY || process.env.REACT_APP_XAI_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -52,7 +52,6 @@ Current products include: Electronics, Clothing, Groceries, Home & Garden`
     const data = await response.json();
     return data.choices[0].message.content;
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,4 +117,3 @@ Current products include: Electronics, Clothing, Groceries, Home & Garden`
 };
 
 export default AIChat;
-

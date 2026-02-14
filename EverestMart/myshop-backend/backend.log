@@ -1,0 +1,136 @@
+📧 Email worker started
+📱 SMS worker started
+📦 Order worker started
+📦 Inventory worker started
+⏰ Scheduled jobs initialized
+  - Abandoned cart check: Every hour
+  - Inventory check: Every 6 hours
+  - Daily report: 11 PM daily
+  - Job cleanup: 3 AM daily
+ðŸ¤– Automation workers initialized
+ðŸ”’ CORS Allowed Origins:
+   - http://localhost:5173
+   - http://localhost:3001
+   - http://localhost:3000
+   - http://127.0.0.1:5173
+   - http://127.0.0.1:3001
+   - http://127.0.0.1:3000
+   - http://localhost:5174
+   - http://localhost:3002
+   - https://everestmart.com
+   - https://admin.everestmart.com
+
+âœ… MongoDB Connected: myshop
+ðŸ“Š Connection Pool: 100 (min: 10)
+ðŸ”’ Security: Helmet, Rate Limiting, CORS, Sanitization
+âš¡ Performance: Compression, Caching, Connection Pooling
+ðŸ” Admin Isolation: ENABLED
+
+ðŸš€ Server: http://localhost:5000
+ðŸŒ Environment: development
+
+ðŸ“± Client App: http://localhost:5174
+ðŸ” Admin App: http://localhost:3002
+ðŸ“¡ Socket.IO: Ready
+ðŸ’¾ Cache: In-Memory (60s TTL)
+ðŸ”’ Rate Limiting: âœ… ENABLED
+
+âš ï¸  Development Mode
+
+âœ¨ Ready to handle 1000+ concurrent users!
+ðŸ” Admin & Client domains isolated for security
+
+🔍 GET /products parameters: {
+  search: '',
+  category: '',
+  minPrice: 0,
+  maxPrice: 999999,
+  sortBy: 'createdAt',
+  sortOrder: 'desc'
+}
+ðŸŒ OPTIONS /api/behavior/track - 204 (10ms) - http://localhost:5174
+ðŸŒ OPTIONS /api/behavior/track - 204 (2ms) - http://localhost:5174
+✅ Categories loaded: 0
+ðŸŒ GET / - 200 (126ms) - http://localhost:5174
+ðŸŒ GET / - 304 (2ms) - http://localhost:5174
+ðŸŒ OPTIONS /api/behavior/session/session_1771098188707_rb9qyhjlu/end - 204 (1ms) - http://localhost:5174
+ðŸŒ GET / - 200 (2ms) - http://localhost:5174
+ðŸŒ GET / - 304 (2ms) - http://localhost:5174
+ðŸŒ GET / - 304 (3ms) - http://localhost:5174
+ðŸŒ GET / - 304 (2ms) - http://localhost:5174
+ðŸŒ POST /session/session_1771098188707_rb9qyhjlu/end - 200 (218ms) - http://localhost:5174
+ðŸŒ GET / - 304 (5ms) - http://localhost:5174
+ðŸŒ GET / - 304 (1ms) - http://localhost:5174
+ðŸŒ GET / - 304 (3ms) - http://localhost:5174
+ðŸŒ GET / - 304 (2ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (168ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (167ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (171ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (147ms) - http://localhost:5174
+ðŸŒ GET /trending - 200 (50ms) - http://localhost:5174
+ðŸŒ GET /trending - 304 (16ms) - http://localhost:5174
+ðŸŒ GET /trending - 304 (8ms) - http://localhost:5174
+ðŸŒ GET /trending - 304 (6ms) - http://localhost:5174
+ðŸŒ GET / - 304 (1ms) - http://localhost:5174
+ðŸŒ OPTIONS /api/behavior/track - 204 (1ms) - http://localhost:5174
+🔍 GET /products parameters: {
+  search: '',
+  category: '',
+  minPrice: 0,
+  maxPrice: 999999,
+  sortBy: 'createdAt',
+  sortOrder: 'desc'
+}
+ðŸŒ GET / - 304 (1ms) - http://localhost:5174
+ðŸŒ GET / - 200 (138ms) - http://localhost:5174
+ðŸŒ GET / - 304 (1ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (158ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (167ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (146ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (156ms) - http://localhost:5174
+ðŸŒ GET /google - 302 (2ms) - no-origin
+ðŸŒ POST /session/session_1771098188707_rb9qyhjlu/end - 200 (144ms) - http://localhost:5174
+🔐 Google login attempt: nandita06122001@gmail.com
+✅ New Google user created: nandita06122001@gmail.com
+📦 Simple in-memory queues initialized (No Redis required)
+Google callback error: TypeError: emailQueue.add is not a function
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\routes\auth.js:61:26
+    at Layer.handle [as handle_request] (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\express\lib\router\route.js:149:13)
+    at complete (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\middleware\authenticate.js:280:13)
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\middleware\authenticate.js:287:15
+    at pass (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\authenticator.js:446:14)
+    at Authenticator.transformAuthInfo (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\authenticator.js:468:5)
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\middleware\authenticate.js:284:22
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\http\request.js:41:7
+    at Immediate._onImmediate (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\sessionmanager.js:51:9)
+ðŸŒ GET /google/callback - 302 (608ms) - no-origin
+ðŸŒ POST /track - 200 (166ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (175ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (152ms) - http://localhost:5174
+ðŸŒ OPTIONS /api/behavior/track - 204 (1ms) - http://localhost:5174
+ðŸŒ OPTIONS /api/behavior/track - 204 (1ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (143ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (149ms) - http://localhost:5174
+ðŸŒ GET /google - 302 (1ms) - no-origin
+ðŸŒ OPTIONS /api/behavior/session/session_1771098246995_0f706etu0/end - 204 (1ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (156ms) - http://localhost:5174
+ðŸŒ POST /session/session_1771098246995_0f706etu0/end - 200 (125ms) - http://localhost:5174
+🔐 Google login attempt: sah633551@gmail.com
+✅ New Google user created: sah633551@gmail.com
+Google callback error: TypeError: emailQueue.add is not a function
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\routes\auth.js:61:26
+    at Layer.handle [as handle_request] (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\express\lib\router\route.js:149:13)
+    at complete (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\middleware\authenticate.js:280:13)
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\middleware\authenticate.js:287:15
+    at pass (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\authenticator.js:446:14)
+    at Authenticator.transformAuthInfo (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\authenticator.js:468:5)
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\middleware\authenticate.js:284:22
+    at C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\http\request.js:41:7
+    at Immediate._onImmediate (C:\Users\drago\OneDrive\Desktop\EverestMart_Clean\EverestMart\myshop-backend\node_modules\passport\lib\sessionmanager.js:51:9)
+ðŸŒ GET /google/callback - 302 (531ms) - no-origin
+ðŸŒ POST /track - 200 (150ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (146ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (176ms) - http://localhost:5174
+ðŸŒ POST /track - 200 (150ms) - http://localhost:5174
