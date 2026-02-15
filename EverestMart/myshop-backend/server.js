@@ -51,7 +51,7 @@ if (process.env.NODE_ENV !== 'test') {
   require('./workers/orderWorker');
   require('./workers/inventoryWorker');
   require('./jobs/scheduledJobs');
-  console.log('ðŸ¤– Automation workers initialized');
+  console.log('🤖 Automation workers initialized');
 }
 
 // ============================================
@@ -59,6 +59,14 @@ if (process.env.NODE_ENV !== 'test') {
 // ============================================
 const app = express();
 const server = http.createServer(app);
+
+// ============================================
+// TRUST PROXY CONFIGURATION (for Render/Heroku)
+// ============================================
+if (process.env.TRUST_PROXY === 'true') {
+  app.set('trust proxy', true);
+  console.log('✅ Trust proxy enabled');
+}
 
 // ============================================
 // ENVIRONMENT CONFIGURATION
@@ -69,7 +77,7 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGODB_URI || process.env.MONGO_URI;
 const SESSION_SECRET = process.env.SESSION_SECRET || 'myshop-session-secret';
 
-// âœ… UPDATED: Separate Client and Admin URLs
+// ✅ UPDATED: Separate Client and Admin URLs
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 const ADMIN_URL = process.env.ADMIN_URL || 'http://localhost:3001';
 const PRODUCTION_CLIENT_URL = process.env.PRODUCTION_CLIENT_URL || '';
@@ -145,7 +153,7 @@ app.use(helmet({
   hidePoweredBy: true                   // Hide X-Powered-By
 }));
 
-// âœ… ENHANCED: Rate Limiting with admin protection
+// ✅ ENHANCED: Rate Limiting with admin protection
 const createLimiter = (windowMs, max, message) => {
   if (SKIP_RATE_LIMIT || isDevelopment) {
     return (req, res, next) => next();
@@ -159,7 +167,7 @@ const createLimiter = (windowMs, max, message) => {
     legacyHeaders: false,
     skip: (req) => req.path === '/' || req.path === '/api/health',
     handler: (req, res) => {
-      console.log(`âš ï¸ Rate limit exceeded: ${req.ip} - ${req.path}`);
+      console.log(`⚠️ Rate limit exceeded: ${req.ip} - ${req.path}`);
       res.status(429).json({
         error: message,
         retryAfter: Math.ceil(windowMs / 1000)
@@ -168,7 +176,7 @@ const createLimiter = (windowMs, max, message) => {
   });
 };
 
-// ðŸ›¡ï¸ DoS Protection Limiters
+// 🛡️ DoS Protection Limiters
 const globalLimiter = createLimiter(15 * 60 * 1000, 300, 'Too many requests from this IP'); // 300 req / 15 min globally
 const generalLimiter = createLimiter(15 * 60 * 1000, 100, 'Too many API requests');
 const authLimiter = createLimiter(15 * 60 * 1000, 10, 'Too many login attempts. Please try again later.'); // Strict auth limit
@@ -178,25 +186,25 @@ const paymentLimiter = createLimiter(60 * 1000, 5, 'Too many payment attempts');
 // Apply Global Limiter to ALL requests
 app.use(globalLimiter);
 
-// ðŸ›¡ï¸ Body Limit - Prevent Large Payload Attacks
+// 🛡️ Body Limit - Prevent Large Payload Attacks
 // (Multer handles multipart/form-data separately, so this safely limits JSON attacks)
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// ðŸ›¡ï¸ Data Sanitization against NoSQL Query Injection
+// 🛡️ Data Sanitization against NoSQL Query Injection
 app.use(mongoSanitize());
 
-// ðŸ›¡ï¸ Data Sanitization against XSS
+// 🛡️ Data Sanitization against XSS
 app.use(xss());
 
-// ðŸ›¡ï¸ Prevent HTTP Parameter Pollution
+// 🛡️ Prevent HTTP Parameter Pollution
 app.use(hpp());
 
 // ============================================
 // LOGGING & MONITORING
 // ============================================
 
-// âœ… Security Logger: Track suspicious activity
+// ✅ Security Logger: Track suspicious activity
 app.use((req, res, next) => {
   const start = Date.now();
 
@@ -204,7 +212,7 @@ app.use((req, res, next) => {
     // Log typical attack status codes
     if (res.statusCode === 401 || res.statusCode === 403 || res.statusCode === 429 || res.statusCode >= 500) {
       const duration = Date.now() - start;
-      const logMessage = `ðŸš¨ SECURITY ALERT: ${req.method} ${req.path} - Status: ${res.statusCode} - IP: ${req.ip} - User: ${req.user ? req.user.email : 'Anonymous'} - Time: ${duration}ms`;
+      const logMessage = `🚨 SECURITY ALERT: ${req.method} ${req.path} - Status: ${res.statusCode} - IP: ${req.ip} - User: ${req.user ? req.user.email : 'Anonymous'} - Time: ${duration}ms`;
       console.warn(logMessage);
     }
   });
@@ -312,7 +320,7 @@ if (isDevelopment) {
     res.on('finish', () => {
       const duration = Date.now() - start;
       const isAdmin = origin.includes('3001') || origin.includes('admin');
-      const emoji = isAdmin ? 'ðŸ”' : 'ðŸŒ';
+      const emoji = isAdmin ? '🔒' : '🌐';
       console.log(`${emoji} ${req.method} ${req.path} - ${res.statusCode} (${duration}ms) - ${origin}`);
     });
     next();
@@ -323,7 +331,7 @@ if (isDevelopment) {
 // CORS CONFIGURATION - ADMIN ISOLATION
 // ============================================
 
-// âœ… UPDATED: Separate origins for client and admin
+// ✅ UPDATED: Separate origins for client and admin
 const allowedOrigins = [
   // Development URLs
   'http://localhost:5173',        // Client dev (Vite)
@@ -343,7 +351,7 @@ const allowedOrigins = [
 // Remove duplicates
 const uniqueOrigins = [...new Set(allowedOrigins)];
 
-console.log('ðŸ”’ CORS Allowed Origins:');
+console.log('🔒 CORS Allowed Origins:');
 uniqueOrigins.forEach(origin => console.log(`   - ${origin}`));
 
 app.use(cors({
@@ -358,11 +366,11 @@ app.use(cors({
       callback(null, true);
     } else if (isDevelopment) {
       // In development, log but allow
-      console.log('âš ï¸ CORS: Allowing dev origin:', origin);
+      console.log('⚠️ CORS: Allowing dev origin:', origin);
       callback(null, true);
     } else {
       // In production, block unknown origins
-      console.log('âŒ CORS blocked origin:', origin);
+      console.log('❌ CORS blocked origin:', origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
@@ -376,30 +384,28 @@ app.use(cors({
 app.options('*', cors());
 
 // ============================================
-
-// ============================================
 // SOCKET.IO EVENTS
 // ============================================
 io.on('connection', (socket) => {
   const origin = socket.handshake.headers.origin || 'unknown';
   const isAdmin = origin.includes('3001') || origin.includes('admin');
 
-  console.log(`âœ… ${isAdmin ? 'Admin' : 'Client'} connected:`, socket.id);
+  console.log(`✅ ${isAdmin ? 'Admin' : 'Client'} connected:`, socket.id);
 
   socket.on('join-order', (orderId) => {
     socket.join(`order-${orderId}`);
-    console.log(`ðŸ“¦ Socket ${socket.id} joined order: ${orderId}`);
+    console.log(`📦 Socket ${socket.id} joined order: ${orderId}`);
   });
 
   socket.on('join-rider', (riderId) => {
     socket.join(`rider-${riderId}`);
-    console.log(`ðŸš´ Socket ${socket.id} joined rider: ${riderId}`);
+    console.log(`🚴 Socket ${socket.id} joined rider: ${riderId}`);
   });
 
-  // âœ… NEW: Admin-only room
+  // ✅ NEW: Admin-only room
   socket.on('join-admin', (adminId) => {
     socket.join('admin-dashboard');
-    console.log(`ðŸ” Admin ${adminId} joined dashboard`);
+    console.log(`🔒 Admin ${adminId} joined dashboard`);
   });
 
   socket.on('update-location', (data) => {
@@ -410,7 +416,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('âŒ Client disconnected:', socket.id);
+    console.log('❌ Client disconnected:', socket.id);
   });
 });
 
@@ -441,7 +447,7 @@ app.get('/api/health', (req, res) => {
 // Root endpoint
 app.get('/', (req, res) => {
   res.json({
-    message: 'ðŸš€ Food Craze API v1.1.0',
+    message: '🚀 Food Craze API v1.1.0',
     status: 'running',
     environment: process.env.NODE_ENV || 'development',
     timestamp: new Date().toISOString(),
@@ -454,7 +460,8 @@ app.get('/', (req, res) => {
       adminIsolation: 'enabled',
       cors: 'domain-restricted',
       helmet: 'enabled',
-      mongoSanitize: 'enabled'
+      mongoSanitize: 'enabled',
+      trustProxy: process.env.TRUST_PROXY === 'true' ? 'enabled' : 'disabled'
     },
     domains: {
       client: CLIENT_URL,
@@ -479,13 +486,13 @@ app.get('/', (req, res) => {
   });
 });
 
-// âœ… UPDATED: Apply routes with caching and rate limiting
+// ✅ UPDATED: Apply routes with caching and rate limiting
 app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/payments', paymentLimiter, paymentRoutes);
 app.use('/api/rider', generalLimiter, riderRoutes);
 app.use('/api/products', simpleCache(60000), generalLimiter, productRoutes);
 app.use('/api/orders', generalLimiter, orderRoutes);
-app.use('/api/admin', adminLimiter, adminRoutes); // âœ… Admin-specific rate limit
+app.use('/api/admin', adminLimiter, adminRoutes); // ✅ Admin-specific rate limit
 app.use('/api/categories', simpleCache(120000), generalLimiter, categoryRoutes);
 app.use('/api/order-history', generalLimiter, orderHistoryRoutes);
 app.use('/api/wishlist', generalLimiter, wishlistRoutes);
@@ -493,8 +500,8 @@ app.use('/api/addresses', generalLimiter, addressRoutes);
 app.use('/api/reviews', generalLimiter, reviewRoutes);
 app.use('/api/cart', generalLimiter, cartRoutes);
 app.use('/api/behavior', generalLimiter, behaviorRoutes); // User behavior tracking
-app.use('/api/recipes', simpleCache(60000), generalLimiter, require('./routes/recipes')); // âœ… Recipe Book Routes
-app.use('/api/recommendations', generalLimiter, require('./routes/recommendations')); // âœ… Recommendation System Proxy
+app.use('/api/recipes', simpleCache(60000), generalLimiter, require('./routes/recipes')); // ✅ Recipe Book Routes
+app.use('/api/recommendations', generalLimiter, require('./routes/recommendations')); // ✅ Recommendation System Proxy
 
 // ============================================
 // ERROR HANDLERS
@@ -512,7 +519,7 @@ app.use((req, res) => {
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error('âŒ Error:', err.message);
+  console.error('❌ Error:', err.message);
 
   // Don't expose stack traces in production
   const errorResponse = isDevelopment
@@ -548,32 +555,33 @@ const mongoOptions = {
 
 mongoose.connect(MONGO_URI, mongoOptions)
   .then(() => {
-    console.log('\nâœ… MongoDB Connected:', mongoose.connection.name);
-    console.log('ðŸ“Š Connection Pool: 100 (min: 10)');
-    console.log('ðŸ”’ Security: Helmet, Rate Limiting, CORS, Sanitization');
-    console.log('âš¡ Performance: Compression, Caching, Connection Pooling');
-    console.log('ðŸ” Admin Isolation: ENABLED');
+    console.log('\n✅ MongoDB Connected:', mongoose.connection.name);
+    console.log('📊 Connection Pool: 100 (min: 10)');
+    console.log('🔒 Security: Helmet, Rate Limiting, CORS, Sanitization');
+    console.log('⚡ Performance: Compression, Caching, Connection Pooling');
+    console.log('🔒 Admin Isolation: ENABLED');
+    console.log('🔧 Trust Proxy:', process.env.TRUST_PROXY === 'true' ? 'ENABLED ✅' : 'DISABLED ❌');
 
     server.listen(PORT, () => {
-      console.log(`\nðŸš€ Server: http://localhost:${PORT}`);
-      console.log(`ðŸŒ Environment: ${process.env.NODE_ENV || 'development'}`);
-      console.log(`\nðŸ“± Client App: ${CLIENT_URL}`);
-      console.log(`ðŸ” Admin App: ${ADMIN_URL}`);
-      console.log(`ðŸ“¡ Socket.IO: Ready`);
-      console.log(`ðŸ’¾ Cache: In-Memory (${CACHE_DURATION / 1000}s TTL)`);
-      console.log(`ðŸ”’ Rate Limiting: ${SKIP_RATE_LIMIT ? 'âŒ DISABLED (Testing Mode)' : 'âœ… ENABLED'}`);
+      console.log(`\n🚀 Server: http://localhost:${PORT}`);
+      console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`\n📱 Client App: ${CLIENT_URL}`);
+      console.log(`🔒 Admin App: ${ADMIN_URL}`);
+      console.log(`📡 Socket.IO: Ready`);
+      console.log(`💾 Cache: In-Memory (${CACHE_DURATION / 1000}s TTL)`);
+      console.log(`🔒 Rate Limiting: ${SKIP_RATE_LIMIT ? '❌ DISABLED (Testing Mode)' : '✅ ENABLED'}`);
 
       if (isDevelopment) {
-        console.log('\nâš ï¸  Development Mode');
+        console.log('\n⚠️  Development Mode');
       }
 
-      console.log('\nâœ¨ Ready to handle 1000+ concurrent users!');
-      console.log('ðŸ” Admin & Client domains isolated for security\n');
+      console.log('\n✨ Ready to handle 1000+ concurrent users!');
+      console.log('🔒 Admin & Client domains isolated for security\n');
     });
   })
   .catch((err) => {
-    console.error('âŒ MongoDB Connection Failed:', err.message);
-    console.error('ðŸ’¡ Check MONGODB_URI in .env file');
+    console.error('❌ MongoDB Connection Failed:', err.message);
+    console.error('💡 Check MONGODB_URI in .env file');
     process.exit(1);
   });
 
@@ -584,15 +592,15 @@ let isShuttingDown = false;
 
 const gracefulShutdown = async (signal) => {
   if (isShuttingDown) {
-    console.log('âš ï¸  Shutdown already in progress...');
+    console.log('⚠️  Shutdown already in progress...');
     return;
   }
 
   isShuttingDown = true;
-  console.log(`\nðŸ‘‹ ${signal} received, shutting down gracefully...`);
+  console.log(`\n👋 ${signal} received, shutting down gracefully...`);
 
   const forceShutdownTimer = setTimeout(() => {
-    console.error('âš ï¸  Forced shutdown after timeout');
+    console.error('⚠️  Forced shutdown after timeout');
     process.exit(1);
   }, 10000);
 
@@ -601,9 +609,9 @@ const gracefulShutdown = async (signal) => {
     await new Promise((resolve) => {
       server.close((err) => {
         if (err) {
-          console.error('âš ï¸  Error closing HTTP server:', err.message);
+          console.error('⚠️  Error closing HTTP server:', err.message);
         } else {
-          console.log('âœ… HTTP server closed');
+          console.log('✅ HTTP server closed');
         }
         resolve();
       });
@@ -611,25 +619,25 @@ const gracefulShutdown = async (signal) => {
 
     // 2. Close Socket.IO connections
     io.close(() => {
-      console.log('âœ… Socket.IO closed');
+      console.log('✅ Socket.IO closed');
     });
 
     // 3. Close MongoDB connection
     await mongoose.connection.close();
-    console.log('âœ… MongoDB connection closed');
+    console.log('✅ MongoDB connection closed');
 
     // 4. Clear cache
     if (cache) {
       cache.clear();
-      console.log('âœ… Cache cleared');
+      console.log('✅ Cache cleared');
     }
 
     clearTimeout(forceShutdownTimer);
-    console.log('ðŸ‘‹ Shutdown complete');
+    console.log('👋 Shutdown complete');
     process.exit(0);
 
   } catch (error) {
-    console.error('âŒ Shutdown error:', error.message);
+    console.error('❌ Shutdown error:', error.message);
     clearTimeout(forceShutdownTimer);
     process.exit(1);
   }
@@ -646,12 +654,12 @@ process.on('SIGINT', () => {
 
 // Error handlers
 process.on('uncaughtException', (err) => {
-  console.error('âŒ Uncaught Exception:', err.message);
+  console.error('❌ Uncaught Exception:', err.message);
   if (!isShuttingDown) gracefulShutdown('UNCAUGHT_EXCEPTION');
 });
 
 process.on('unhandledRejection', (reason) => {
-  console.error('âŒ Unhandled Rejection:', reason);
+  console.error('❌ Unhandled Rejection:', reason);
   if (!isShuttingDown) gracefulShutdown('UNHANDLED_REJECTION');
 });
 
